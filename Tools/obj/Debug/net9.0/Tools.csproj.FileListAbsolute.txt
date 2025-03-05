@@ -1,0 +1,12 @@
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\bin\Debug\net9.0\Tools.deps.json
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\bin\Debug\net9.0\Tools.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\bin\Debug\net9.0\Tools.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.csproj.AssemblyReference.cache
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.GeneratedMSBuildEditorConfig.editorconfig
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.AssemblyInfoInputs.cache
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.AssemblyInfo.cs
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.csproj.CoreCompileInputs.cache
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\refint\Tools.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\Tools.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\Tools\obj\Debug\net9.0\ref\Tools.dll

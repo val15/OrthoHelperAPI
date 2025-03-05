@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ipskx/ILvu0=",
+  "success": true,
+  "projectFilePath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tsiry\\.nuget\\packages\\diffplex\\1.7.2\\diffplex.1.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}
