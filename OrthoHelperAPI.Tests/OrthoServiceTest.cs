@@ -1,15 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Moq;
 using OrthoHelperAPI.Services;
-using OrthoHelperAPI.Services.Interfaces;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Tools;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace OrthoHelperAPI.Tests
@@ -21,7 +15,7 @@ namespace OrthoHelperAPI.Tests
         private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
         private readonly Mock<IConfiguration> _configurationMock;
         private readonly Mock<IChatCompletionService> _chatServiceMock;
-
+        private readonly string inputText = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
         public OrthoServiceTests(ITestOutputHelper output)
         {
             _loggerMock = new Mock<ILogger<OrthoService>>();
@@ -49,7 +43,7 @@ namespace OrthoHelperAPI.Tests
         public async Task ProcessTextAsync_ReturnsCorrected_llama32_Text()
         {
             // Arrange
-            var input = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            var input = inputText;
             _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.2");
             _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
 
@@ -69,11 +63,38 @@ namespace OrthoHelperAPI.Tests
 
             Assert.NotEmpty(result.correctedText);
         }
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_llama31_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.1");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+        }
+
+
         [Fact]
         public async Task ProcessTextAsync_ReturnsCorrected_llama3_Text()
         {
             // Arrange
-            var input = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            var input = inputText;
             _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3");
             _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
 
@@ -98,7 +119,7 @@ namespace OrthoHelperAPI.Tests
         public async Task ProcessTextAsync_ReturnsCorrected_mistral_Text()
         {
             // Arrange
-            var input = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            var input = inputText;
             _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("mistral");
             _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
 
@@ -122,7 +143,7 @@ namespace OrthoHelperAPI.Tests
         public async Task ProcessTextAsync_ReturnsCorrected_deepseekR115_Text()
         {
             // Arrange
-            var input = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            var input = inputText;
             _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1:1.5b");
             _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
 
@@ -147,8 +168,193 @@ namespace OrthoHelperAPI.Tests
         public async Task ProcessTextAsync_ReturnsCorrected_deepseekR1_Text()
         {
             // Arrange
-            var input = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            var input = inputText;
             _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_deepseekR114b_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1:14b");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_vigostral_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("benob/vigostral:latest");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_openchat_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("openchat:latest");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_EomerGpt35turbo_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("Eomer/gpt-3.5-turbo:latest");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_gemma3_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("gemma3");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_gemma312_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("gemma3:12b");
+            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+
+            var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
+
+            //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
+            //    .ReturnsAsync(new ChatMessage { Content = correctedText });
+
+            // Act
+            var result = await service.ProcessTextAsync(input);
+
+            // Assert
+            //Assert.Equal(correctedText, result);
+            _output.WriteLine($"Input : {input}");
+            _output.WriteLine($"Output : {result.correctedText}");
+            _output.WriteLine($"Diff : {result.diffText}");
+
+            Assert.NotEmpty(result.correctedText);
+            Assert.DoesNotContain("Erreur lors du traitement", result.correctedText);
+        }
+
+
+        [Fact]
+        public async Task ProcessTextAsync_ReturnsCorrected_apxObsidian_Text()
+        {
+            // Arrange
+            var input = inputText;
+            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("apx/obsidian:fr");
             _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
@@ -194,7 +400,7 @@ namespace OrthoHelperAPI.Tests
         public void TestCharacterDifference()
         {
             // Arrange
-            string text1 = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
+            string text1 = inputText;
             string text2 = "Salut Henitsoa, je viens vous aider à la demande de Hafalina pour donner mon coup de main sur l'application NovyParking que vous développez.";
 
             // Act

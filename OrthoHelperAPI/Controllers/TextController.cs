@@ -32,7 +32,8 @@ namespace OrthoHelperAPI.Controllers
                 var messages = await _messageRepository.GetUserMessagesAsync(userId);
 
                 var startDate = DateTime.Now;
-                var result = await _textProcessingService.ProcessTextAsync(request.Text, messages);
+                //var result = await _textProcessingService.ProcessTextAsync(request.Text, messages);
+                var result = await _textProcessingService.ProcessTextAsync(request.Text);
                 var processingTime = DateTime.Now - startDate;
 
                 Console.WriteLine($"REFLECTION TIME :{processingTime}");

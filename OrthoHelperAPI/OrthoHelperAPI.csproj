@@ -4,10 +4,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	
+	    <!-- Ajoutez ces propriétés -->
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
+     <!-- <IsTestProject>false</IsTestProject> -->
+	
     <UserSecretsId>d5773898-d8c0-41bb-8757-e280a11da6cf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
+  
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
@@ -19,7 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.40.0" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.43.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.40.0-alpha" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" />
@@ -27,6 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrthoHelper.Application\OrthoHelper.Application.csproj" />
+    <ProjectReference Include="..\OrthoHelper.Infrastructure\OrthoHelper.Infrastructure.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 

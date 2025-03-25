@@ -7,32 +7,77 @@ using System.Text;
 using SQLitePCL;
 using OrthoHelperAPI.Services.Interfaces;
 using OrthoHelperAPI.Services;
-using OrthoHelperAPI.Repositories; // Add this using directive
+using OrthoHelperAPI.Repositories;
+using OrthoHelper.Application.Features.TextCorrection.UseCases;
+using OrthoHelper.Domain.Ports;
+using OrthoHelper.Infrastructure.TextProcessing;
+using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Initialize SQLite provider
-Batteries.Init(); // Add this line
 
-// Program.cs
-// Ajouter avec les autres services
+
+// 1. Initialisation SQLite
+Batteries.Init();
+
+// 2. Configuration CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+//OLD
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 
-// Add services to the container.
-builder.Services.AddControllers();
 
-// Add IHttpClientFactory service
+// 3. Configuration HttpClient pour Ollama
+var ollamaConfig = builder.Configuration.GetSection("OllamaSettings");
+builder.Services.AddHttpClient("Ollama", client =>
+{
+    client.BaseAddress = new Uri(ollamaConfig["Address"]!);
+    client.Timeout = TimeSpan.FromMinutes(15);
+});
+
+
+// 3. Configuration de l'Infrastructure
+// 4. Configuration de l'Infrastructure
+builder.Services.AddSingleton<IOrthoEngine>(provider =>
+{
+    var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+    return new OrthoEngine(
+        httpClientFactory.CreateClient("Ollama"))
+    {
+        // Configuration supplémentaire si nécessaire
+    };
+});
+
+builder.Services.AddScoped<ITextProcessingEngine, OrthoEngineAdapter>();
+
+//builder.Services.AddSingleton<IOrthoEngine, OrthoEngine>(); // Interface -> Implémentation
+//builder.Services.AddScoped<ITextProcessingEngine, OrthoEngineAdapter>();
+
+// 4. Configuration de l'Application
+builder.Services.AddScoped<ICorrectTextUseCase, CorrectTextUseCase>();
+
+// 5. Configuration de l'API
+builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
-// Configuration base de données SQLite
+// 6. Configuration de la base de données
 builder.Services.AddDbContext<ApiDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Ajoutez le repository ici, après le DbContext
+// 7. Autres services
+builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 
-// Configuration JWT
+// 8. Configuration JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -46,18 +91,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Configuration Swagger/OpenAPI
+// 9. Configuration Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Mon API",
+        Title = "OrthoHelper API",
         Version = "v1",
-        Description = "API avec authentification et traitement de texte"
+        Description = "API de correction orthographique"
     });
 
-    // Configuration Swagger pour JWT
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -65,7 +109,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme."
+        Description = "JWT Authorization header"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -79,24 +123,23 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
 
 var app = builder.Build();
 
+// 10. Middleware pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrthoHelper API v1"));
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthentication(); // Ajout de l'authentification
+app.UseCors("AllowLocalhost");
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -1,0 +1,6 @@
+version: '3.4'
+
+services:
+  orthohelperapi:
+    ports:
+      - "32780:8080"  # Mappe le port 8080 de l'hôte au port 8080 du conteneur

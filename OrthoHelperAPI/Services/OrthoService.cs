@@ -1,14 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.Ollama;
+﻿using Microsoft.SemanticKernel.ChatCompletion;
 using OllamaSharp;
-using OllamaSharp.Models.Chat;
-using OpenAI.Assistants;
-using OrthoHelperAPI.Model;
 using OrthoHelperAPI.Services.Interfaces;
 using System.Diagnostics;
-using System.Text;
 using Tools;
 
 namespace OrthoHelperAPI.Services
@@ -45,7 +38,13 @@ namespace OrthoHelperAPI.Services
 #pragma warning restore SKEXP0001
                 _history = new();
                 //_history.AddSystemMessage("Tu es une IA spécialiste en correction d'orthographe. À chaque texte que tu reçois, retourne le texte corrigé sans rien d'autre.");
-                _history.AddSystemMessage("Tu es une IA spécialiste en correction d'orthographe.");
+                var initText = "";
+                //initText = "Tu es une IA spécialiste en correction d'orthographe, et de grammaire.";
+
+                initText = "Tu es un assistant pour mon éditeur de texte Obsidian. Tu me parles exclusivement en français même si je te parle dans une autre langue, tu me réponds en français. \r\nTu dois pouvoir me corriger mes fautes d'orthographe ou reformuler mes phrases si elles sont grammaticalement incorrectes. Si le text est du markdown, tu ne dois pas le modifier.";
+
+
+                    _history.AddSystemMessage(initText);
             }
             catch (Exception ex)
             {
