@@ -14,3 +14,5 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\refint\OrthoHelper.Application.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\OrthoHelper.Application.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\ref\OrthoHelper.Application.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.pdb

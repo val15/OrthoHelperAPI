@@ -39,7 +39,14 @@ namespace OrthoHelperAPI.Tests.Controllers
         {
             // Arrange
             var input = new CorrectTextInputDto("Je veut un café");
-            var expectedOutput = new CorrectTextOutputDto("Je veut un café", "Je veux un café", DateTime.UtcNow);
+            var expectedOutput = new CorrectTextOutputDto
+            {
+                InputText = "Je veut un café",
+                OutputText = "Je veux un café",
+                CreatedAt = DateTime.UtcNow,
+            };
+                
+                //(, , DateTime.UtcNow);
 
             _mockUseCase.Setup(uc => uc.ExecuteAsync(input))
                        .ReturnsAsync(expectedOutput);

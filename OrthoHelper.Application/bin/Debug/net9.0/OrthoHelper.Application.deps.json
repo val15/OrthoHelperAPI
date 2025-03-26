@@ -8,15 +8,35 @@
     ".NETCoreApp,Version=v9.0": {
       "OrthoHelper.Application/1.0.0": {
         "dependencies": {
-          "OrthoHelper.Domain": "1.0.0"
+          "OrthoHelper.Domain": "1.0.0",
+          "Tools": "1.0.0"
         },
         "runtime": {
           "OrthoHelper.Application.dll": {}
         }
       },
+      "DiffPlex/1.7.2": {
+        "runtime": {
+          "lib/net6.0/DiffPlex.dll": {
+            "assemblyVersion": "1.7.2.0",
+            "fileVersion": "1.7.2.0"
+          }
+        }
+      },
       "OrthoHelper.Domain/1.0.0": {
         "runtime": {
           "OrthoHelper.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Tools/1.0.0": {
+        "dependencies": {
+          "DiffPlex": "1.7.2"
+        },
+        "runtime": {
+          "Tools.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -30,7 +50,19 @@
       "serviceable": false,
       "sha512": ""
     },
+    "DiffPlex/1.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qJEjdxEDBWSFZGB8paBB9HDeJXHGlHlOXeGX3kbTuXWuOsgv2iSAEOOzo5V1/B39Vcxr9IVVrNKewRcX+rsn4g==",
+      "path": "diffplex/1.7.2",
+      "hashPath": "diffplex.1.7.2.nupkg.sha512"
+    },
     "OrthoHelper.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Tools/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

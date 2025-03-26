@@ -1,9 +1,13 @@
 ﻿namespace OrthoHelper.Application.Features.TextCorrection.DTOs
 {
 
-    public record CorrectTextOutputDto(
-    string OriginalText,
-    string CorrectedText,
-    DateTime ProcessedAt
-);
+    public class CorrectTextOutputDto
+    {
+        public string InputText { get; set; } = string.Empty;
+        public string OutputText { get; set; } = string.Empty;
+        public string Diff { get; set; } = string.Empty;
+        public TimeSpan ProcessingTime { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+
 }

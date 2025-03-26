@@ -109,3 +109,6 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.genruntimeconfig.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\ref\OrthoHelper.Application.Tests.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\DiffPlex.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.pdb

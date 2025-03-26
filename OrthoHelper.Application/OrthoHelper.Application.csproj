@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrthoHelper.Domain\OrthoHelper.Domain.csproj" />
+    <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 
 </Project>

@@ -35,6 +35,9 @@
             "projectReferences": {
               "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj": {
                 "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj"
+              },
+              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj": {
+                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj"
               }
             }
           }

@@ -30,8 +30,8 @@ public class CorrectTextUseCaseTests
         var result = await _useCase.ExecuteAsync(input);
 
         // Assert
-        result.CorrectedText.Should().Be("Je veux un café");
-        result.OriginalText.Should().Be("Je veut un café");
+        result.OutputText.Should().Be("Je veux un café");
+        result.InputText.Should().Be("Je veut un café");
         _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
     }
 
