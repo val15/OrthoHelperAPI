@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OrthoHelper.Domain\OrthoHelper.Domain.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Auth\UseCases\" />
   </ItemGroup>
 
 </Project>

@@ -2,21 +2,22 @@
 using Moq;
 using OrthoHelper.Api.Controllers;
 using OrthoHelper.Application.Features.TextCorrection.DTOs;
-using OrthoHelper.Application.Features.TextCorrection.UseCases;
 using FluentAssertions;
-using OrthoHelper.Domain.Exceptions;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
+using MediatR;
 
 namespace OrthoHelperAPI.Tests.Controllers
 {
     public class TextCorrectionControllerTests
     {
         private readonly Mock<ICorrectTextUseCase> _mockUseCase = new();
+        private readonly Mock<IMediator> _mockMediator = new();
         private readonly TextCorrectionController _controller;
+
 
         public TextCorrectionControllerTests()
         {
-            _controller = new TextCorrectionController(_mockUseCase.Object);
+            _controller = new TextCorrectionController(_mockUseCase.Object, _mockMediator.Object);
         }
 
         [Fact]

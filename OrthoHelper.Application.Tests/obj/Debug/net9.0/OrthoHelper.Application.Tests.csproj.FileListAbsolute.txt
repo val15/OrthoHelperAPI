@@ -9,9 +9,17 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Application.Tests.runtimeconfig.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Application.Tests.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Application.Tests.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\AutoMapper.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Castle.Core.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\DiffPlex.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\FluentAssertions.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\MediatR.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\MediatR.Contracts.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -95,8 +103,10 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Application.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Domain.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Application.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\OrthoHelper.Domain.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.csproj.AssemblyReference.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.GeneratedMSBuildEditorConfig.editorconfig
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.AssemblyInfoInputs.cache
@@ -109,6 +119,3 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\OrthoHelper.Application.Tests.genruntimeconfig.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\obj\Debug\net9.0\ref\OrthoHelper.Application.Tests.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\DiffPlex.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application.Tests\bin\Debug\net9.0\Tools.pdb

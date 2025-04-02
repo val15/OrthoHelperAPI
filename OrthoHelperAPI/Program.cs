@@ -2,16 +2,21 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using OrthoHelperAPI.Data;
 using System.Text;
 using SQLitePCL;
 using OrthoHelperAPI.Services.Interfaces;
 using OrthoHelperAPI.Services;
 using OrthoHelperAPI.Repositories;
 using OrthoHelper.Application.Features.TextCorrection.UseCases;
-using OrthoHelper.Domain.Ports;
-using OrthoHelper.Infrastructure.TextProcessing;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Infrastructure.Features.TextProcessing;
+using OrthoHelper.Infrastructure.Features.Auth.Repositories;
+using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
+using OrthoHelper.Domain.Features.TextCorrection.Mappings;
+using OrthoHelper.Domain.Features.Common.Ports;
+using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,24 +42,34 @@ builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 
 // 3. Configuration HttpClient pour Ollama
 var ollamaConfig = builder.Configuration.GetSection("OllamaSettings");
-builder.Services.AddHttpClient("Ollama", client =>
-{
-    client.BaseAddress = new Uri(ollamaConfig["Address"]!);
-    client.Timeout = TimeSpan.FromMinutes(15);
-});
+builder.Services
+    .AddScoped<ICorrectionSessionRepository, CorrectionSessionRepository>()
+    .AddHttpClient("Ollama", client =>
+    {
+        client.BaseAddress = new Uri(ollamaConfig["Address"]!);
+        client.Timeout = TimeSpan.FromMinutes(15);
+    });
 
 
 // 3. Configuration de l'Infrastructure
 // 4. Configuration de l'Infrastructure
-builder.Services.AddSingleton<IOrthoEngine>(provider =>
+builder.Services.AddScoped<IOrthoEngine>(provider =>
 {
     var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+    var repository = provider.GetRequiredService<ICorrectionSessionRepository>();
+    var currentUserService = provider.GetRequiredService<ICurrentUserService>();
+
     return new OrthoEngine(
-        httpClientFactory.CreateClient("Ollama"))
-    {
-        // Configuration supplémentaire si nécessaire
-    };
+        httpClient: httpClientFactory.CreateClient("Ollama"),
+        repository: repository, // Ajout du paramètre manquant
+    currentUserService: currentUserService
+        );
 });
+
+
+builder.Services
+    .AddHttpContextAccessor() // Nécessaire pour IHttpContextAccessor
+    .AddScoped<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddScoped<ITextProcessingEngine, OrthoEngineAdapter>();
 
@@ -70,8 +85,20 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 // 6. Configuration de la base de données
-builder.Services.AddDbContext<ApiDbContext>(options =>
+builder.Services.AddDbContext<OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext.ApiDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//OLD
+builder.Services.AddDbContext<OrthoHelperAPI.Data.ApiDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Enregistrement des dépendances Auth
+builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.IUserRepository, UserRepository>();
+builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService, OrthoHelper.Infrastructure.Features.Auth.Services.TokenService>();
+
+// ajout des handlers CQR 
+builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.IUserRepository, UserRepository>();
+builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService, OrthoHelper.Infrastructure.Features.Auth.Services.TokenService>();
 
 // 7. Autres services
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
@@ -127,6 +154,21 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+//// Ajouter MediatR
+//builder.Services.AddMediatR(cfg =>
+//    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(OrthoHelper.Application.AssemblyMarker).Assembly));
+
+
+builder.Services.AddAutoMapper(typeof(CorrectionSessionProfile)); // Enregistrer le profil AutoMapper
+
+
+//builder.Services.AddMediatR(cfg =>
+//    cfg.RegisterServicesFromAssembly(typeof(OrthoHelper.Application.AssemblyMarker).Assembly));
+
 
 var app = builder.Build();
 

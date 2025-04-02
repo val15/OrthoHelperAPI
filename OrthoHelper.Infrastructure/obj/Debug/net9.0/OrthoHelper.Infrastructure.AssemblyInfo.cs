@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrthoHelper.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2f72509a07f2cd76eefed4eff17001e03fad00a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f10f7080d97b58e8b59b978ca6f79f61bd0f3ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrthoHelper.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrthoHelper.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

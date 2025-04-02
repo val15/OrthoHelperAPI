@@ -2,8 +2,10 @@
 using Moq;
 using OrthoHelper.Application.Features.TextCorrection.DTOs;
 using OrthoHelper.Application.Features.TextCorrection.UseCases;
-using OrthoHelper.Domain.Exceptions;
-using OrthoHelper.Domain.Ports;
+using OrthoHelper.Domain.Features.Common.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using Xunit;
 
 namespace OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
@@ -11,11 +13,13 @@ namespace OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 public class CorrectTextUseCaseTests
 {
     private readonly Mock<ITextProcessingEngine> _mockEngine = new();
+    private readonly Mock<ICurrentUserService> _mockCurrentUserService = new();
+    private readonly Mock<ICorrectionSessionRepository> _mockCorrectionSessionRepository = new();
     private readonly CorrectTextUseCase _useCase;
 
     public CorrectTextUseCaseTests()
     {
-        _useCase = new CorrectTextUseCase(_mockEngine.Object);
+        _useCase = new CorrectTextUseCase(_mockEngine.Object, _mockCurrentUserService.Object, _mockCorrectionSessionRepository.Object);
     }
 
     [Fact]

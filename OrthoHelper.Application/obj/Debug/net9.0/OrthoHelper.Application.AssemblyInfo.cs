@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrthoHelper.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8442f9ca88005c399fd35b29ad73df0e3b94a1b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f10f7080d97b58e8b59b978ca6f79f61bd0f3ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrthoHelper.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrthoHelper.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

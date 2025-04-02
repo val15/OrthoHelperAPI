@@ -2,7 +2,9 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\OrthoHelper.Application.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\OrthoHelper.Application.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\OrthoHelper.Domain.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\OrthoHelper.Domain.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\OrthoHelper.Application.csproj.AssemblyReference.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\OrthoHelper.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\OrthoHelper.Application.AssemblyInfoInputs.cache
@@ -14,5 +16,3 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Applicati
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\refint\OrthoHelper.Application.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\OrthoHelper.Application.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\obj\Debug\net9.0\ref\OrthoHelper.Application.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Application\bin\Debug\net9.0\Tools.pdb

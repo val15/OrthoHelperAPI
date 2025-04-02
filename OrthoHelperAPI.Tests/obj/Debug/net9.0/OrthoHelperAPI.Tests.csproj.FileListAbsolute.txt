@@ -191,12 +191,17 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.Tests.runtimeconfig.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.Tests.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.Tests.pdb
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\AutoMapper.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Azure.AI.OpenAI.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Azure.Core.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\BCrypt.Net-Next.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Castle.Core.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\DiffPlex.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\FluentAssertions.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\MediatR.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\MediatR.Contracts.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\MediatR.Extensions.Microsoft.DependencyInjection.Libraries.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll

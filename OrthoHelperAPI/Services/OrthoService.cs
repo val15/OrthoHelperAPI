@@ -44,7 +44,7 @@ namespace OrthoHelperAPI.Services
                 initText = "Tu es un assistant pour mon éditeur de texte Obsidian. Tu me parles exclusivement en français même si je te parle dans une autre langue, tu me réponds en français. \r\nTu dois pouvoir me corriger mes fautes d'orthographe ou reformuler mes phrases si elles sont grammaticalement incorrectes. Si le text est du markdown, tu ne dois pas le modifier.";
 
 
-                    _history.AddSystemMessage(initText);
+                _history.AddSystemMessage(initText);
             }
             catch (Exception ex)
             {
