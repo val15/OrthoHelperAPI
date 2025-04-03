@@ -2,58 +2,63 @@
     agent any
 
     environment {
+        // Nom de l'image Docker
         DOCKER_IMAGE = "orthohelper-api:latest"
+        // Ports exposés (doivent correspondre à votre Dockerfile)
         APP_PORT = "8088"
+        // Configuration de build .NET
         BUILD_CONFIGURATION = "Release"
-        DB_VOLUME = "orthohelper-data" // Volume pour la base de données
     }
 
     stages {
-        // Étape 1 : Récupération du code
+        // Étape 1 : Checkout du code depuis GitHub
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        // Étape 2 : Restauration des dépendances
+        // Étape 2 : Restauration des dépendances .NET
         stage('Restore') {
             steps {
                 bat 'dotnet restore OrthoHelperAPI/OrthoHelperAPI.csproj'
             }
         }
 
-        // Étape 3 : Compilation
+        // Étape 3 : Build du projet
         stage('Build') {
             steps {
                 bat "dotnet build OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
             }
         }
 
-        // Étape 4 : Exécution de tous les tests
-        //stage('Test') {
-        //    steps {
-        //        bat '''
-        //            echo "Lancement des tests..."
-        //            dotnet test "OrthoHelper.Api.Controllers.Tests\\OrthoHelper.Api.Controllers.Tests.csproj" --no-build --verbosity normal
-        //            dotnet test "OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj" --no-build --verbosity normal
-        //            dotnet test "OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj" --no-build --verbosity normal
-        //            dotnet test "OrthoHelper.Infrastructure.Tests\\OrthoHelper.Infrastructure.Tests.csproj" --no-build --verbosity normal
-        //            dotnet test "OrthoHelper.Integration.Tests\\OrthoHelper.Integration.Tests.csproj" --no-build --verbosity normal
-        //            dotnet test "OrthoHelperAPI.Tests\\OrthoHelperAPI.Tests.csproj" --no-build --verbosity normal
-        //        '''
-        //    }
-        //    post {
-        //        always {
-        //            archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
-        //        }
-        //    }
-        //}
+        // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
+       
+       //TODO AJOUTER ICI LES AUTRES PROJETS DE TESTS
+       //stage('Test') {
+       //     steps {
+       //         bat '''
+       //             echo "Lancement des tests..."
+       //             dotnet test "OrthoHelper.Api.Controllers.Tests\\OrthoHelper.Api.Controllers.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Infrastructure.Tests\\OrthoHelper.Infrastructure.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Integration.Tests\\OrthoHelper.Integration.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelperAPI.Tests\\OrthoHelperAPI.Tests.csproj" --no-build --verbosity normal
+       //         '''
+       //     }
+       //     post {
+       //         always {
+       //             // Archive des résultats au format TRX (optionnel)
+       //             archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
+       //         }
+       //     }
+       // }
 
-        // Étape 5 : Publication
+        // Étape 5 : Publication de l'application
         stage('Publish') {
             steps {
-                bat "dotnet publish OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publish --no-build"
+                bat "dotnet publish OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
             }
         }
 
@@ -61,42 +66,35 @@
         stage('Build Docker Image') {
             steps {
                 script {
+                    // Supprime l'image existante pour éviter les conflits
                     bat "docker rmi ${DOCKER_IMAGE} --force || exit 0"
+                    // Build de l'image
                     bat "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
 
-        // Étape 7 : Déploiement avec volume persistant
+        // Étape 7 : Déploiement du conteneur
         stage('Deploy') {
             steps {
                 script {
-                    // Nettoyage des anciens conteneurs
+                    // Arrêt et suppression du conteneur existant (ignore les erreurs)
                     bat "docker stop orthohelper-api || exit 0"
                     bat "docker rm orthohelper-api || exit 0"
-                    
-                    // Lancement avec volume et variables d'environnement
-                    bat """
-                        docker run -d \
-                        --name orthohelper-api \
-                        -p ${APP_PORT}:8080 \
-                        -v ${DB_VOLUME}:/app/data \
-                        -e ASPNETCORE_ENVIRONMENT=Production \
-                        -e CONNECTIONSTRINGS__DEFAULTCONNECTION="Data Source=/app/data/api.db;" \
-                        ${DOCKER_IMAGE}
-                    """
+                    // Lancement du nouveau conteneur
+                    bat "docker run -d --name orthohelper-api -p ${APP_PORT}:8080 ${DOCKER_IMAGE}"
                 }
             }
         }
     }
-
-    // Notifications
+    // Actions post-build (notifications, nettoyage)
     post {
         success {
-            echo '✅ Déploiement réussi! Accédez à : http://localhost:8088/swagger'
+            echo 'Build et déploiement réussis !'
+            // Slack/Email notification optionnelle
         }
         failure {
-            echo '❌ Échec du pipeline. Vérifiez les logs Jenkins.'
+            echo 'Échec du pipeline. Consultez les logs.'
         }
     }
 }
