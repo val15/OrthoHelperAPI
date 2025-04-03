@@ -5,7 +5,7 @@ pipeline {
         // Nom de l'image Docker
         DOCKER_IMAGE = "orthohelper-api:latest"
         // Ports exposés (doivent correspondre à votre Dockerfile)
-        APP_PORT = "8080"
+        APP_PORT = "8088"
         // Configuration de build .NET
         BUILD_CONFIGURATION = "Release"
     }
