@@ -82,7 +82,7 @@ pipeline {
                     bat "docker stop orthohelper-api || exit 0"
                     bat "docker rm orthohelper-api || exit 0"
                     // Lancement du nouveau conteneur
-                    bat "docker run -d --name orthohelper-api -p ${APP_PORT}:${APP_PORT} ${DOCKER_IMAGE}"
+                    bat "docker run -d --name orthohelper-api -p ${APP_PORT}:8080 ${DOCKER_IMAGE}"
                 }
             }
         }
