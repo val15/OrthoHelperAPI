@@ -35,7 +35,16 @@ pipeline {
         // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
         stage('Test') {
             steps {
-                bat 'dotnet test --no-build --verbosity normal'
+                bat '''
+                    echo "Lancement de tous les projets de test..."
+                    dotnet test **/*.Tests.csproj --no-build --verbosity normal --logger "trx;LogFileName=TestResults.trx"
+                '''
+            }
+            post {
+                always {
+                    // Archive les résultats des tests pour inspection
+                    archiveArtifacts artifacts: '**/TestResults/**/*', allowEmptyArchive: true
+                }
             }
         }
 

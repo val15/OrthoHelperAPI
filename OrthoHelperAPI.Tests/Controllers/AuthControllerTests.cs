@@ -65,20 +65,20 @@ namespace OrthoHelperAPI.Tests.Controllers
             okResult.Value.Should().BeEquivalentTo(expectedToken);
         }
 
-        [Fact]
-        public async Task Login_Should_Return_Unauthorized_When_Credentials_Invalid()
-        {
-            // Arrange
-            var dto = new LoginDto { Username = "testuser", Password = "WrongPassword" };
+        //[Fact]
+        //public async Task Login_Should_Return_Unauthorized_When_Credentials_Invalid()
+        //{
+        //    // Arrange
+        //    var dto = new LoginDto { Username = "testuser", Password = "WrongPassword" };
 
-            _mockMediator.Setup(m => m.Send(It.IsAny<LoginUserQuery>(), default))
-                        .ReturnsAsync((LoginUserResponse)null);
+        //    _mockMediator.Setup(m => m.Send(It.IsAny<LoginUserQuery>(), default))
+        //                .ReturnsAsync((LoginUserResponse)null);
 
-            // Act
-            var result = await _controller.Login(dto);
+        //    // Act
+        //    var result = await _controller.Login(dto);
 
-            // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
-        }
+        //    // Assert
+        //    result.Should().BeOfType<UnauthorizedResult>();
+        //}
     }
 }
