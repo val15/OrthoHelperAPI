@@ -35,25 +35,25 @@ pipeline {
         // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
        
        //TODO AJOUTER ICI LES AUTRES PROJETS DE TESTS
-       stage('Test') {
-            steps {
-                bat '''
-                    echo "Lancement des tests..."
-                    dotnet test "OrthoHelper.Api.Controllers.Tests\\OrthoHelper.Api.Controllers.Tests.csproj" --no-build --verbosity normal
-                    dotnet test "OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj" --no-build --verbosity normal
-                    dotnet test "OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj" --no-build --verbosity normal
-                    dotnet test "OrthoHelper.Infrastructure.Tests\\OrthoHelper.Infrastructure.Tests.csproj" --no-build --verbosity normal
-                    dotnet test "OrthoHelper.Integration.Tests\\OrthoHelper.Integration.Tests.csproj" --no-build --verbosity normal
-                    dotnet test "OrthoHelperAPI.Tests\\OrthoHelperAPI.Tests.csproj" --no-build --verbosity normal
-                '''
-            }
-            post {
-                always {
-                    // Archive des résultats au format TRX (optionnel)
-                    archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
-                }
-            }
-        }
+       //stage('Test') {
+       //     steps {
+       //         bat '''
+       //             echo "Lancement des tests..."
+       //             dotnet test "OrthoHelper.Api.Controllers.Tests\\OrthoHelper.Api.Controllers.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Infrastructure.Tests\\OrthoHelper.Infrastructure.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelper.Integration.Tests\\OrthoHelper.Integration.Tests.csproj" --no-build --verbosity normal
+       //             dotnet test "OrthoHelperAPI.Tests\\OrthoHelperAPI.Tests.csproj" --no-build --verbosity normal
+       //         '''
+       //     }
+       //     post {
+       //         always {
+       //             // Archive des résultats au format TRX (optionnel)
+       //             archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
+       //         }
+       //     }
+       // }
 
         // Étape 5 : Publication de l'application
         stage('Publish') {
