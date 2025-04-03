@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     // Supprime l'image existante pour éviter les conflits
-                  //  sh "docker rmi ${DOCKER_IMAGE} --force || true"
+                    sh "docker rmi ${DOCKER_IMAGE} --force || true"
                     // Build de l'image
                     sh "docker build -t ${DOCKER_IMAGE} ."
                 }
@@ -63,8 +63,8 @@ pipeline {
             steps {
                 script {
                     // Arrêt et suppression du conteneur existant (ignore les erreurs)
-                    sh "docker stop orthohelper-api || true"
-                    sh "docker rm orthohelper-api || true"
+                    //sh "docker stop orthohelper-api || true"
+                    //sh "docker rm orthohelper-api || true"
                     // Lancement du nouveau conteneur
                     sh """
                         docker run -d \
