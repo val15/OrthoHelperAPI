@@ -172,11 +172,30 @@ builder.Services.AddAutoMapper(typeof(CorrectionSessionProfile)); // Enregistrer
 
 var app = builder.Build();
 
+// ------------------------- MIGRATE DB-------------------------
+// Appliquer les migrations EF Core au démarrage
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var dbContext = services.GetRequiredService<OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext.ApiDbContext>();
+        dbContext.Database.Migrate(); // Crée les tables manquantes
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Erreur lors de l'application des migrations");
+    }
+}
+// ------------------------- END MIGRATE DB -------------------------
+
+
 // 10. Middleware pipeline
 //TODO A DECOMMENTER
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrthoHelper API v1"));
 //}
 
