@@ -173,11 +173,12 @@ builder.Services.AddAutoMapper(typeof(CorrectionSessionProfile)); // Enregistrer
 var app = builder.Build();
 
 // 10. Middleware pipeline
-if (app.Environment.IsDevelopment())
-{
+//TODO A DECOMMENTER
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrthoHelper API v1"));
-}
+//}
 
 app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost");
