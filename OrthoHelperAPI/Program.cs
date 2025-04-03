@@ -181,6 +181,9 @@ using (var scope = app.Services.CreateScope())
     {
         var dbContext = services.GetRequiredService<OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext.ApiDbContext>();
         dbContext.Database.Migrate(); // Crée les tables manquantes
+        var dbContextOld = services.GetRequiredService<OrthoHelperAPI.Data.ApiDbContext>();
+        dbContextOld.Database.Migrate(); // Crée les tables manquantes
+
     }
     catch (Exception ex)
     {
