@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SuQQ4bxvY48=",
+  "dgSpecHash": "GVbaoZvDfGI=",
   "success": true,
-  "projectFilePath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj",
+  "projectFilePath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tsiry\\.nuget\\packages\\diffplex\\1.7.2\\diffplex.1.7.2.nupkg.sha512"
   ],

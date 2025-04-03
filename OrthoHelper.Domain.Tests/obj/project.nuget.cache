@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JVLNFpP9Bpk=",
+  "dgSpecHash": "riHvl4Z3juQ=",
   "success": true,
-  "projectFilePath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj",
+  "projectFilePath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tsiry\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\tsiry\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

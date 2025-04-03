@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {}
+    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {}
   },
   "projects": {
-    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {
+    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj",
+        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj",
         "projectName": "OrthoHelper.Application",
-        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj",
+        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj",
         "packagesPath": "C:\\Users\\tsiry\\.nuget\\packages\\",
-        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\obj\\",
+        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj": {
-                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj"
+              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj": {
+                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj"
               },
-              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj": {
-                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj"
+              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj": {
+                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj"
               }
             }
           }
@@ -87,14 +87,14 @@
         }
       }
     },
-    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj": {
+    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj",
+        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj",
         "projectName": "OrthoHelper.Domain",
-        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj",
+        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\OrthoHelper.Domain.csproj",
         "packagesPath": "C:\\Users\\tsiry\\.nuget\\packages\\",
-        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Domain\\obj\\",
+        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -116,8 +116,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj": {
-                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj"
+              "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj": {
+                "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj"
               }
             }
           }
@@ -163,14 +163,14 @@
         }
       }
     },
-    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj": {
+    "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj",
+        "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj",
         "projectName": "Tools",
-        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\Tools.csproj",
+        "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\Tools.csproj",
         "packagesPath": "C:\\Users\\tsiry\\.nuget\\packages\\",
-        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\Tools\\obj\\",
+        "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Tools\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
