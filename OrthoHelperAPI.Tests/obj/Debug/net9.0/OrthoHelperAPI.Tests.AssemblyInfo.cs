@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrthoHelperAPI.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfa757f5be1fcf2b2205c895ae0ff942d59a9d40")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0134c5af8e0271b0317575a35fe09eff4137e46")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrthoHelperAPI.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrthoHelperAPI.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
