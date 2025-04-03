@@ -79,8 +79,8 @@ pipeline {
             steps {
                 script {
                     // Arrêt et suppression du conteneur existant (ignore les erreurs)
-                    bat "docker stop orthohelper-api || true"
-                    bat "docker rm orthohelper-api || true"
+                    bat "docker stop orthohelper-api || exit 0"
+                    bat "docker rm orthohelper-api || exit 0"
                     // Lancement du nouveau conteneur
                     bat "docker run -d --name orthohelper-api -p ${APP_PORT}:${APP_PORT} ${DOCKER_IMAGE}"
                 }
