@@ -76,7 +76,6 @@ pipeline {
             }
         }
     }
-
     // Actions post-build (notifications, nettoyage)
     post {
         success {
