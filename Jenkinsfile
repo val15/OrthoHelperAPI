@@ -21,14 +21,14 @@ pipeline {
         // Étape 2 : Restauration des dépendances .NET
         stage('Restore') {
             steps {
-                bat 'dotnet restore OrthoHelperAPI.csproj'
+                bat 'dotnet restore OrthoHelperAPI/OrthoHelperAPI.csproj'
             }
         }
 
         // Étape 3 : Build du projet
         stage('Build') {
             steps {
-                bat "dotnet build OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
+                bat "dotnet build OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
             }
         }
 
@@ -42,7 +42,7 @@ pipeline {
         // Étape 5 : Publication de l'application
         stage('Publish') {
             steps {
-                bat "dotnet publibat OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
+                bat "dotnet publibat OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
             }
         }
 
