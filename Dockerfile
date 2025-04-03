@@ -1,33 +1,37 @@
-# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-# This stage is used when running from VS in fast mode (Default for Debug configuration)
+# Stage 1 : Base image avec configuration des variables d'environnement
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
 WORKDIR /app
+
+# Configuration pour SQLite
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV CONNECTIONSTRINGS__DEFAULTCONNECTION="Data Source=/app/data/api.db;"
+
+# Ports exposés et création du dossier de données
 EXPOSE 8080
 EXPOSE 8081
+RUN mkdir -p /app/data && chmod -R 777 /app/data  # Permissions pour SQLite
 
-# Ajout des extra hosts pour Docker
-#ENV DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2UNENCRYPTEDSUPPORT=true
-#ENV ASPNETCORE_URLS=http://+:8080
-
-# This stage is used to build the service project
+# Stage 2 : Build de l'application
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["OrthoHelperAPI/OrthoHelperAPI.csproj", "."]
-RUN dotnet restore "./OrthoHelperAPI.csproj"
+COPY ["OrthoHelperAPI/OrthoHelperAPI.csproj", "OrthoHelperAPI/"]
+RUN dotnet restore "OrthoHelperAPI/OrthoHelperAPI.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "OrthoHelperAPI/OrthoHelperAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/OrthoHelperAPI"
+RUN dotnet build "OrthoHelperAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# This stage is used to publish the service project to be copied to the final stage
+# Stage 3 : Publication de l'application
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "OrthoHelperAPI/OrthoHelperAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "OrthoHelperAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+# Stage 4 : Image finale avec persistance des données
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Volume pour la persistance de la base de données
+VOLUME /app/data
+
 ENTRYPOINT ["dotnet", "OrthoHelperAPI.dll"]
