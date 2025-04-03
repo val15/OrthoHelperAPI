@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     // Supprime l'image existante pour éviter les conflits
-                    sh "docker rmi ${DOCKER_IMAGE} --force || true"
+                  //  sh "docker rmi ${DOCKER_IMAGE} --force || true"
                     // Build de l'image
                     sh "docker build -t ${DOCKER_IMAGE} ."
                 }
