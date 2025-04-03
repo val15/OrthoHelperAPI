@@ -58,7 +58,7 @@ pipeline {
         // Étape 5 : Publication de l'application
         stage('Publish') {
             steps {
-                bat "dotnet publibat OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
+                bat "dotnet publish OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
             }
         }
 
