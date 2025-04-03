@@ -1507,11 +1507,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj",
+      "projectUniqueName": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj",
       "projectName": "OrthoHelper.Application.Tests",
-      "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj",
+      "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj",
       "packagesPath": "C:\\Users\\tsiry\\.nuget\\packages\\",
-      "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application.Tests\\obj\\",
+      "outputPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1533,8 +1533,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {
-              "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\OrthoHelper.Application\\OrthoHelper.Application.csproj"
+            "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj": {
+              "projectPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI - Copie\\OrthoHelper.Application\\OrthoHelper.Application.csproj"
             }
           }
         }
