@@ -21,28 +21,28 @@ pipeline {
         // Étape 2 : Restauration des dépendances .NET
         stage('Restore') {
             steps {
-                sh 'dotnet restore OrthoHelperAPI.csproj'
+                bat 'dotnet restore OrthoHelperAPI.csproj'
             }
         }
 
         // Étape 3 : Build du projet
         stage('Build') {
             steps {
-                sh "dotnet build OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
+                bat "dotnet build OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
             }
         }
 
         // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
         stage('Test') {
             steps {
-                sh 'dotnet test --no-build --verbosity normal'
+                bat 'dotnet test --no-build --verbosity normal'
             }
         }
 
         // Étape 5 : Publication de l'application
         stage('Publish') {
             steps {
-                sh "dotnet publish OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publish --no-build"
+                bat "dotnet publibat OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
             }
         }
 
@@ -51,9 +51,9 @@ pipeline {
             steps {
                 script {
                     // Supprime l'image existante pour éviter les conflits
-                    sh "docker rmi ${DOCKER_IMAGE} --force || true"
+                    bat "docker rmi ${DOCKER_IMAGE} --force || true"
                     // Build de l'image
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    bat "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -63,10 +63,10 @@ pipeline {
             steps {
                 script {
                     // Arrêt et suppression du conteneur existant (ignore les erreurs)
-                    sh "docker stop orthohelper-api || true"
-                    sh "docker rm orthohelper-api || true"
+                    bat "docker stop orthohelper-api || true"
+                    bat "docker rm orthohelper-api || true"
                     // Lancement du nouveau conteneur
-                    sh "docker run -d --name orthohelper-api -p ${APP_PORT}:${APP_PORT} ${DOCKER_IMAGE}"
+                    bat "docker run -d --name orthohelper-api -p ${APP_PORT}:${APP_PORT} ${DOCKER_IMAGE}"
                 }
             }
         }
