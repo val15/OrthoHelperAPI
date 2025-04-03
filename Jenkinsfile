@@ -33,17 +33,24 @@ pipeline {
         }
 
         // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
-        stage('Test') {
+       
+       //TODO AJOUTER ICI LES AUTRES PROJETS DE TESTS
+       stage('Test') {
             steps {
                 bat '''
-                    echo "Lancement de tous les projets de test..."
-                    dotnet test **/*.Tests.csproj --no-build --verbosity normal
+                    echo "Lancement des tests..."
+                    dotnet test "OrthoHelper.Api.Controllers.Tests\\OrthoHelper.Api.Controllers.Tests.csproj" --no-build --verbosity normal
+                    dotnet test "OrthoHelper.Application.Tests\\OrthoHelper.Application.Tests.csproj" --no-build --verbosity normal
+                    dotnet test "OrthoHelper.Domain.Tests\\OrthoHelper.Domain.Tests.csproj" --no-build --verbosity normal
+                    dotnet test "OrthoHelper.Infrastructure.Tests\\OrthoHelper.Infrastructure.Tests.csproj" --no-build --verbosity normal
+                    dotnet test "OrthoHelper.Integration.Tests\\OrthoHelper.Integration.Tests.csproj" --no-build --verbosity normal
+                    dotnet test "OrthoHelperAPI.Tests\\OrthoHelperAPI.Tests.csproj" --no-build --verbosity normal
                 '''
             }
             post {
                 always {
-                    // Archive les résultats des tests pour inspection
-                    archiveArtifacts artifacts: '**/TestResults/**/*', allowEmptyArchive: true
+                    // Archive des résultats au format TRX (optionnel)
+                    archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
                 }
             }
         }
