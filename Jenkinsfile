@@ -1,38 +1,38 @@
-pipeline {
+ï»¿pipeline {
     agent any
 
     environment {
         // Nom de l'image Docker
         DOCKER_IMAGE = "orthohelper-api:latest"
-        // Ports exposés (doivent correspondre à votre Dockerfile)
+        // Ports exposÃ©s (doivent correspondre Ã  votre Dockerfile)
         APP_PORT = "8088"
         // Configuration de build .NET
         BUILD_CONFIGURATION = "Release"
     }
 
     stages {
-        // Étape 1 : Checkout du code depuis GitHub
+        // Ã‰tape 1 : Checkout du code depuis GitHub
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        // Étape 2 : Restauration des dépendances .NET
+        // Ã‰tape 2 : Restauration des dÃ©pendances .NET
         stage('Restore') {
             steps {
                 bat 'dotnet restore OrthoHelperAPI/OrthoHelperAPI.csproj'
             }
         }
 
-        // Étape 3 : Build du projet
+        // Ã‰tape 3 : Build du projet
         stage('Build') {
             steps {
                 bat "dotnet build OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} --no-restore"
             }
         }
 
-        // Étape 4 : Exécution des tests (ajustez si vous avez des tests)
+        // Ã‰tape 4 : ExÃ©cution des tests (ajustez si vous avez des tests)
        
        //TODO AJOUTER ICI LES AUTRES PROJETS DE TESTS
        //stage('Test') {
@@ -49,24 +49,24 @@ pipeline {
        //     }
        //     post {
        //         always {
-       //             // Archive des résultats au format TRX (optionnel)
+       //             // Archive des rÃ©sultats au format TRX (optionnel)
        //             archiveArtifacts artifacts: '**/TestResults/*.trx', allowEmptyArchive: true
        //         }
        //     }
        // }
 
-        // Étape 5 : Publication de l'application
+        // Ã‰tape 5 : Publication de l'application
         stage('Publish') {
             steps {
                 bat "dotnet publish OrthoHelperAPI/OrthoHelperAPI.csproj -c ${BUILD_CONFIGURATION} -o ./publibat --no-build"
             }
         }
 
-        // Étape 6 : Construction de l'image Docker
+        // Ã‰tape 6 : Construction de l'image Docker
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Supprime l'image existante pour éviter les conflits
+                    // Supprime l'image existante pour Ã©viter les conflits
                     bat "docker rmi ${DOCKER_IMAGE} --force || exit 0"
                     // Build de l'image
                     bat "docker build -t ${DOCKER_IMAGE} ."
@@ -74,11 +74,11 @@ pipeline {
             }
         }
 
-        // Étape 7 : Déploiement du conteneur
+        // Ã‰tape 7 : DÃ©ploiement du conteneur
         stage('Deploy') {
             steps {
                 script {
-                    // Arrêt et suppression du conteneur existant (ignore les erreurs)
+                    // ArrÃªt et suppression du conteneur existant (ignore les erreurs)
                     bat "docker stop orthohelper-api || exit 0"
                     bat "docker rm orthohelper-api || exit 0"
                     // Lancement du nouveau conteneur
@@ -90,11 +90,11 @@ pipeline {
     // Actions post-build (notifications, nettoyage)
     post {
         success {
-            echo 'Build et déploiement réussis !'
+            echo 'Build et dÃ©ploiement rÃ©ussis !'
             // Slack/Email notification optionnelle
         }
         failure {
-            echo 'Échec du pipeline. Consultez les logs.'
+            echo 'Ã‰chec du pipeline. Consultez les logs.'
         }
     }
 }
