@@ -37,7 +37,7 @@ pipeline {
             steps {
                 bat '''
                     echo "Lancement de tous les projets de test..."
-                    dotnet test **/*.Tests.csproj --no-build --verbosity normal --logger "trx;LogFileName=TestResults.trx"
+                    dotnet test **/*.Tests.csproj --no-build --verbosity normal
                 '''
             }
             post {
