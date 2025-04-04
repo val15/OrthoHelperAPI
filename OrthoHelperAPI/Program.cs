@@ -172,6 +172,18 @@ builder.Services.AddAutoMapper(typeof(CorrectionSessionProfile)); // Enregistrer
 
 var app = builder.Build();
 
+
+//Modifications pour intégration Angular 
+// 1. Configuration des fichiers statiques
+app.UseStaticFiles(); // Active la gestion des fichiers statiques (wwwroot)
+
+// 2. Redirection des routes inconnues vers Angular
+app.MapFallbackToFile("index.html"); // Gère le routage côté client
+
+// 3. Mise à jour de la politique CORS (optionnel)
+app.UseCors("AllowLocalhost"); // Conservez ou ajustez selon vos besoins
+
+
 // ------------------------- MIGRATE DB-------------------------
 // Appliquer les migrations EF Core au démarrage
 using (var scope = app.Services.CreateScope())

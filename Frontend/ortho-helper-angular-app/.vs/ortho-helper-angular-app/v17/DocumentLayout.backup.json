@@ -1,0 +1,547 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\login\\login.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\correct-text\\correct-text.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.module.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\login\\login.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\correct-text\\correct-text.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.routes.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\app.routes.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\guards\\auth.guard.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\guards\\auth.guard.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\auth.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\services\\auth.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\correct-text\\correct-text.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\login\\login.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\login\\login.component.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\text-editor\\text-editor.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\text-editor\\text-editor.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\text.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\services\\text.service.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\text-editor\\text-editor.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\models\\api-response.model.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\models\\api-response.model.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\correct-text\\correct-text.component.spec.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "text-editor.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\text-editor\\text-editor.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.ts",
+              "RelativeToolTip": "src\\app\\components\\text-editor\\text-editor.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T10:58:55.68Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "app.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\app.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "RelativeToolTip": "src\\app\\app.component.ts",
+              "ViewState": "AgIAACcAAAAAAAAAAAAQwDMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T11:00:17.634Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "text.service.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\text.service.ts",
+              "RelativeDocumentMoniker": "src\\app\\services\\text.service.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\text.service.ts",
+              "RelativeToolTip": "src\\app\\services\\text.service.ts",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T11:03:19.902Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "main.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\main.ts",
+              "RelativeDocumentMoniker": "src\\main.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\main.ts",
+              "RelativeToolTip": "src\\main.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T11:11:35.256Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "app.module.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.module.ts",
+              "RelativeDocumentMoniker": "src\\app\\app.module.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.module.ts",
+              "RelativeToolTip": "src\\app\\app.module.ts",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T11:12:26.917Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "api-response.model.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\models\\api-response.model.ts",
+              "RelativeDocumentMoniker": "src\\app\\models\\api-response.model.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\models\\api-response.model.ts",
+              "RelativeToolTip": "src\\app\\models\\api-response.model.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T12:34:08.108Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "text-editor.component.spec.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.spec.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\text-editor\\text-editor.component.spec.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.spec.ts",
+              "RelativeToolTip": "src\\app\\components\\text-editor\\text-editor.component.spec.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T12:52:04.738Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "text-editor.component.html",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.html",
+              "RelativeDocumentMoniker": "src\\app\\components\\text-editor\\text-editor.component.html",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\text-editor\\text-editor.component.html",
+              "RelativeToolTip": "src\\app\\components\\text-editor\\text-editor.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-07T12:45:44.382Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "correct-text.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\correct-text\\correct-text.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.ts",
+              "RelativeToolTip": "src\\app\\components\\correct-text\\correct-text.component.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T08:00:36.163Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "correct-text.component.html",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.html",
+              "RelativeDocumentMoniker": "src\\app\\components\\correct-text\\correct-text.component.html",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.html",
+              "RelativeToolTip": "src\\app\\components\\correct-text\\correct-text.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-07T12:45:23.646Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "correct-text.component.css",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.css",
+              "RelativeDocumentMoniker": "src\\app\\components\\correct-text\\correct-text.component.css",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.css",
+              "RelativeToolTip": "src\\app\\components\\correct-text\\correct-text.component.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-07T13:03:19.873Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "app.component.html",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.html",
+              "RelativeDocumentMoniker": "src\\app\\app.component.html",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.html",
+              "RelativeToolTip": "src\\app\\app.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-07T13:04:38.796Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "app.component.css",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.css",
+              "RelativeDocumentMoniker": "src\\app\\app.component.css",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.component.css",
+              "RelativeToolTip": "src\\app\\app.component.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-07T12:54:49.266Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "app.routes.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.routes.ts",
+              "RelativeDocumentMoniker": "src\\app\\app.routes.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\app.routes.ts",
+              "RelativeToolTip": "src\\app\\app.routes.ts",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAUwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-10T11:51:54.617Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "login.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\login\\login.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "RelativeToolTip": "src\\app\\components\\login\\login.component.ts",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAwB0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-10T14:52:41.544Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "login.component.html",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.html",
+              "RelativeDocumentMoniker": "src\\app\\components\\login\\login.component.html",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.html",
+              "RelativeToolTip": "src\\app\\components\\login\\login.component.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-10T14:52:45.793Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "auth.service.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\auth.service.ts",
+              "RelativeDocumentMoniker": "src\\app\\services\\auth.service.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\services\\auth.service.ts",
+              "RelativeToolTip": "src\\app\\services\\auth.service.ts",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-10T17:21:46.661Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "auth.guard.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\guards\\auth.guard.ts",
+              "RelativeDocumentMoniker": "src\\app\\guards\\auth.guard.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\guards\\auth.guard.ts",
+              "RelativeToolTip": "src\\app\\guards\\auth.guard.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-10T17:25:24.613Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".tsbuildinfo",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\.tsbuildinfo",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAACJxQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-04T14:08:30.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "app.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "RelativeDocumentMoniker": "..\\..\\..\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "RelativeToolTip": "..\\..\\..\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\app.component.ts",
+              "ViewState": "AgIAACUAAAAAAAAAAAAQwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:07:19.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "login.component.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "RelativeDocumentMoniker": "..\\..\\..\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "RelativeToolTip": "..\\..\\..\\OrthoHelperAngular\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.ts",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:07:02.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "chunk-QX2COTFA.js.map",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QX2COTFA.js.map",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAADEWA8AAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-04T14:06:54.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "chunk-QUFGTQRT.js.map",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js.map",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABCuwMAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-04T14:06:50.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "chunk-QUFGTQRT.js",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-QUFGTQRT.js",
+              "ViewState": "AgIAAAwQAAAAAAAAAAAAABUQAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-04T14:06:47.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "chunk-63QXRHOW.js.map",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js.map",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAADuTAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-04T14:06:43.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "chunk-63QXRHOW.js",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\chunk-63QXRHOW.js",
+              "ViewState": "AgIAAPYBAAAAAAAAAAAqwP4BAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-04T14:06:39.915Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "@angular_forms.js.map",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map",
+              "RelativeDocumentMoniker": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\.angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map",
+              "RelativeToolTip": ".angular\\cache\\19.2.1\\ortho-helper-angular-app\\vite\\deps\\@angular_forms.js.map",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAACCOwAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-03T17:46:05.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "login.component.spec.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.spec.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\login\\login.component.spec.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.spec.ts",
+              "RelativeToolTip": "src\\app\\components\\login\\login.component.spec.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-10T14:52:47.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "login.component.css",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.css",
+              "RelativeDocumentMoniker": "src\\app\\components\\login\\login.component.css",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\login\\login.component.css",
+              "RelativeToolTip": "src\\app\\components\\login\\login.component.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-10T14:52:44.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "correct-text.component.spec.ts",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.spec.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\correct-text\\correct-text.component.spec.ts",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\app\\components\\correct-text\\correct-text.component.spec.ts",
+              "RelativeToolTip": "src\\app\\components\\correct-text\\correct-text.component.spec.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-03-07T12:49:41.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\index.html",
+              "RelativeDocumentMoniker": "src\\index.html",
+              "ToolTip": "C:\\inProgress\\sdz\\update2025\\IA\\OrthoHelper\\OrthoHelperAPI\\Frontend\\ortho-helper-angular-app\\src\\index.html",
+              "RelativeToolTip": "src\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-07T11:11:48.925Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

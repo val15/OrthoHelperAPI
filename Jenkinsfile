@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "orthohelper-api:latest"
-        APP_PORT = "8088"
+        APP_PORT = "7088"
         BUILD_CONFIGURATION = "Release"
         DB_VOLUME = "orthohelper-data" // Volume pour la base de données
     }

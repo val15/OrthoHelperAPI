@@ -1,0 +1,19 @@
+<nav *ngIf="authService.isAuthenticated()">
+  <button (click)="logout()">Déconnexion</button>
+</nav>
+
+<main class="main" *ngIf="authService.isAuthenticated()">
+  <div class="container">
+    <div class="editor-container">
+      <app-text-editor></app-text-editor>
+      <div class="button-container">
+        <button class="send-button" (click)="sendToApi()">
+          ➜
+        </button>
+      </div>
+      <app-correct-text></app-correct-text>
+    </div>
+  </div>
+</main>
+
+<router-outlet *ngIf="!authService.isAuthenticated()"></router-outlet>
