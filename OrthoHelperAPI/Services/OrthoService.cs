@@ -57,7 +57,10 @@ namespace OrthoHelperAPI.Services
         {
             try
             {
-             
+
+                //Debug.WriteLine(_modelName);
+                //Console.WriteLine(_modelName);
+
                 //add old messages
                 if (messagesList != null)
                 {

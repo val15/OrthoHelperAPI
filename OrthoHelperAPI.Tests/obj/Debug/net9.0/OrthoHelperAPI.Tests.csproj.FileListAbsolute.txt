@@ -372,3 +372,4 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\OrthoHelperAPI.Tests.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\OrthoHelperAPI.Tests.genruntimeconfig.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\ref\OrthoHelperAPI.Tests.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.staticwebassets.runtime.json
