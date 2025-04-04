@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.SemanticKernel;
+﻿using System.Diagnostics;
 using Microsoft.SemanticKernel.ChatCompletion;
 using OllamaSharp;
 using OrthoHelper.Domain.Features.Common.Ports;
