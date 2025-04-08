@@ -9,6 +9,13 @@ pipeline {
     }
 
     stages {
+        
+        //Étape 0 : Test Environment
+        stage('Test Environment') {
+                steps {
+                    echo "La variable GOOGLE_AI_GEMINI_API_KEY vaut : ${env.GOOGLE_AI_GEMINI_API_KEY}"
+                }
+            }
         // Étape 1 : Récupération du code
         stage('Checkout') {
             steps {
