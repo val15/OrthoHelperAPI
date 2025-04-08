@@ -81,6 +81,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
                     var apiKeyGemini = Environment.GetEnvironmentVariable("GOOGLE_AI_GEMINI_API_KEY");
 #pragma warning disable SKEXP0070
+                    //TODO A METTRE DANS LES LOGS
+                    if(apiKeyGemini==null)
+                        Console.WriteLine("apiKeyGemini IS NULL");
                     // Utilisation de la classe expérimentale
                     _chatService = new GoogleAIGeminiChatCompletionService(
                         modelId: realModelName,//"gemini-2.0-flash",
