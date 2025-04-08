@@ -50,7 +50,6 @@ builder.Services
         client.Timeout = TimeSpan.FromMinutes(15);
     });
 
-
 // 3. Configuration de l'Infrastructure
 // 4. Configuration de l'Infrastructure
 builder.Services.AddScoped<IOrthoEngine>(provider =>
