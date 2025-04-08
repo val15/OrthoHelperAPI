@@ -58,13 +58,12 @@ builder.Services.AddScoped<IOrthoEngine>(provider =>
     var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
     var repository = provider.GetRequiredService<ICorrectionSessionRepository>();
     var currentUserService = provider.GetRequiredService<ICurrentUserService>();
-
+    var logger = provider.GetRequiredService<ILogger<OrthoEngine>>();
     var orthoEngine =  new OrthoEngine(
         httpClient: httpClientFactory.CreateClient("Ollama"),
-        repository: repository, // Ajout du paramètre manquant
-    currentUserService: currentUserService
-    //modelName: "Ollama:Gemma"
-    //modelName: "Online:gemini-2.0-flash"
+        repository: repository, 
+    currentUserService: currentUserService,
+    logger: logger 
         );
     orthoEngine.ModelName = "Online:gemini-2.0-flash";
     return orthoEngine;

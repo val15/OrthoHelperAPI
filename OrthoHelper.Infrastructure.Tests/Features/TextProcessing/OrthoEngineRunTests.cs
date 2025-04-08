@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Castle.Core.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Moq;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
@@ -14,10 +16,10 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         private readonly Mock<ICorrectionSessionRepository> _mockRepo;
         private readonly Mock<ICurrentUserService> _mockCurrentUserService;
 
+        private readonly Mock<ILogger<OrthoEngine>> _mockLogger;
+
 
         private readonly ITestOutputHelper _output;
-
-        private readonly Mock<IConfiguration> _configurationMock;
         private readonly string inputText = "Salu Henitsoa, je viens vert toi a la demande de Hafalina pour donné mon coup de main sur l'application novyparking que tu develope";
         public OrthoEngineRunTests(ITestOutputHelper output)
         {
@@ -31,7 +33,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             _mockCurrentUserService = new Mock<ICurrentUserService>();
 
 
-            _configurationMock = new Mock<IConfiguration>();
+
            
             _output = output;
         }
@@ -40,12 +42,10 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         public void OrthoService_Initialization_Success()
         {
             // Arrange
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("llama3.2");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             // Act
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Ollama:llama3.2";
             // Assert
             Assert.NotNull(engine);
@@ -56,11 +56,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3.2");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var modelName = "Ollama:llama3.2";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -83,11 +81,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3.1");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var modelName = "Ollama:llama3.1";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -111,11 +107,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var modelName = "Ollama:llama3";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -138,11 +132,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:mistral");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var modelName = "Ollama:mistral";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -166,10 +158,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:gemma3");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
+
             var modelName = "Ollama:gemma3";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -193,11 +184,9 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:gemma3:12b");
-            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var modelName = "Ollama:gemma3:12b";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -221,9 +210,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Online:gemini-2.0-flash");
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Online:gemini-2.0-flash";
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -239,6 +227,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             Assert.Equal("Online:gemini-2.0-flash", engine.ModelName);
             Assert.DoesNotContain("Erreur lors du traitement", result);
         }
+
+       
 
 
 

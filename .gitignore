@@ -1,4 +1,30 @@
-﻿################################################################################
+﻿## Fichiers de build
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+## Dossiers de VS
+.vscode/
+.vs/
+
+## Fichiers de logs / debug
+*.log
+
+## Configuration utilisateur
+*.user
+*.suo
+
+## Fichiers temporaires
+*.tmp
+*.bak
+
+## Dossiers de test
+TestResults/
+coverage/
+
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 

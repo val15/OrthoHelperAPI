@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Infrastructure.Features.TextProcessing;
@@ -10,6 +11,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         private readonly HttpClient _client;
         private readonly Mock<ICorrectionSessionRepository> _mockRepo;
         private readonly Mock<ICurrentUserService> _mockCurrentUserService;
+
+        private readonly Mock<ILogger<OrthoEngine>> _mockLogger;
 
         public OrthoEngineTests()
         {
@@ -30,7 +33,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         public void ProcessTextAsync_WithCommonErrors_ReturnsCorrectedText(string input, string expected)
         {
             // Arrange
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
+            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Ollama:Gemma.2";
             // Act
             var result = engine.ProcessTextAsync(input).Result; // .Result car la méthode est async
