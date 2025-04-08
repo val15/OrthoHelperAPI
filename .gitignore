@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/OrthoHelper.Infrastructure.Tests/Properties/launchSettings.json
+/OrthoHelper.Infrastructure/Properties/launchSettings.json
+/OrthoHelper.Infrastructure.Tests/Properties/launchSettings.json
+/OrthoHelper.Infrastructure.Tests/Test.runsettings
+/OrthoHelperAPI/Test.runsettings
+/OrthoHelperAPI/Properties/launchSettings.json
+/OrthoHelperAPI/Properties/launchSettings.json
+/OrthoHelperAPI/Properties/launchSettings.json
+/docker-compose.yml
+/OrthoHelperAPI/Test.runsettings

@@ -11,6 +11,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
     {
         Task<string> ProcessTextAsync(string inputText);
 
+        void SetModelName(string modelName);
         //Task InitializeUserSession(string username);
     }
 }

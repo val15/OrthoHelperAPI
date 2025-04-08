@@ -2,11 +2,6 @@
 using OrthoHelper.Domain.Features.Auth.Entities;
 using OrthoHelper.Domain.Features.Auth.Ports;
 using OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrthoHelper.Infrastructure.Features.Auth.Repositories
 {

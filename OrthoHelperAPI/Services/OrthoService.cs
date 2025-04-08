@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel.ChatCompletion;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.SemanticKernel.ChatCompletion;
 using OllamaSharp;
 using OrthoHelperAPI.Services.Interfaces;
 using System.Diagnostics;
@@ -19,24 +20,38 @@ namespace OrthoHelperAPI.Services
 
         public OrthoService(ILogger<OrthoService> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _logger = logger;
-            _modelName = configuration["OllamaSettings:ModelName"];
-            _ollamaAdress = configuration["OllamaSettings:Address"];
-
-
             try
             {
-                var httpClient = new HttpClient
+                _logger = logger;
+                _modelName = configuration["ModelSettings:ModelName"];
+                if (_modelName.Contains("Ollama"))
                 {
-                    BaseAddress = new Uri(_ollamaAdress),
-                    Timeout = TimeSpan.FromMinutes(15),
-                };
+                    _ollamaAdress = configuration["ModelSettings:Address"];
+                    _modelName = _modelName.Replace("Ollama:","");
+
+
+                    var httpClient = new HttpClient
+                    {
+                        BaseAddress = new Uri(_ollamaAdress),
+                        Timeout = TimeSpan.FromMinutes(15),
+                    };
 #pragma warning disable SKEXP0001
-                // _chatService = new OllamaApiClient(httpClient).AsChatCompletionService();
-                _chatService = new OllamaApiClient(httpClient, _modelName).AsChatCompletionService();
+                    // _chatService = new OllamaApiClient(httpClient).AsChatCompletionService();
+                    _chatService = new OllamaApiClient(httpClient, _modelName).AsChatCompletionService();
 
 #pragma warning restore SKEXP0001
-                _history = new();
+                }
+                //else if (_modelName.Contains("Online"))
+                //{
+                //    var httpClient = new HttpClient
+                //    {
+                //        BaseAddress = new Uri(_ollamaAdress),
+                //        Timeout = TimeSpan.FromMinutes(15),
+                //    };
+
+                //}
+
+                    _history = new();
                 //_history.AddSystemMessage("Tu es une IA spécialiste en correction d'orthographe. À chaque texte que tu reçois, retourne le texte corrigé sans rien d'autre.");
                 var initText = "";
                 //initText = "Tu es une IA spécialiste en correction d'orthographe, et de grammaire.";

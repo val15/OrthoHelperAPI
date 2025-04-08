@@ -10,6 +10,7 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Ports
     public interface ITextProcessingEngine
     {
         Task<string> CorrectTextAsync(string inputText);
+        void SetModelName(string modelName);
 
         //Task InitializeUserSession(string username);
     }

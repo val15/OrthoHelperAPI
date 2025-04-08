@@ -256,7 +256,11 @@
             },
             "Microsoft.SemanticKernel": {
               "target": "Package",
-              "version": "[1.43.0, )"
+              "version": "[1.45.0, )"
+            },
+            "Microsoft.SemanticKernel.Connectors.Google": {
+              "target": "Package",
+              "version": "[1.45.0-alpha, )"
             },
             "OllamaSharp": {
               "target": "Package",

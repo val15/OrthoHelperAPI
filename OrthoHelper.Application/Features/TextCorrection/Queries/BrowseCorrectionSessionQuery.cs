@@ -5,9 +5,6 @@ using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 
 namespace OrthoHelper.Application.Features.TextCorrection.Queries
 {
-    //internal class BrowseCorrectionSessionQuery
-    //{
-    //}
 
     public class BrowseCorrectionSessionQuery : IRequest<IEnumerable<CorrectTextOutputDto>>
     {

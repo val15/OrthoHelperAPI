@@ -29,8 +29,8 @@ namespace OrthoHelperAPI.Tests
         public void OrthoService_Initialization_Success()
         {
             // Arrange
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.2");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("llama3.2");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             // Act
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
@@ -44,8 +44,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.2");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3.2");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -69,8 +69,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.1");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3.1");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -95,8 +95,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:llama3");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -120,8 +120,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("mistral");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("mistral");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -145,8 +145,8 @@ namespace OrthoHelperAPI.Tests
         //{
         //    // Arrange
         //    var input = inputText;
-        //    _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1:1.5b");
-        //    _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+        //    _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("deepseek-r1:1.5b");
+        //    _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
         //    var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -170,8 +170,8 @@ namespace OrthoHelperAPI.Tests
         //{
         //    // Arrange
         //    var input = inputText;
-        //    _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1");
-        //    _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+        //    _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("deepseek-r1");
+        //    _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
         //    var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -195,8 +195,8 @@ namespace OrthoHelperAPI.Tests
         //{
         //    // Arrange
         //    var input = inputText;
-        //    _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("deepseek-r1:14b");
-        //    _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+        //    _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("deepseek-r1:14b");
+        //    _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
         //    var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -223,8 +223,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("gemma3");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:gemma3");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -249,8 +249,8 @@ namespace OrthoHelperAPI.Tests
         {
             // Arrange
             var input = inputText;
-            _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("gemma3:12b");
-            _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+            _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("Ollama:gemma3:12b");
+            _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
             var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -276,8 +276,8 @@ namespace OrthoHelperAPI.Tests
         //{
         //    // Arrange
         //    var input = inputText;
-        //    _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("apx/obsidian:fr");
-        //    _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+        //    _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("apx/obsidian:fr");
+        //    _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
         //    var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 
@@ -302,8 +302,8 @@ namespace OrthoHelperAPI.Tests
         //public async Task ProcessTextAsync_LogsErrorOnException()
         //{
         //    // Arrange
-        //    _configurationMock.Setup(c => c["OllamaSettings:ModelName"]).Returns("llama3.2");
-        //    _configurationMock.Setup(c => c["OllamaSettings:Address"]).Returns("http://localhost:11434");
+        //    _configurationMock.Setup(c => c["ModelSettings:ModelName"]).Returns("llama3.2");
+        //    _configurationMock.Setup(c => c["ModelSettings:Address"]).Returns("http://localhost:11434");
 
         //    var service = new OrthoService(_loggerMock.Object, _httpClientFactoryMock.Object, _configurationMock.Object);
 

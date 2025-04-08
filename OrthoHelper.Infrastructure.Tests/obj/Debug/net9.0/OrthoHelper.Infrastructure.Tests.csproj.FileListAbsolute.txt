@@ -365,6 +365,7 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastru
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Abstractions.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.AzureOpenAI.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.Google.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.OpenAI.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Core.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelper.Infrastructure.Tests\bin\Debug\net9.0\Microsoft.TestPlatform.CoreUtilities.dll

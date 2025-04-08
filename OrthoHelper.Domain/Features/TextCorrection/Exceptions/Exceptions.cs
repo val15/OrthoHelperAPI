@@ -11,6 +11,11 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Exceptions
         public InvalidTextException(string message) : base(message) { }
 
     }
+    public class InvalidModelNameException : Exception
+    {
+        public InvalidModelNameException(string message) : base(message) { }
+
+    }
 
     public class UserNotFoundException : Exception
     {

@@ -22,16 +22,34 @@ public class CorrectTextUseCase : ICorrectTextUseCase
     {
         _textProcessingEngine = textProcessingEngine;
         _currentUserService = currentUserService;
-         _repository = repository;
+        _repository = repository;
     }
 
     public async Task<CorrectTextOutputDto> ExecuteAsync(CorrectTextInputDto input)
     {
+        //input ajout de MODEL_NAME
         var startTime = DateTime.UtcNow;
         var stopwatch = Stopwatch.StartNew();
+
         // Validation applicative
         if (string.IsNullOrWhiteSpace(input.Text))
             throw new InvalidTextException("Le texte à corriger ne peut pas être vide.");
+
+
+        if (string.IsNullOrWhiteSpace(input.ModelName))
+            throw new InvalidModelNameException("Le nom du model ne peut pas être vide.");
+
+        //if (input.ModelName== "string")
+        //{
+
+        //}
+
+        //TODO 
+
+        // if not in models list
+        if (string.IsNullOrWhiteSpace(input.ModelName))
+            throw new InvalidModelNameException("Le nom du model n' est pas dans la list  des models disponible.");
+
 
         //if (string.IsNullOrWhiteSpace(input.UserName))
         //    throw new UserNotFoundException("Le nom d'utilisateur est requis.");
@@ -47,14 +65,15 @@ public class CorrectTextUseCase : ICorrectTextUseCase
         {
 
             //Appel de l'initailaisation pour lires les données dans la base
-           // await _textProcessingEngine.InitializeUserSession(username);
+            // await _textProcessingEngine.InitializeUserSession(username);
             // Appel au moteur externe via le port
+            _textProcessingEngine.SetModelName(input.ModelName);
             var correctedText = await _textProcessingEngine.CorrectTextAsync(input.Text);
 
             // Mise à jour de l'entité Domain
             correctionSession.ApplyCorrection(correctedText);
 
-           // correctedText.Diff = input.Text, correctedText);
+            // correctedText.Diff = input.Text, correctedText);
             stopwatch.Stop();
             // Mapping vers le DTO de sortie
 
@@ -67,12 +86,12 @@ public class CorrectTextUseCase : ICorrectTextUseCase
                 CreatedAt = startTime
             };
 
-    
+
 
             _repository.AddAsync(correctionSession);
             return result;
 
-          
+
         }
         catch (Exception ex)
         {

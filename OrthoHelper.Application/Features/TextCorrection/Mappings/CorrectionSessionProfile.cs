@@ -24,4 +24,6 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Mappings
 
         }
     }
+
+   
 }

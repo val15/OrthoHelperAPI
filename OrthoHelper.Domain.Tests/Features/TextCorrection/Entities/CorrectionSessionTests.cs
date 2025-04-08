@@ -1,7 +1,6 @@
 ﻿// OrthoHelper.Domain.Tests/Entities/CorrectionSessionTests.cs
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
-using Xunit;
 
 namespace OrthoHelper.Domain.Tests.Features.TextCorrection.Entities
 {

@@ -31,7 +31,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object);
-
+            engine.ModelName = "Ollama:Gemma.2";
             // Act
             var result = engine.ProcessTextAsync(input).Result; // .Result car la méthode est async
 

@@ -26,7 +26,8 @@ public class CorrectTextUseCaseTests
     public async Task ExecuteAsync_WithValidText_ReturnsCorrectedText()
     {
         // Arrange
-        var input = new CorrectTextInputDto("Je veut un café");
+        var modelName = "Ollama:gemma3";
+        var input = new CorrectTextInputDto("Je veut un café", modelName);
         _mockEngine.Setup(e => e.CorrectTextAsync(input.Text))
                   .ReturnsAsync("Je veux un café");
 
@@ -34,6 +35,8 @@ public class CorrectTextUseCaseTests
         var result = await _useCase.ExecuteAsync(input);
 
         // Assert
+        input.ModelName.Should().Be(modelName);
+        result.InputText.Should().Be("Je veut un café");
         result.OutputText.Should().Be("Je veux un café");
         result.InputText.Should().Be("Je veut un café");
         _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
@@ -43,9 +46,11 @@ public class CorrectTextUseCaseTests
     public async Task ExecuteAsync_WithEmptyText_ThrowsArgumentException()
     {
         // Arrange
-        var input = new CorrectTextInputDto("");
+        var modelName = "Ollama:gemma3";
+        var input = new CorrectTextInputDto("", modelName);
 
         // Act & Assert
+        input.ModelName.Should().Be(modelName);
         await Assert.ThrowsAsync<InvalidTextException>(() => _useCase.ExecuteAsync(input));
         _mockEngine.Verify(e => e.CorrectTextAsync(It.IsAny<string>()), Times.Never);
     }

@@ -41,7 +41,7 @@ builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 
 
 // 3. Configuration HttpClient pour Ollama
-var ollamaConfig = builder.Configuration.GetSection("OllamaSettings");
+var ollamaConfig = builder.Configuration.GetSection("ModelSettings");
 builder.Services
     .AddScoped<ICorrectionSessionRepository, CorrectionSessionRepository>()
     .AddHttpClient("Ollama", client =>
@@ -59,11 +59,15 @@ builder.Services.AddScoped<IOrthoEngine>(provider =>
     var repository = provider.GetRequiredService<ICorrectionSessionRepository>();
     var currentUserService = provider.GetRequiredService<ICurrentUserService>();
 
-    return new OrthoEngine(
+    var orthoEngine =  new OrthoEngine(
         httpClient: httpClientFactory.CreateClient("Ollama"),
         repository: repository, // Ajout du paramètre manquant
     currentUserService: currentUserService
+    //modelName: "Ollama:Gemma"
+    //modelName: "Online:gemini-2.0-flash"
         );
+    orthoEngine.ModelName = "Online:gemini-2.0-flash";
+    return orthoEngine;
 });
 
 
@@ -96,13 +100,11 @@ builder.Services.AddDbContext<OrthoHelperAPI.Data.ApiDbContext>(options =>
 builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.IUserRepository, UserRepository>();
 builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService, OrthoHelper.Infrastructure.Features.Auth.Services.TokenService>();
 
-// ajout des handlers CQR 
-builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.IUserRepository, UserRepository>();
-builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService, OrthoHelper.Infrastructure.Features.Auth.Services.TokenService>();
 
 // 7. Autres services
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
 
 // 8. Configuration JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -772,11 +772,11 @@
           }
         }
       },
-      "Microsoft.SemanticKernel/1.43.0": {
+      "Microsoft.SemanticKernel/1.45.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "1.43.0",
-          "Microsoft.SemanticKernel.Core": "1.43.0"
+          "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "1.45.0",
+          "Microsoft.SemanticKernel.Core": "1.45.0"
         },
         "compile": {
           "lib/net8.0/Microsoft.SemanticKernel.dll": {
@@ -789,7 +789,7 @@
           }
         }
       },
-      "Microsoft.SemanticKernel.Abstractions/1.43.0": {
+      "Microsoft.SemanticKernel.Abstractions/1.45.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
@@ -812,12 +812,12 @@
           }
         }
       },
-      "Microsoft.SemanticKernel.Connectors.AzureOpenAI/1.43.0": {
+      "Microsoft.SemanticKernel.Connectors.AzureOpenAI/1.45.0": {
         "type": "package",
         "dependencies": {
           "Azure.AI.OpenAI": "[2.2.0-beta.4]",
-          "Microsoft.SemanticKernel.Connectors.OpenAI": "1.43.0",
-          "Microsoft.SemanticKernel.Core": "1.43.0"
+          "Microsoft.SemanticKernel.Connectors.OpenAI": "1.45.0",
+          "Microsoft.SemanticKernel.Core": "1.45.0"
         },
         "compile": {
           "lib/net8.0/Microsoft.SemanticKernel.Connectors.AzureOpenAI.dll": {
@@ -826,6 +826,23 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.SemanticKernel.Connectors.AzureOpenAI.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.SemanticKernel.Connectors.Google/1.45.0-alpha": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.SemanticKernel.Abstractions": "1.45.0",
+          "Microsoft.SemanticKernel.Core": "1.45.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.SemanticKernel.Connectors.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.SemanticKernel.Connectors.Google.dll": {
             "related": ".xml"
           }
         }
@@ -849,10 +866,10 @@
           }
         }
       },
-      "Microsoft.SemanticKernel.Connectors.OpenAI/1.43.0": {
+      "Microsoft.SemanticKernel.Connectors.OpenAI/1.45.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.SemanticKernel.Core": "1.43.0",
+          "Microsoft.SemanticKernel.Core": "1.45.0",
           "OpenAI": "[2.2.0-beta.4]"
         },
         "compile": {
@@ -866,11 +883,11 @@
           }
         }
       },
-      "Microsoft.SemanticKernel.Core/1.43.0": {
+      "Microsoft.SemanticKernel.Core/1.45.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "8.0.1",
-          "Microsoft.SemanticKernel.Abstractions": "1.43.0",
+          "Microsoft.SemanticKernel.Abstractions": "1.45.0",
           "System.Numerics.Tensors": "9.0.0",
           "System.Text.Json": "8.0.5"
         },
@@ -1743,7 +1760,8 @@
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.2",
           "Microsoft.IdentityModel.Tokens": "8.0.1",
-          "Microsoft.SemanticKernel": "1.43.0",
+          "Microsoft.SemanticKernel": "1.45.0",
+          "Microsoft.SemanticKernel.Connectors.Google": "1.45.0-alpha",
           "OllamaSharp": "5.1.7",
           "OrthoHelper.Domain": "1.0.0",
           "System.IdentityModel.Tokens.Jwt": "8.0.1",
@@ -1766,7 +1784,7 @@
           "Microsoft.AspNetCore.OpenApi": "9.0.2",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.Sqlite.Core": "9.0.2",
-          "Microsoft.SemanticKernel": "1.43.0",
+          "Microsoft.SemanticKernel": "1.45.0",
           "Microsoft.SemanticKernel.Connectors.Ollama": "1.40.0-alpha",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.21.0",
           "OrthoHelper.Application": "1.0.0",
@@ -3187,10 +3205,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.SemanticKernel/1.43.0": {
-      "sha512": "V2KPLuRak0S5fPc5/U53bitej3tY1rkygsSWf99Qj1jLGbCxkYQBxWPv+udTbE4BIZ7CYrGQL28RCESQhl7aaA==",
+    "Microsoft.SemanticKernel/1.45.0": {
+      "sha512": "EysWAheRYfJVzqqeH8R7yZ7X+UqUXXt4c8ulRW/YafeZyeGQ3QR3xsTWU81wiV+uPQZked3IGZxQwGlKZc9XUQ==",
       "type": "package",
-      "path": "microsoft.semantickernel/1.43.0",
+      "path": "microsoft.semantickernel/1.45.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3200,14 +3218,14 @@
         "lib/net8.0/Microsoft.SemanticKernel.xml",
         "lib/netstandard2.0/Microsoft.SemanticKernel.dll",
         "lib/netstandard2.0/Microsoft.SemanticKernel.xml",
-        "microsoft.semantickernel.1.43.0.nupkg.sha512",
+        "microsoft.semantickernel.1.45.0.nupkg.sha512",
         "microsoft.semantickernel.nuspec"
       ]
     },
-    "Microsoft.SemanticKernel.Abstractions/1.43.0": {
-      "sha512": "O9KrSt1yKpZvvA60MXnRdwgxbM47gTVZt5pGX5mt0vTx1b+gY0LLRRRIwX8cRqcB466opXsvZfAV+UnUuN2FRg==",
+    "Microsoft.SemanticKernel.Abstractions/1.45.0": {
+      "sha512": "cdYkgcNnfltEYDKT63btrkeGrhMtLnhW2W06iNQyJCkd2jlGYTLEAj981c001pUPs9mYnO8Xfz1a31GP9lEZWw==",
       "type": "package",
-      "path": "microsoft.semantickernel.abstractions/1.43.0",
+      "path": "microsoft.semantickernel.abstractions/1.45.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3217,14 +3235,14 @@
         "lib/net8.0/Microsoft.SemanticKernel.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Abstractions.xml",
-        "microsoft.semantickernel.abstractions.1.43.0.nupkg.sha512",
+        "microsoft.semantickernel.abstractions.1.45.0.nupkg.sha512",
         "microsoft.semantickernel.abstractions.nuspec"
       ]
     },
-    "Microsoft.SemanticKernel.Connectors.AzureOpenAI/1.43.0": {
-      "sha512": "zkvvc1hwq4mUvETGEaR3Vj91RMMkT3KMR/37FftzR0tXan588Z0zOqRF7HGE1PiB6w2fm1QRtzzs4smQ476OSw==",
+    "Microsoft.SemanticKernel.Connectors.AzureOpenAI/1.45.0": {
+      "sha512": "ibMLi0r2zao9eYpjKCexjSFCIe3XNBlraPA22h9F8+WSgFJxJ7bkFbz/oEl/XsMVE2F6NZ4+cSLBo/l+HyUi1w==",
       "type": "package",
-      "path": "microsoft.semantickernel.connectors.azureopenai/1.43.0",
+      "path": "microsoft.semantickernel.connectors.azureopenai/1.45.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3234,8 +3252,25 @@
         "lib/net8.0/Microsoft.SemanticKernel.Connectors.AzureOpenAI.xml",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.AzureOpenAI.dll",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.AzureOpenAI.xml",
-        "microsoft.semantickernel.connectors.azureopenai.1.43.0.nupkg.sha512",
+        "microsoft.semantickernel.connectors.azureopenai.1.45.0.nupkg.sha512",
         "microsoft.semantickernel.connectors.azureopenai.nuspec"
+      ]
+    },
+    "Microsoft.SemanticKernel.Connectors.Google/1.45.0-alpha": {
+      "sha512": "VJcxZnjMix/XVfwmbxlNTJh0/ZA+sgB6gIdwPJbfLHEXCmOPMBDlBK/T3qjlK2Sr1z9arUgYGlGOPvgwwltHJg==",
+      "type": "package",
+      "path": "microsoft.semantickernel.connectors.google/1.45.0-alpha",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NUGET.md",
+        "icon.png",
+        "lib/net8.0/Microsoft.SemanticKernel.Connectors.Google.dll",
+        "lib/net8.0/Microsoft.SemanticKernel.Connectors.Google.xml",
+        "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.Google.dll",
+        "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.Google.xml",
+        "microsoft.semantickernel.connectors.google.1.45.0-alpha.nupkg.sha512",
+        "microsoft.semantickernel.connectors.google.nuspec"
       ]
     },
     "Microsoft.SemanticKernel.Connectors.Ollama/1.40.0-alpha": {
@@ -3255,10 +3290,10 @@
         "microsoft.semantickernel.connectors.ollama.nuspec"
       ]
     },
-    "Microsoft.SemanticKernel.Connectors.OpenAI/1.43.0": {
-      "sha512": "LewLOK2vdpS3cnPkepHnVPj7Lyccb75ws2FDPLw9QSbtflH8VNr0kAZsJPVqggqR0F9rX3QYleXdfF4PcUhDgg==",
+    "Microsoft.SemanticKernel.Connectors.OpenAI/1.45.0": {
+      "sha512": "HzOHEX2f2TmCCbg+dRJGcmmP70ZvOW4IPZ7iDFqTEpNpwwhWlfb8+SX7fq/MDY6VY+RCtvLcKC6f6CnFnN7LcQ==",
       "type": "package",
-      "path": "microsoft.semantickernel.connectors.openai/1.43.0",
+      "path": "microsoft.semantickernel.connectors.openai/1.45.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3268,14 +3303,14 @@
         "lib/net8.0/Microsoft.SemanticKernel.Connectors.OpenAI.xml",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.OpenAI.dll",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Connectors.OpenAI.xml",
-        "microsoft.semantickernel.connectors.openai.1.43.0.nupkg.sha512",
+        "microsoft.semantickernel.connectors.openai.1.45.0.nupkg.sha512",
         "microsoft.semantickernel.connectors.openai.nuspec"
       ]
     },
-    "Microsoft.SemanticKernel.Core/1.43.0": {
-      "sha512": "ZaO0a7w8trQcxj2hdHyCB4fpAqcssCKBiVV4CZ89z55fQng754SuCztRJSYVkaolCyvKgdIsinCUlv2PzwCj4A==",
+    "Microsoft.SemanticKernel.Core/1.45.0": {
+      "sha512": "2SaUqgYKvnrkkfLP5yo1Wl5+MKVNQtxoCw6uPxz7SiuZsOf4bR0lQCjieWpK0T/fVrTuc6A8x17KcfYWh+Le8A==",
       "type": "package",
-      "path": "microsoft.semantickernel.core/1.43.0",
+      "path": "microsoft.semantickernel.core/1.45.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3285,7 +3320,7 @@
         "lib/net8.0/Microsoft.SemanticKernel.Core.xml",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Core.dll",
         "lib/netstandard2.0/Microsoft.SemanticKernel.Core.xml",
-        "microsoft.semantickernel.core.1.43.0.nupkg.sha512",
+        "microsoft.semantickernel.core.1.45.0.nupkg.sha512",
         "microsoft.semantickernel.core.nuspec"
       ]
     },

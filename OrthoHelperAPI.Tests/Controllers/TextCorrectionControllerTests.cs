@@ -5,6 +5,8 @@ using OrthoHelper.Application.Features.TextCorrection.DTOs;
 using FluentAssertions;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 using MediatR;
+using OrthoHelper.Domain.Features.TextCorrection.Entities;
+using OrthoHelper.Application.Features.TextCorrection.Queries;
 
 namespace OrthoHelperAPI.Tests.Controllers
 {
@@ -24,7 +26,7 @@ namespace OrthoHelperAPI.Tests.Controllers
         public async Task CorrectText_WithEmptyInput_ReturnsBadRequest()
         {
             // Arrange
-            var input = new CorrectTextInputDto("");
+            var input = new CorrectTextInputDto("", "Ollama:Gemma");
             _mockUseCase.Setup(uc => uc.ExecuteAsync(input))
                        .ThrowsAsync(new ArgumentException("Le texte ne peut pas être vide."));
 
@@ -39,7 +41,7 @@ namespace OrthoHelperAPI.Tests.Controllers
         public async Task CorrectText_WithValidInput_ReturnsOkResult()
         {
             // Arrange
-            var input = new CorrectTextInputDto("Je veut un café");
+            var input = new CorrectTextInputDto("Je veut un café", "Ollama:Gemma");
             var expectedOutput = new CorrectTextOutputDto
             {
                 InputText = "Je veut un café",
@@ -60,5 +62,34 @@ namespace OrthoHelperAPI.Tests.Controllers
             var okResult = result as OkObjectResult;
             okResult.Value.Should().BeEquivalentTo(expectedOutput);
         }
+
+
+        [Fact]
+        public async Task BrowseAvailableMMLModels_WhenCalled_ReturnsOkWithData()
+        {
+            // Arrange
+            var fakeLlms = new List<LLMModelOutputDto>
+        {
+            new() { ModelName = "Ollama:mistral" },
+            new() { ModelName = "Ollama:llama" }
+        };
+
+
+
+
+            _mockMediator
+                .Setup(m => m.Send(It.IsAny<BrowseLLMModelsQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(fakeLlms);
+
+            // Act
+            var result = await _controller.BrowseAvailableModels();
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult!.Value.Should().BeEquivalentTo(fakeLlms);
+        }
+
+        
     }
 }

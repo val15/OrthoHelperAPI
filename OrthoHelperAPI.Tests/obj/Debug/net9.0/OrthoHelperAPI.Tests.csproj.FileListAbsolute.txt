@@ -181,6 +181,8 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.runtimeconfig.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\appsettings.Development.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\appsettings.json
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\testEnvironments.json
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.staticwebassets.runtime.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.staticwebassets.endpoints.json
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.exe
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\testhost.exe
@@ -236,6 +238,7 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Abstractions.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.AzureOpenAI.dll
+C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.Google.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.Ollama.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Connectors.OpenAI.dll
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\Microsoft.SemanticKernel.Core.dll
@@ -372,4 +375,3 @@ C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\OrthoHelperAPI.Tests.pdb
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\OrthoHelperAPI.Tests.genruntimeconfig.cache
 C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\obj\Debug\net9.0\ref\OrthoHelperAPI.Tests.dll
-C:\inProgress\sdz\update2025\IA\OrthoHelper\OrthoHelperAPI\OrthoHelperAPI.Tests\bin\Debug\net9.0\OrthoHelperAPI.staticwebassets.runtime.json
