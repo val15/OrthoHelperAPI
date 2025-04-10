@@ -10,11 +10,11 @@ pipeline {
 
     stages {
         //Étape 0 : Test Environment
-        stage('Test Environment') {
-                steps {
-                    echo "La variable GOOGLE_AI_GEMINI_API_KEY vaut : ${env.GOOGLE_AI_GEMINI_API_KEY}"
-                }
-            }
+        //stage('Test Environment') {
+        //        steps {
+        //            echo "La variable GOOGLE_AI_GEMINI_API_KEY vaut : ${env.GOOGLE_AI_GEMINI_API_KEY}"
+        //        }
+        //    }
         // Étape 1 : Récupération du code
         stage('Checkout') {
             steps {
@@ -88,6 +88,7 @@ pipeline {
                         -p ${APP_PORT}:8080 \
                         -v ${DB_VOLUME}:/app/data \
                         -e ASPNETCORE_ENVIRONMENT=Production \
+                        -e GOOGLE_AI_GEMINI_API_KEY=${env.GOOGLE_AI_GEMINI_API_KEY} \
                         -e CONNECTIONSTRINGS__DEFAULTCONNECTION="Data Source=/app/data/api.db;" \
                         ${DOCKER_IMAGE}
                     """
