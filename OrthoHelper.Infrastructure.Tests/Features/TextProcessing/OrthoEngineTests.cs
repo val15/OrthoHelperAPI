@@ -24,6 +24,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
 
             _mockRepo = new Mock<ICorrectionSessionRepository>();
             _mockCurrentUserService = new Mock<ICurrentUserService>();
+            _mockLogger = new Mock<ILogger<OrthoEngine>>();
         }
 
 
@@ -34,7 +35,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
         {
             // Arrange
             var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
-            engine.ModelName = "Ollama:Gemma.2";
+            engine.ModelName = "Ollama:Gemma3";
             // Act
             var result = engine.ProcessTextAsync(input).Result; // .Result car la méthode est async
 

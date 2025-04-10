@@ -31,10 +31,11 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
 
             _mockRepo = new Mock<ICorrectionSessionRepository>();
             _mockCurrentUserService = new Mock<ICurrentUserService>();
+            _mockLogger = new Mock<ILogger<OrthoEngine>>();
 
 
 
-           
+
             _output = output;
         }
 

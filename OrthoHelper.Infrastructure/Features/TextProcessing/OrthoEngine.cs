@@ -20,7 +20,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
         private readonly HttpClient _httpClient;
 
-        private string _modelName = "Ollama:Gemma";
+        private string _modelName = "Ollama:Gemma3";
 
         public string ModelName
         {

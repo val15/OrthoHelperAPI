@@ -65,7 +65,6 @@ builder.Services.AddScoped<IOrthoEngine>(provider =>
     currentUserService: currentUserService,
     logger: logger 
         );
-    orthoEngine.ModelName = "Online:gemini-2.0-flash";
     return orthoEngine;
 });
 
@@ -103,7 +102,19 @@ builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService,
 // 7. Autres services
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
+//builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
+
+builder.Services.AddScoped<ILLMModelRepository>(provider =>
+{
+    var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+    var logger = provider.GetRequiredService<ILogger<LLMModelRepository>>();
+    var orthoEngine = new LLMModelRepository(
+        httpClient: httpClientFactory.CreateClient("Ollama"),
+    logger: logger
+        );
+    return orthoEngine;
+});
+
 
 // 8. Configuration JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
