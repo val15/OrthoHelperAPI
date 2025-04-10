@@ -9,7 +9,6 @@ pipeline {
     }
 
     stages {
-        
         //Étape 0 : Test Environment
         stage('Test Environment') {
                 steps {
