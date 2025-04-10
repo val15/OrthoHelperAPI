@@ -3,7 +3,6 @@ using Moq;
 using FluentAssertions;
 using OrthoHelper.Application.Features.TextCorrection.Queries;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
-using OrthoHelper.Domain.Features.TextCorrection.Mappings;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Application.Features.TextCorrection.Mappings;
 

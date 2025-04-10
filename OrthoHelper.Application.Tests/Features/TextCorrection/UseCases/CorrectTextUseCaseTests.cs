@@ -6,19 +6,22 @@ using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
-using Xunit;
 
 namespace OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 
 public class CorrectTextUseCaseTests
 {
     private readonly Mock<ITextProcessingEngine> _mockEngine = new();
-    private readonly Mock<ICurrentUserService> _mockCurrentUserService = new();
+    private readonly Mock<ICurrentUserService> _mockCurrentUserService =new ();
     private readonly Mock<ICorrectionSessionRepository> _mockCorrectionSessionRepository = new();
     private readonly CorrectTextUseCase _useCase;
 
     public CorrectTextUseCaseTests()
     {
+
+        _mockCurrentUserService.SetupGet(x => x.UserName).Returns("test user");
+        _mockCurrentUserService.SetupGet(x => x.IsAuthenticated).Returns(true);
+        _mockCurrentUserService.SetupGet(x => x.UserId).Returns(123); 
         _useCase = new CorrectTextUseCase(_mockEngine.Object, _mockCurrentUserService.Object, _mockCorrectionSessionRepository.Object);
     }
 
