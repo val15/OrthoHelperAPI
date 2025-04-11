@@ -35,7 +35,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
                     foreach (var modelInfo in OllamaModels.models)
                     {
                              
-                            llmModelList.Add(new LLMModel($"Online:{modelInfo.name}"));
+                            llmModelList.Add(new LLMModel($"Ollama:{modelInfo.name}"));
                         
                     }
                 }

@@ -2,6 +2,15 @@
   <button (click)="logout()">Déconnexion</button>
 </nav>
 
+<div *ngIf="authService.isAuthenticated()" class="model-selector">
+  <label for="modelSelect">Choisir un modèle :</label>
+  <select id="modelSelect" [(ngModel)]="selectedModel">
+    <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+  </select>
+</div>
+
+
+
 <main class="main" *ngIf="authService.isAuthenticated()">
   <div class="container">
     <div class="editor-container">

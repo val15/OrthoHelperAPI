@@ -26,8 +26,8 @@ export class LoginComponent {
   onSubmit(): void {
     // URL de l'API de login
    // const apiUrl = 'https://localhost:32774/api/auth/login'; //DEV Remplacez par l'URL de votre API
-    //const apiUrl = 'http://localhost:8088/api/auth/login'; // Remplacez par l'URL de votre API
-    const apiUrl = 'http://localhost:7088/api/auth/login'; // TEST
+    const apiUrl = 'http://localhost:8088/api/auth/login'; // Remplacez par l'URL de votre API
+    //const apiUrl = 'http://localhost:7088/api/auth/login'; // TEST
 
     // Données à envoyer (nom d'utilisateur et mot de passe)
     const loginData = {

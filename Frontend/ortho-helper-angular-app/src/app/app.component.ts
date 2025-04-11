@@ -1,62 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CommonModule } from '@angular/common'; // Ajout de CommonModule
-import { Router, RouterModule } from '@angular/router'; // Ajout de Router pour la navigation
-import { routes } from './app.routes'; // Importer les routes depuis app.routes.ts
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+
+import { FormsModule } from '@angular/forms';
+
 
 import { TextService } from './services/text.service';
 import { ApiResponse } from './models/api-response.model';
-import { AuthService } from './services/auth.service'; // Importez AuthService
+import { AuthService } from './services/auth.service';
 
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { CorrectTextComponent } from './components/correct-text/correct-text.component';
 
+const baseUrl = 'http://localhost:8088'; //TEST ✅ URL de base ici
+//const baseUrl = 'http://localhost:7088'; // PROD
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, TextEditorComponent, CorrectTextComponent], // Ajout de CommonModule et RouterModule
+  imports: [CommonModule, FormsModule, RouterModule, TextEditorComponent, CorrectTextComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ortho-helper-angular-app';
   apiResponse: ApiResponse | null = null;
   errorMessage: string | null = null;
 
+  models: string[] = [];
+  selectedModel: string = '';
+
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private textService: TextService,
-    public authService: AuthService, // Rendre authService publique
-    private router: Router // Injectez Router pour la navigation
+    public authService: AuthService,
+    private router: Router
   ) {
-
     this.textService.setCorrectedText('');
-   }
+  }
 
-  // Méthode pour envoyer du texte à l'API
+  ngOnInit(): void {
+    const token = this.authService.getToken(); // Récupérer le token de l'utilisateur
+    if (!token) {
+      console.error('Token manquant — utilisateur non authentifié');
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.http.get<any[]>(`${baseUrl}/api/TextCorrection/models`, { headers })
+      .subscribe({
+        next: (response) => {
+          this.models = response.map(m => m.modelName);
+          this.selectedModel = this.models[0] || '';
+        },
+        error: (err) => {
+          console.error('Erreur de chargement des modèles :', err);
+        }
+      });
+  }
+
   sendToApi() {
-    const token = this.authService.getToken(); // Récupérez le token depuis AuthService
+    const token = this.authService.getToken();
     if (!token) {
       console.error('Token non trouvé');
       return;
     }
 
     this.textService.setCorrectedText('Traitement en cours...');
-    console.log('Envoi à l\'API...');
-
     const textToSend = this.textService.getText();
     console.log('Texte envoyé :', textToSend);
-
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    //const apiUrl = 'https://localhost:32768/api/Text/process'; //DEV
-    const apiUrl = 'http://localhost:7088/api/TextCorrection/correct'; //TEST
 
-    this.http.post<ApiResponse>(apiUrl, { text: textToSend }, { headers: headers })
+    this.http.post<ApiResponse>(`${baseUrl}/api/TextCorrection/correct`, {
+      text: textToSend,
+      modelName: this.selectedModel
+    }, { headers })
       .subscribe({
         next: (response: ApiResponse) => {
-          
           this.apiResponse = response;
           this.textService.setCorrectedText(this.apiResponse.outputText);
+          this.errorMessage = null;
           this.errorMessage = null;
           console.log('apiResponse :');
           console.log('outputText : ', this.apiResponse.outputText);
@@ -67,14 +93,12 @@ export class AppComponent {
           this.errorMessage = error.message || 'Erreur inconnue';
           console.error('Erreur API:', error);
           this.textService.setCorrectedText(`Erreur API: ${error.status}`);
-
         }
       });
   }
 
-  // Méthode pour déconnecter l'utilisateur
   logout(): void {
-    this.authService.logout(); // Appelez la méthode logout de AuthService
-    this.router.navigate(['/login']); // Redirigez vers la page de login
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
