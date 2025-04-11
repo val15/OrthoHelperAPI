@@ -12,8 +12,9 @@ import { AuthService } from './services/auth.service';
 
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { CorrectTextComponent } from './components/correct-text/correct-text.component';
-
-const baseUrl = 'http://localhost:8088'; //TEST ✅ URL de base ici
+import { environment } from '../environments/environment';
+const baseUrl = environment.apiBaseUrl;
+//const baseUrl = 'http://localhost:8088'; //TEST ✅ URL de base ici
 //const baseUrl = 'http://localhost:7088'; // PROD
 @Component({
   selector: 'app-root',
