@@ -9,7 +9,7 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories
         Task<IEnumerable<CorrectionSession>> GetCorrectionSessionsAsync();
         Task AddAsync(CorrectionSession correctionSession);
         Task UpdateAsync(CorrectionSession correctionSession);
-        Task DeleteAsync(Guid id);
+        Task<int> DeleteAllUserCorrectionSessionsAsync();
     }
 }
 

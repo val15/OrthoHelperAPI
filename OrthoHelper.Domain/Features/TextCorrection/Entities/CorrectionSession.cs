@@ -53,7 +53,7 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
                 throw new InvalidOperationException("La correction a déjà été appliquée.");
 
             CorrectedText = correctedText;
-            Diff =  TextDiffHelper.GenerateCharacterDiff(OriginalText, CorrectedText);
+            Diff =  TextHelper.GenerateCharacterDiff(OriginalText, CorrectedText);
             ProcessingTime = DateTime.UtcNow - CreatedAt;
             Status = CorrectionStatus.Completed;
         }

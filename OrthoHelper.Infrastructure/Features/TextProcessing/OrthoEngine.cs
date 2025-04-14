@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
 using Microsoft.Extensions.Logging; // Ajoutez cet using
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.Google;
@@ -20,6 +19,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
         private readonly HttpClient _httpClient;
 
+        private readonly int _maxCharsPerPartGemmini = 1000;
+        private bool _subdiviseText = false;
+
         private string _modelName = "Ollama:Gemma3";
 
         public string ModelName
@@ -32,6 +34,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         {
             _modelName = modelName;
         }
+
+
 
         // Constructeur mis à jour pour accepter ILogger
         public OrthoEngine(HttpClient httpClient, ICorrectionSessionRepository repository, ICurrentUserService currentUserService, ILogger<OrthoEngine> logger)
@@ -53,6 +57,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             }
         }
 
+
+
         public void InitializeByModelName()
         {
             try
@@ -72,6 +78,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                     realModelName = _modelName.Replace("Online:", "");
                     if (_modelName.Contains("gemini"))
                     {
+                        _subdiviseText = true;
                         var apiKeyGemini = Environment.GetEnvironmentVariable("GOOGLE_AI_GEMINI_API_KEY");
                         if (apiKeyGemini == null)
                         {
@@ -113,7 +120,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
                 _logger.LogError($"Exeption : {ex}");
             }
-            
+
         }
 
         public async Task InitializeUserSession(string username)
@@ -156,22 +163,134 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             {
                 InitializeByModelName();
 
+                var textResult = string.Empty;
+                var resultList = new List<string[]>();
+
+                if (!_subdiviseText && inputText.Contains("QFIA"))
+                    return await AskQuestionForIaAsync(inputText);
+                else if (!_subdiviseText)
+                    return await ProcessTextCorrectionAsync(inputText);
+
+
+                _logger.LogInformation($"Division du text: {inputText}");
+                var textParts = TextHelper.DivideTextIntoParts(inputText, _maxCharsPerPartGemmini);
+
                 if (inputText.Contains("QFIA"))
                 {
-                    var userMessage = inputText.Replace("QFIA", "");
-                    _history.AddUserMessage(userMessage);
-                    _logger.LogDebug($"Message utilisateur (QFIA) ajouté à l'historique: {userMessage}");
+
+                    var isNotFirst = false;
+                    foreach (var input in textParts)
+                    {
+                        var prompt = input;
+                        if (isNotFirst)
+                        {
+                            prompt = $". Voici la suite de tu text : {input}";
+                        }
+                        var output = await AskQuestionForIaAsync(prompt);
+
+                        resultList.Add(new string[] { input, output }); //(new st inpoutText, outputText);
+                        isNotFirst = true;
+                    }
+
+
                 }
                 else
                 {
-                    var userMessage = $"Peux-tu corriger ? (retourne seulement le texte corrigé) : {inputText}";
-                    _history.AddUserMessage(userMessage);
-                    _logger.LogDebug($"Message utilisateur (correction) ajouté à l'historique: {userMessage}");
+                    foreach (var input in textParts)
+                    {
+                        var output = await ProcessTextCorrectionAsync(input);
+                        resultList.Add(new string[] { input, output }); //(new st inpoutText, outputText);
+                    }
                 }
+
+                foreach (var result in resultList)
+                {
+                    textResult += result[1];
+                }
+
+
+                if (textResult != null)
+                {
+                    textResult = textResult.Trim();
+                    return textResult;
+                }
+                else
+                {
+                    _logger.LogWarning("La réponse du service de complétion est nulle.");
+                    return "Erreur lors du traitement : Réponse du service nulle.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erreur lors du traitement du texte: {inputText}");
+                return $"Erreur lors du traitement : {inputText}";
+            }
+        }
+
+
+        public async Task<string> AskQuestionForIaAsync(string questionText)
+        {
+            _logger.LogInformation($"Question pour l'IA: {questionText}");
+            try
+            {
+
+
+                questionText = questionText.Replace("QFIA", "");
+
+
+
+
+                _history.AddUserMessage(questionText);
+
+                var result = await _chatService.GetChatMessageContentAsync(_history);
+                var textResult = result.Content;
+                _logger.LogInformation($"Réponse de l'IA: {textResult}");
+                Debug.WriteLine(textResult);
+                Console.WriteLine(textResult); // Utile pour le débogage initial dans Docker
+                if (result != null)
+                {
+                    _history.Add(result);
+                }
+
+                if (textResult != null)
+                {
+
+                    return textResult;
+                }
+                else
+                {
+                    _logger.LogWarning("La réponse du service de complétion est nulle.");
+                    return "Erreur lors du traitement : Réponse du service nulle.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erreur lors du traitement du texte: {questionText}");
+                return $"Erreur lors du traitement : {questionText}";
+            }
+        }
+
+
+        public async Task<string> ProcessTextCorrectionAsync(string inputText)
+        {
+            _logger.LogInformation($"Traitement du texte entrant: {inputText}");
+            try
+            {
+
+
+
+
+
+
+
+                var userMessage = $"Peux-tu corriger ? (retourne seulement le texte corrigé) : {inputText}";
+                _history.AddUserMessage(userMessage);
+                _logger.LogDebug($"Message utilisateur (correction) ajouté à l'historique: {userMessage}");
+
 
                 _logger.LogInformation("Appel du service de complétion de chat.");
                 var result = await _chatService.GetChatMessageContentAsync(_history);
-                var textResult = result.Content?.Trim();
+                var textResult = result.Content;
                 _logger.LogInformation($"Réponse du service de complétion: {textResult}");
                 Debug.WriteLine(textResult);
                 Console.WriteLine(textResult); // Utile pour le débogage initial dans Docker
@@ -182,7 +301,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
                 if (textResult != null)
                 {
-                    var diff = TextDiffHelper.GenerateCharacterDiff(inputText, textResult);
+                    textResult.Replace("Voici le texte corrigé :\n\n", string.Empty);
+                    var diff = TextHelper.GenerateCharacterDiff(inputText, textResult);
                     _history.AddUserMessage($"differences : {diff}");
                     _logger.LogDebug($"Différences générées: {diff}");
                     return textResult;
@@ -199,5 +319,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                 return $"Erreur lors du traitement : {inputText}";
             }
         }
+
+
     }
 }

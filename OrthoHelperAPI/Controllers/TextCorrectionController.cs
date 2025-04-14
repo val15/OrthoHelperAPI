@@ -48,6 +48,21 @@ public class TextCorrectionController : ControllerBase
         return Ok(result);
     }
 
+    [HttpDelete("DeleteUserMessages")]
+    public async Task<IActionResult> DeleteAllMessages()
+    {
+        try
+        {
+            var query = new DeleteAllUserCorrectionSessionQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Une erreur est survenue : {ex.Message}");
+        }
+    }
+
     [HttpGet("Models")]
     public async Task<IActionResult> BrowseAvailableModels()
     {

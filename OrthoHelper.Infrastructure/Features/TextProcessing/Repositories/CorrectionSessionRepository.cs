@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using OrthoHelper.Domain.Features.Auth.Entities;
 using OrthoHelper.Domain.Features.Auth.Ports;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
@@ -56,9 +57,41 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task<int> DeleteAllUserCorrectionSessionsAsync()
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                var userName = "";
+                // Récupérer l'utilisateur
+                if (_currentUserService.IsAuthenticated)
+                {
+                    //historyText = GetTextUserSessionHistory(_currentUserService.UserName).Result;
+
+                    userName = _currentUserService.UserName;
+
+
+                }
+
+
+                var user = await _userRepository.GetUserByUsername(userName);
+                if (user is null) throw new Exception("Utilisateur non trouvé");
+
+
+
+                var userMessages = _context.Messages.Where(x => x.UserId == user.Id);
+
+                _context.Messages.RemoveRange(userMessages);
+
+                await _context.SaveChangesAsync();
+                return userMessages.Count();
+            }
+            catch (Exception)
+            {
+
+                return -1;
+            }
+            
         }
 
         public Task<CorrectionSession?> GetByIdAsync(Guid id)

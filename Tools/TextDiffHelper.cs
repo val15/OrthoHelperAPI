@@ -1,11 +1,61 @@
 ﻿using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Tools
 {
-    public static class TextDiffHelper
+    public static class TextHelper
     {
+
+
+        public static List<string> DivideTextIntoParts(string longText, int maxCharsPerPart)
+        {
+            if (string.IsNullOrEmpty(longText))
+            {
+                return new List<string>();
+            }
+
+            var parts = new List<string>();
+            int startIndex = 0;
+
+            while (startIndex < longText.Length)
+            {
+                int endIndex = startIndex + maxCharsPerPart;
+
+                if (endIndex >= longText.Length)
+                {
+                    parts.Add(longText.Substring(startIndex));
+                    break;
+                }
+
+                // Recherche du dernier séparateur de phrase avant la limite
+                int lastSeparatorIndex = -1;
+                for (int i = endIndex; i > startIndex; i--)
+                {
+                    if (Regex.IsMatch(longText[i].ToString(), @"[\.\n!?]"))
+                    {
+                        lastSeparatorIndex = i;
+                        break;
+                    }
+                }
+
+                if (lastSeparatorIndex != -1)
+                {
+                    parts.Add(longText.Substring(startIndex, lastSeparatorIndex - startIndex + 1).Trim());
+                    startIndex = lastSeparatorIndex + 1;
+                }
+                else
+                {
+                    // Aucun séparateur trouvé dans la limite, on coupe à la limite maximale
+                    parts.Add(longText.Substring(startIndex, maxCharsPerPart).Trim());
+                    startIndex += maxCharsPerPart;
+                }
+            }
+
+            return parts;
+        }
+
 
         public static string GenerateCharacterDiff(string oldText, string newText)
         {

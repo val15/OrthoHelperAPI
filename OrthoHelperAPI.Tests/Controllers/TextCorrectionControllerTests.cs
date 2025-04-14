@@ -48,8 +48,8 @@ namespace OrthoHelperAPI.Tests.Controllers
                 OutputText = "Je veux un café",
                 CreatedAt = DateTime.UtcNow,
             };
-                
-                //(, , DateTime.UtcNow);
+
+            //(, , DateTime.UtcNow);
 
             _mockUseCase.Setup(uc => uc.ExecuteAsync(input))
                        .ReturnsAsync(expectedOutput);
@@ -90,6 +90,61 @@ namespace OrthoHelperAPI.Tests.Controllers
             okResult!.Value.Should().BeEquivalentTo(fakeLlms);
         }
 
-        
+
+        [Fact]
+        public async Task BrowseCorrectionSession_WhenCalled_ReturnsOkWithData()
+        {
+            // Arrange
+            var fakeCorrectionList = new List<CorrectTextOutputDto>
+        {
+            new() { InputText = "Test1",OutputText="Text 1" },
+            new() { InputText = "Test2",OutputText="Text 2" }
+
+        };
+
+
+
+
+            _mockMediator
+                .Setup(m => m.Send(It.IsAny<BrowseCorrectionSessionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(fakeCorrectionList);
+
+            // Act
+            var result = await _controller.BrowseCorrectionSessions();
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult!.Value.Should().BeEquivalentTo(fakeCorrectionList);
+        }
+
+
+        [Fact]
+        public async Task DeleteAllUserCorrectionSession_WhenCalled_ReturnTrue()
+        {
+            // Arrange
+            var fakeCorrectionList = new List<CorrectTextOutputDto>
+        {
+            new() { InputText = "Test1",OutputText="Text 1" },
+            new() { InputText = "Test2",OutputText="Text 2" }
+
+        };
+
+
+
+
+            _mockMediator
+                .Setup(m => m.Send(It.IsAny<DeleteAllUserCorrectionSessionQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(fakeCorrectionList.Count);
+
+            // Act
+            var result = await _controller.DeleteAllMessages();
+
+            // Assert
+            result.Equals(2);
+        }
+
+
+
     }
 }

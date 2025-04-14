@@ -1,12 +1,11 @@
-﻿using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using FluentAssertions;
 using Moq;
 using OrthoHelper.Domain.Features.Auth.Entities;
 using OrthoHelper.Domain.Features.Auth.Ports;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext;
-using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
 
 
@@ -34,83 +33,94 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
             _userRepoMock.Setup(r => r.GetUserByUsername(It.IsAny<string>()))
                        .ReturnsAsync(new User { Id = 1 });
             _userRepository = _userRepoMock.Object;
+            _currentUserServiceMock = new Mock<ICurrentUserService>();
 
             // 3. Initialisation du repository à tester
             _repository = new CorrectionSessionRepository(_context, _userRepository, _currentUserServiceMock.Object);
         }
-      //  [Fact]
-      //  public async Task AddAsync_Should_Persist_Data_InMemory()
-      //  {
-      //      // Act
-      //      var correctionSessionTemp = new CorrectionSession(
-      //   id: Guid.NewGuid(),
-      //          originalText: "je ve",
-      //          correctedText: "je veux",
-      //          diff: "x",
-      //          createdAt: DateTime.UtcNow,
-      //          status: CorrectionStatus.Completed// Méthode helper
-      //);
 
-      //      await _repository.AddAsync(correctionSessionTemp);
+
+        [Fact]
+        public async Task AddAsync_Should_Persist_Data_InMemory()
+        {
+            // Act
+            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
+            correctionSessionTemp.CorrectedText = "textCorrected1";
+            await _repository.AddAsync(correctionSessionTemp);
 
 
 
-      //      // Assert
-      //      _context.Messages.Should().HaveCount(1);
-      //  }
+            // Assert
+            _context.Messages.Should().HaveCount(1);
+        }
 
-        //[Fact]
-        //public async Task GetCorrectionSessionsAsync_Should_Return_UserSessions_InMemory()
-        //{
-        //    // Arrange
-        //    var testUser = new User { Id = 1, Username = "testuser" };
+       
+        [Fact]
+        public async Task GetCorrectionSessionsAsync_Should_Return_Empty_For_NoSessions_InMemory()
+        {
+            // Arrange
+            var testUser = new User { Id = 1, Username = "testuser" };
+            _userRepoMock.Setup(r => r.GetUserByUsername("testuser"))
+                       .ReturnsAsync(testUser);
 
-        //    // Seed la base de test
-        //    _context.Messages.AddRange(
-        //        new Message { Id = 1, UserId = 1, InputText = "Text1",OutputText = "Text 1",Diff = "1", CreatedAt = DateTime.UtcNow },
-        //        new Message { Id = 2, UserId = 1, InputText = "Text2",OutputText = "Text 2",Diff = "2", CreatedAt = DateTime.UtcNow },
-        //        new Message { Id = 3, UserId = 2, InputText = "OtherUserText", OutputText = "Other User Text", Diff = " ", CreatedAt = DateTime.UtcNow }
-        //    );
-        //    await _context.SaveChangesAsync();
+            // Act
+            var result = await _repository.GetCorrectionSessionsAsync();
 
-        //    _userRepoMock.Setup(r => r.GetUserByUsername("testuser"))
-        //               .ReturnsAsync(testUser);
+            // Assert
+            result.Should().BeEmpty();
+        }
 
-        //    // Act
-        //    var result = await _repository.GetCorrectionSessionsAsync();
+        [Fact]
+        public async Task GetCorrectionSessionsAsync_Should_Return_CorrectionSessions_InMemory()
+        {
+            // Arrange
+            var testUser = new User { Id = 1, Username = "testuser" };
 
-        //    // Assert
-        //    result.Should().HaveCount(2);
-        //    result.Should().OnlyContain(x =>
-        //        x.OriginalText == "Text1" || x.OriginalText == "Text2");
-        //}
+            // Seed la base de test
+            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
+            correctionSessionTemp.CorrectedText = "textCorrected1";
+            await _repository.AddAsync(correctionSessionTemp);
+            await _repository.AddAsync(correctionSessionTemp);
+            await _repository.AddAsync(correctionSessionTemp);
 
-        //[Fact]
-        //public async Task GetCorrectionSessionsAsync_Should_Return_Empty_For_NoSessions_InMemory()
-        //{
-        //    // Arrange
-        //    var testUser = new User { Id = 1, Username = "testuser" };
-        //    _userRepoMock.Setup(r => r.GetUserByUsername("testuser"))
-        //               .ReturnsAsync(testUser);
+            // Act
+            var result = await _repository.GetCorrectionSessionsAsync();
 
-        //    // Act
-        //    var result = await _repository.GetCorrectionSessionsAsync();
+            // Assert
+            result.Should().HaveCount(3);
+            result.Should().OnlyContain(x =>
+                x.OriginalText == "textIncorrect1" || x.OriginalText == "textIncorrect1");
+        }
 
-        //    // Assert
-        //    result.Should().BeEmpty();
-        //}
+        [Fact]
+        public async Task DeleteAllUserCorrectionSessionsAsyn_Should_Return_CorrectionSessions_InMemory()
+        {
+            // Arrange
+            var testUser = new User { Id = 1, Username = "testuser" };
 
-        //[Fact]
-        //public async Task GetCorrectionSessionsAsync_Should_Throw_When_UserNotFound_InMemory()
-        //{
-        //    // Arrange
-        //    _userRepoMock.Setup(r => r.GetUserByUsername("unknown"))
-        //               .ReturnsAsync((User)null);
+            // Seed la base de test
+            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
+            correctionSessionTemp.CorrectedText = "textCorrected1";
+            await _repository.AddAsync(correctionSessionTemp);
+            await _repository.AddAsync(correctionSessionTemp);
+            await _repository.AddAsync(correctionSessionTemp);
 
-        //    // Act & Assert
-        //    await Assert.ThrowsAsync<Exception>(() =>
-        //        _repository.GetCorrectionSessionsAsync());
-        //}
+            // Act
+            var result = await _repository.GetCorrectionSessionsAsync();
+
+            // Assert
+            result.Should().HaveCount(3);
+            
+
+            // Act
+              await _repository.DeleteAllUserCorrectionSessionsAsync();
+
+             result = await _repository.GetCorrectionSessionsAsync();
+            result.Should().HaveCount(0);
+        }
+
+
+
 
         public void Dispose()
         {

@@ -104,7 +104,7 @@ namespace OrthoHelperAPI.Services
 
                 _history.Add(result);
 
-                var diff = TextDiffHelper.GenerateCharacterDiff(text, result.Content);
+                var diff = TextHelper.GenerateCharacterDiff(text, result.Content);
                 _history.AddUserMessage($"differences : {diff}");
 
                 // Retourne un tuple nommé
