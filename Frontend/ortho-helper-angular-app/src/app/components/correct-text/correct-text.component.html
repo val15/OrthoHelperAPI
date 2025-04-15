@@ -1,10 +1,14 @@
 <div class="response-wrapper">
-   <h2>Texte corrigé</h2> 
-
-  <textarea
-            [(ngModel)]="correctedText"
-            (ngModelChange)="onTextChange()"
-            placeholder="">
+  <div class="header-line">
+    <h2>Texte corrigé</h2>
+    <div class="copy-paste-buttons">
+      <button (click)="copyCorrectedText()" title="Copier le texte corrigé">📤</button>
+    </div>
+    </div>
+    <textarea [(ngModel)]="correctedText"
+              (ngModelChange)="onTextChange()"
+              placeholder="">
 </textarea>
 
-</div>
+
+  </div>

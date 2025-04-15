@@ -18,4 +18,15 @@ export class TextEditorComponent {
     //console.log('Texte modifié:', this.userText);
     this.textService.setText(this.userText); // Sauvegarde du texte
   }
+
+   
+  
+
+  pasteText() {
+    navigator.clipboard.readText().then(text => {
+      this.userText = text;
+    }).catch(err => {
+      console.error('Erreur lors du collage :', err);
+    });
+  }
 }

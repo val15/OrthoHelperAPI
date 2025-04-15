@@ -63,6 +63,9 @@ export class AppComponent implements OnInit {
       });
   }
 
+ 
+
+
   sendToApi() {
     const token = this.authService.getToken();
     if (!token) {

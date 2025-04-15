@@ -6,10 +6,16 @@
   
   .editor-wrapper {
     width: 100%;
-    height: 100%;
+    height: 96%;
     display: flex;
     flex-direction: column;
   }
+.header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
   
   textarea {
     flex: 1;

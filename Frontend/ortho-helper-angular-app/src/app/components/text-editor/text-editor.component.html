@@ -1,11 +1,13 @@
 <div class="editor-wrapper">
-  <h2>Texte à corriger</h2>
-  <textarea 
-    [(ngModel)]="userText" 
-    (ngModelChange)="onTextChange()"
-    placeholder="Entrez votre texte ici..."
-
-    
-    >
+  <div class="header-line">
+    <h2>Texte à corriger</h2>
+    <div class="copy-paste-buttons">
+      <button (click)="pasteText()" title="Coller">📋</button>
+    </div>
+   </div>
+  <textarea [(ngModel)]="userText"
+              (ngModelChange)="onTextChange()"
+              placeholder="Entrez votre texte ici...">
   </textarea>
-</div>
+
+  </div>

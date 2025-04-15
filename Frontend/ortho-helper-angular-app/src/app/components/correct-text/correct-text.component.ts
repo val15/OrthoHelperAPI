@@ -30,5 +30,24 @@ export class CorrectTextComponent implements OnInit {
       this.correctedText = correctedText;
     });
   }
+
+
+  userText: string = '';
+
+  copyCorrectedText(): void {
+    if (!this.correctedText) {
+      console.warn('Aucun texte à copier.');
+      return;
+    }
+
+    navigator.clipboard.writeText(this.correctedText)
+      .then(() => {
+        console.log('Texte corrigé copié dans le presse-papiers.');
+      })
+      .catch(err => {
+        console.error('Erreur lors de la copie :', err);
+      });
+  }
+
 }
 
