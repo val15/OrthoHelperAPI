@@ -7,6 +7,7 @@ OrthoHelperAPI is a French spelling corrector powered by AI. It supports both lo
 - Supports local AI models and external LLMs.
 - Provides a RESTful API for text correction and user management.
 - Integrated frontend and backend in a single Docker image.
+- User SQLite file database
 
 ## Endpoints
 
@@ -50,7 +51,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - CONNECTIONSTRINGS__DEFAULTCONNECTION=Data Source=/app/data/api.db;
-      - GOOGLE_AI_GEMINI_API_KEY=YOUR_GOOGLE_AI_GEMINI_API_KE
+      - GOOGLE_AI_GEMINI_API_KEY=YOUR_GOOGLE_AI_GEMINI_API_KEY
 volumes:
   orthohelper-data:
 ```
@@ -74,6 +75,7 @@ This will expose the application on ports `7080`
 - **Frontend**: Angular
 - **Containerization**: Docker
 - **AI Models**: Ollama (local) and Gemmini Advance (external)
+- **DataBase**: SQLite
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request.
