@@ -6,8 +6,7 @@ OrthoHelperAPI is a French spelling corrector powered by AI. It supports both lo
 - Leverages AI for advanced text correction.
 - Supports local AI models and external LLMs.
 - Provides a RESTful API for text correction and user management.
-- Integrated frontend and backend in a single Docker image.
-- User SQLite file database
+- Integrated frontend and backend and database in a single Docker image.
 
 ## Endpoints
 
