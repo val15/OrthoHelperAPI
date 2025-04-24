@@ -15,14 +15,16 @@ public class CorrectTextUseCase : ICorrectTextUseCase
     // private readonly ICorrectionSessionRepository _repository;
     private readonly ICurrentUserService _currentUserService;
 
-    private readonly ICorrectionSessionRepository _repository;
+    private readonly ICorrectionSessionRepository _correctionSessionRepository;
+    private readonly ILLMModelRepository _llmModelRepository;
 
 
-    public CorrectTextUseCase(ITextProcessingEngine textProcessingEngine, ICurrentUserService currentUserService, ICorrectionSessionRepository repository)
+    public CorrectTextUseCase(ITextProcessingEngine textProcessingEngine, ICurrentUserService currentUserService, ICorrectionSessionRepository correctionSessionRepository, ILLMModelRepository llmModelRepository)
     {
         _textProcessingEngine = textProcessingEngine;
         _currentUserService = currentUserService;
-        _repository = repository;
+        _correctionSessionRepository = correctionSessionRepository;
+        _llmModelRepository = llmModelRepository;
     }
 
     public async Task<CorrectTextOutputDto> ExecuteAsync(CorrectTextInputDto input)
@@ -63,11 +65,12 @@ public class CorrectTextUseCase : ICorrectTextUseCase
 
         try
         {
+            var availableModels = await _llmModelRepository.GetAvailableLLMModelsAsync();
 
             //Appel de l'initailaisation pour lires les données dans la base
             // await _textProcessingEngine.InitializeUserSession(username);
             // Appel au moteur externe via le port
-            _textProcessingEngine.SetModelName(input.ModelName);
+            correctionSession.SetModelName(input.ModelName,_textProcessingEngine, availableModels);
             var correctedText = await _textProcessingEngine.CorrectTextAsync(input.Text);
 
             // Mise à jour de l'entité Domain
@@ -88,10 +91,18 @@ public class CorrectTextUseCase : ICorrectTextUseCase
 
 
 
-            _repository.AddAsync(correctionSession);
+            _correctionSessionRepository.AddAsync(correctionSession);
             return result;
 
 
+        }
+        catch (InvalidModelNameException ex)
+        {
+            throw new InvalidModelNameException("Le modèle spécifié n'est pas valide.");
+        }
+        catch (InvalidTextException ex)
+        {
+            throw new InvalidTextException("Le texte spécifié n'est pas valide.");
         }
         catch (Exception ex)
         {

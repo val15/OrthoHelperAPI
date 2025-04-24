@@ -102,7 +102,7 @@ builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService,
 // 7. Autres services
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-//builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
+builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
 
 builder.Services.AddScoped<ILLMModelRepository>(provider =>
 {

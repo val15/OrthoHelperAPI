@@ -302,6 +302,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             Assert.DoesNotContain("Erreur lors du traitement", result);
         }
 
+      
 
         [Fact]
         public async Task ProcessTextAsync_longText_ReturnsCorrected_gemini20_Text()

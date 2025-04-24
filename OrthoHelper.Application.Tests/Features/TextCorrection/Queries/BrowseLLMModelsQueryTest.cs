@@ -19,7 +19,8 @@ namespace OrthoHelper.Application.Tests.Features.TextCorrection.Queries
             var LLMModels = new List<LLMModel>
        {
            new LLMModel("Ollama:Gemma"),
-           new LLMModel("Online:gemini-2.0-flash")
+           new LLMModel("Online:gemini-2.0-flash"),
+           //new LLMModel("Online:gemini-2.5-pro")
 
        };
 

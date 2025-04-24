@@ -1,4 +1,5 @@
 ﻿using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using Tools;
 
 namespace OrthoHelper.Domain.Features.TextCorrection.Entities
@@ -14,8 +15,9 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
         public CorrectionStatus Status { get; private set; }
         public string Diff { get; set; } = string.Empty;
         public TimeSpan ProcessingTime { get; private set; }
+        private string _modelName;
 
-       
+
         // Constructor privé pour contrôler la création
         private CorrectionSession(string originalText)
         {
@@ -44,6 +46,22 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
                 throw new InvalidTextException("Le texte ne peut pas être vide.");
 
             return new CorrectionSession(originalText);
+        }
+        // Méthode pour définir le modèle
+        public void SetModelName(string modelName, ITextProcessingEngine textProcessingEngine,IEnumerable<LLMModel> availableModels)
+        {
+
+            if (string.IsNullOrWhiteSpace(modelName))
+                throw new InvalidModelNameException("Le nom du modèle ne peut pas être vide.");
+
+            if (availableModels.FirstOrDefault(x=> modelName.Contains(x.ModelName)) == null )
+                throw new InvalidModelNameException("Le modèle spécifié n'est pas disponible.");
+
+
+            textProcessingEngine.SetModelName(modelName);
+
+            // Stocker le modèle dans l'entité si nécessaire
+            _modelName = modelName;
         }
 
         // Méthode pour appliquer la correction
