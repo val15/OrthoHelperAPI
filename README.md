@@ -38,7 +38,7 @@ docker build -t orthohelperapi .
 
 ### Run Docker Container
 #use docker compose up
-#Exaple docker compose dontainte:
+#Example docker compose file containte (to run in solution path):
 ```bash
 services:
   OrthoHelperAPI:
@@ -68,7 +68,7 @@ This will expose the application on ports `7080`
    cd OrthoHelperAPI
    ```
 3. Build and run the Docker container using the commands provided above.
-4. Acces frontend app in http://localhost/7080
+4. Acces frontend app in http://localhost:7088/
 
 ## Technologies Used
 - **Backend**: C# with .NET
