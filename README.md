@@ -46,7 +46,7 @@ services:
     ports:
       - 7088:8080    
     volumes:
-      - orthohelper-data:/app/data  # Volume pour SQLite
+      - orthohelper-data:/app/data  # SQLite Volume 
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - CONNECTIONSTRINGS__DEFAULTCONNECTION=Data Source=/app/data/api.db;
@@ -68,6 +68,7 @@ This will expose the application on ports `7080`
    cd OrthoHelperAPI
    ```
 3. Build and run the Docker container using the commands provided above.
+4. Acces frontend app in http://localhost/7080
 
 ## Technologies Used
 - **Backend**: C# with .NET
