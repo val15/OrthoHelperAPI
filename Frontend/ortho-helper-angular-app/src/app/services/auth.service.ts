@@ -13,7 +13,7 @@ export class AuthService {
   login(token: string): void {
     localStorage.setItem('token', token); // Stockez le token dans le localStorage
     this.isLoggedIn = true;
-    this.router.navigate(['/']); // Redirigez vers la page principale
+    this.router.navigate(['/editor']); // Redirigez vers la page principale
   }
 
   // Méthode pour déconnecter l'utilisateur

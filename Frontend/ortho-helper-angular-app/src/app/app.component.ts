@@ -13,6 +13,8 @@ import { AuthService } from './services/auth.service';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { CorrectTextComponent } from './components/correct-text/correct-text.component';
 import { environment } from '../environments/environment';
+import { ModelsService } from './services/models.service';
+
 const baseUrl = environment.apiBaseUrl;
 //const baseUrl = 'http://localhost:8088'; //TEST ✅ URL de base ici
 //const baseUrl = 'http://localhost:7088'; // PROD
@@ -21,12 +23,14 @@ const baseUrl = environment.apiBaseUrl;
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, TextEditorComponent, CorrectTextComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ModelsService],
 })
 export class AppComponent implements OnInit {
   title = 'ortho-helper-angular-app';
   apiResponse: ApiResponse | null = null;
   errorMessage: string | null = null;
+
 
   models: string[] = [];
   selectedModel: string = '';
@@ -35,19 +39,23 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private textService: TextService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private modelsService: ModelsService
   ) {
     this.textService.setCorrectedText('');
   }
 
   ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/editor']);
+    }
     const token = this.authService.getToken(); // Récupérer le token de l'utilisateur
     if (!token) {
       console.error('Token manquant — utilisateur non authentifié');
       return;
     }
 
-    const headers = new HttpHeaders({
+   /* const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
 
@@ -60,10 +68,27 @@ export class AppComponent implements OnInit {
         error: (err) => {
           console.error('Erreur de chargement des modèles :', err);
         }
-      });
+      });*/
+
+
   }
 
- 
+    loadModels(): void {
+       this.modelsService.loadModels(); // Appel de la méthode du service
+
+       // Souscription aux changements de modèles
+       this.modelsService.models$.subscribe({
+         next: (loadedModels) => {
+           this.models = loadedModels;
+           this.selectedModel = this.models[0] || '';
+         },
+         error: (error) => {
+           console.error('Erreur lors du chargement des modèles:', error);
+         },
+       });
+    }
+
+
 
 
   sendToApi() {
