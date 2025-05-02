@@ -1,116 +1,54 @@
 ﻿using OrthoHelper.Application.Features.TextCorrection.DTOs;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
-using System.Diagnostics;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
-using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
 
 namespace OrthoHelper.Application.Features.TextCorrection.UseCases;
 
 public class CorrectTextUseCase : ICorrectTextUseCase
 {
-    private readonly ITextProcessingEngine _textProcessingEngine;
-    // private readonly ICorrectionSessionRepository _repository;
+    private readonly ICorrectionOrchestrator _correctionOrchestrator;
     private readonly ICurrentUserService _currentUserService;
-
     private readonly ICorrectionSessionRepository _correctionSessionRepository;
-    private readonly ILLMModelRepository _llmModelRepository;
 
-
-    public CorrectTextUseCase(ITextProcessingEngine textProcessingEngine, ICurrentUserService currentUserService, ICorrectionSessionRepository correctionSessionRepository, ILLMModelRepository llmModelRepository)
+    public CorrectTextUseCase(
+        ICorrectionOrchestrator correctionOrchestrator,
+        ICurrentUserService currentUserService,
+        ICorrectionSessionRepository correctionSessionRepository)
     {
-        _textProcessingEngine = textProcessingEngine;
+        _correctionOrchestrator = correctionOrchestrator;
         _currentUserService = currentUserService;
         _correctionSessionRepository = correctionSessionRepository;
-        _llmModelRepository = llmModelRepository;
     }
 
     public async Task<CorrectTextOutputDto> ExecuteAsync(CorrectTextInputDto input)
     {
-        //input ajout de MODEL_NAME
-        var startTime = DateTime.UtcNow;
-        var stopwatch = Stopwatch.StartNew();
-
-        // Validation applicative
-        if (string.IsNullOrWhiteSpace(input.Text))
-            throw new InvalidTextException("Le texte à corriger ne peut pas être vide.");
-
-
-        if (string.IsNullOrWhiteSpace(input.ModelName))
-            throw new InvalidModelNameException("Le nom du model ne peut pas être vide.");
-
-        //if (input.ModelName== "string")
-        //{
-
-        //}
-
-        //TODO 
-
-        // if not in models list
-        if (string.IsNullOrWhiteSpace(input.ModelName))
-            throw new InvalidModelNameException("Le nom du model n' est pas dans la list  des models disponible.");
-
-
-        //if (string.IsNullOrWhiteSpace(input.UserName))
-        //    throw new UserNotFoundException("Le nom d'utilisateur est requis.");
+        // Validation des données d'entrée
+        var textToCorrect = new TextToCorrect(input.Text);
+        var modelName = new ModelName(input.ModelName);
 
         var username = _currentUserService.UserName
             ?? throw new UserNotFoundException("Nom d'utilisateur introuvable");
 
+        // Utilisation de l'orchestrateur pour traiter la correction
+        var correctionSession = await _correctionOrchestrator.ProcessCorrectionAsync(textToCorrect, modelName, username);
 
-        // Création de l'entité Domain
-        var correctionSession = CorrectionSession.Create(input.Text);
+        // Sauvegarde de la session
+        await _correctionSessionRepository.AddAsync(correctionSession);
 
-        try
+        // Mapping vers le DTO de sortie
+        return new CorrectTextOutputDto
         {
-            var availableModels = await _llmModelRepository.GetAvailableLLMModelsAsync();
-
-            //Appel de l'initailaisation pour lires les données dans la base
-            // await _textProcessingEngine.InitializeUserSession(username);
-            // Appel au moteur externe via le port
-            correctionSession.SetModelName(input.ModelName,_textProcessingEngine, availableModels);
-            var correctedText = await _textProcessingEngine.CorrectTextAsync(input.Text);
-
-            // Mise à jour de l'entité Domain
-            correctionSession.ApplyCorrection(correctedText);
-
-            // correctedText.Diff = input.Text, correctedText);
-            stopwatch.Stop();
-            // Mapping vers le DTO de sortie
-
-            var result = new CorrectTextOutputDto
-            {
-                InputText = input.Text,
-                OutputText = correctedText,
-                Diff = correctionSession.Diff,
-                ProcessingTime = stopwatch.Elapsed,
-                CreatedAt = startTime
-            };
-
-
-
-            _correctionSessionRepository.AddAsync(correctionSession);
-            return result;
-
-
-        }
-        catch (InvalidModelNameException ex)
-        {
-            throw new InvalidModelNameException("Le modèle spécifié n'est pas valide.");
-        }
-        catch (InvalidTextException ex)
-        {
-            throw new InvalidTextException("Le texte spécifié n'est pas valide.");
-        }
-        catch (Exception ex)
-        {
-            throw new TextCorrectionFailedException("Échec de la correction du texte.", ex);
-        }
+            InputText = correctionSession.OriginalText,
+            OutputText = correctionSession.CorrectedText,
+            Diff = correctionSession.Diff,
+            ProcessingTime = correctionSession.ProcessingTime,
+            CreatedAt = correctionSession.CreatedAt
+        };
     }
-
-
 }
 
 // Exception applicative

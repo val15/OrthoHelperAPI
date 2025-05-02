@@ -55,21 +55,6 @@ export class AppComponent implements OnInit {
       return;
     }
 
-   /* const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    this.http.get<any[]>(`${baseUrl}/api/TextCorrection/models`, { headers })
-      .subscribe({
-        next: (response) => {
-          this.models = response.map(m => m.modelName);
-          this.selectedModel = this.models[0] || '';
-        },
-        error: (err) => {
-          console.error('Erreur de chargement des modèles :', err);
-        }
-      });*/
-
 
   }
 

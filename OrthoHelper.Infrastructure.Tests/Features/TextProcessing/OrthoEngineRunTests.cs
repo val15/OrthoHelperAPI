@@ -11,7 +11,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
     public class OrthoEngineRunTests
     {
         private readonly HttpClient _client;
-        private readonly Mock<ICorrectionSessionRepository> _mockRepo;
+        private readonly Mock<ICorrectionSessionRepository> _mockCorrectionSessionRepository;
         private readonly Mock<ICurrentUserService> _mockCurrentUserService;
 
         private readonly Mock<ILogger<OrthoEngine>> _mockLogger;
@@ -27,7 +27,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
                 BaseAddress = new Uri("http://localhost:11434")
             };
 
-            _mockRepo = new Mock<ICorrectionSessionRepository>();
+            _mockCorrectionSessionRepository = new Mock<ICorrectionSessionRepository>();
             _mockCurrentUserService = new Mock<ICurrentUserService>();
             _mockLogger = new Mock<ILogger<OrthoEngine>>();
 
@@ -44,7 +44,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
 
             // Act
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Ollama:llama3.2";
             // Assert
             Assert.NotNull(engine);
@@ -57,7 +57,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:llama3.2";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -82,7 +82,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:llama3.1";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -108,7 +108,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:llama3";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -133,7 +133,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:mistral";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -159,7 +159,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:gemma3";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -186,7 +186,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = "1 : Gestion de coupur internet traitement des ticker : user->anager et domoina -> relancer infini : avoir des retour\r\n\t\tProbeme courant,…\r\n\t\tAPI pour suivre les Ticket ou on suis ça sur le web ?\r\n\t\tDB lite, repporting\r\n\t\tFront qui ckeck les tikets\r\n\t\tBack pour stoquer le donnéer\r\n\t\tRepportint en tableau, power be,…\r\n\t2 : situation internet: test de connection, carte, geolocalisation, nperf\r\n\t\tClient qui vars aller sur nperf,\r\n\t\tIl faut rensaigner la localisation (dans un premier temps, pas de géolocalisation)\r\n\t\tAvoir une interface coté admin pour la visibilitée avoir une carte par example ou dans un premier temps un tableau par zone pour par utilisateur\r\n\t\tUn DB costo avec un système de repporting\r\n\t\tFront js (reactc, angular,..)\r\n\t\tBack c#, java\r\n\t3 : portal novity : othontification, droits, info, newslattrer :\r\n\t\tDashBoar : c’est une interface qui contien toute les lien de novity avec un système de motification\r\n\t\tFaciliter d’ajouter et de suplimiler les éléménts\r\n\t\tWEB front : PHP, angula,react ou simple HTLM\r\n\t4 : platforme de mise en relation stagiere des écoles et les sociétes :\r\n\t\tBd fort,\r\n\t\tMicroserveice\r\n\t\tCapaciter de scale (geberger sur des clause et accessible via des portale web qui scalenet)\r\n\t\tBack c#,java, ….\r\n\t\tFront angulal ,etc\r\n\r\n5 tous doit etre en micro service\r\net doit étre portable pour etre heberger n'import'où\r\n\r\n";
 
             var modelName = "Ollama:gemma3";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -212,7 +212,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var input = inputText;
 
             var modelName = "Ollama:gemma3:12b";
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = modelName;
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -237,7 +237,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = "QFIA Qui es tu?";
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Online:gemini-2.0-flash";
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -261,7 +261,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = "QFIA Peut tu corriger : 1 : Gestion de coupur internet traitement des ticker : user->anager et domoina -> relancer infini : avoir des retour\r\n\t\tProbeme courant,…\r\n\t\tAPI pour suivre les Ticket ou on suis ça sur le web ?\r\n\t\tDB lite, repporting\r\n\t\tFront qui ckeck les tikets\r\n\t\tBack pour stoquer le donnéer\r\n\t\tRepportint en tableau, power be,…\r\n\t2 : situation internet: test de connection, carte, geolocalisation, nperf\r\n\t\tClient qui vars aller sur nperf,\r\n\t\tIl faut rensaigner la localisation (dans un premier temps, pas de géolocalisation)\r\n\t\tAvoir une interface coté admin pour la visibilitée avoir une carte par example ou dans un premier temps un tableau par zone pour par utilisateur\r\n\t\tUn DB costo avec un système de repporting\r\n\t\tFront js (reactc, angular,..)\r\n\t\tBack c#, java\r\n\t3 : portal novity : othontification, droits, info, newslattrer :\r\n\t\tDashBoar : c’est une interface qui contien toute les lien de novity avec un système de motification\r\n\t\tFaciliter d’ajouter et de suplimiler les éléménts\r\n\t\tWEB front : PHP, angula,react ou simple HTLM\r\n\t4 : platforme de mise en relation stagiere des écoles et les sociétes :\r\n\t\tBd fort,\r\n\t\tMicroserveice\r\n\t\tCapaciter de scale (geberger sur des clause et accessible via des portale web qui scalenet)\r\n\t\tBack c#,java, ….\r\n\t\tFront angulal ,etc\r\n\r\n5 tous doit etre en micro service\r\net doit étre portable pour etre heberger n'import'où\r\n\r\n ?";
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Online:gemini-2.0-flash";
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -285,7 +285,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = inputText;
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Online:gemini-2.0-flash";
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -310,7 +310,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = "1 : Gestion de coupur internet traitement des ticker : user->anager et domoina -> relancer infini : avoir des retour\r\n\t\tProbeme courant,…\r\n\t\tAPI pour suivre les Ticket ou on suis ça sur le web ?\r\n\t\tDB lite, repporting\r\n\t\tFront qui ckeck les tikets\r\n\t\tBack pour stoquer le donnéer\r\n\t\tRepportint en tableau, power be,…\r\n\t2 : situation internet: test de connection, carte, geolocalisation, nperf\r\n\t\tClient qui vars aller sur nperf,\r\n\t\tIl faut rensaigner la localisation (dans un premier temps, pas de géolocalisation)\r\n\t\tAvoir une interface coté admin pour la visibilitée avoir une carte par example ou dans un premier temps un tableau par zone pour par utilisateur\r\n\t\tUn DB costo avec un système de repporting\r\n\t\tFront js (reactc, angular,..)\r\n\t\tBack c#, java\r\n\t3 : portal novity : othontification, droits, info, newslattrer :\r\n\t\tDashBoar : c’est une interface qui contien toute les lien de novity avec un système de motification\r\n\t\tFaciliter d’ajouter et de suplimiler les éléménts\r\n\t\tWEB front : PHP, angula,react ou simple HTLM\r\n\t4 : platforme de mise en relation stagiere des écoles et les sociétes :\r\n\t\tBd fort,\r\n\t\tMicroserveice\r\n\t\tCapaciter de scale (geberger sur des clause et accessible via des portale web qui scalenet)\r\n\t\tBack c#,java, ….\r\n\t\tFront angulal ,etc\r\n\r\n5 tous doit etre en micro service\r\net doit étre portable pour etre heberger n'import'où\r\n\r\n";
 
-            var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             engine.ModelName = "Online:gemini-2.0-flash";
             //_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             //    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -335,7 +335,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = "1 : Gestion de coupur internet traitement des ticker : user->anager et domoina -> relancer infini : avoir des retour\r\n\t\tProbeme courant,…\r\n\t\tAPI pour suivre les Ticket ou on suis ça sur le web ?\r\n\t\tDB lite, repporting\r\n\t\tFront qui ckeck les tikets\r\n\t\tBack pour stoquer le donnéer\r\n\t\tRepportint en tableau, power be,…\r\n\t2 : situation internet: test de connection, carte, geolocalisation, nperf\r\n\t\tClient qui vars aller sur nperf,\r\n\t\tIl faut rensaigner la localisation (dans un premier temps, pas de géolocalisation)\r\n\t\tAvoir une interface coté admin pour la visibilitée avoir une carte par example ou dans un premier temps un tableau par zone pour par utilisateur\r\n\t\tUn DB costo avec un système de repporting\r\n\t\tFront js (reactc, angular,..)\r\n\t\tBack c#, java\r\n\t3 : portal novity : othontification, droits, info, newslattrer :\r\n\t\tDashBoar : c’est une interface qui contien toute les lien de novity avec un système de motification\r\n\t\tFaciliter d’ajouter et de suplimiler les éléménts\r\n\t\tWEB front : PHP, angula,react ou simple HTLM\r\n\t4 : platforme de mise en relation stagiere des écoles et les sociétes :\r\n\t\tBd fort,\r\n\t\tMicroserveice\r\n\t\tCapaciter de scale (geberger sur des clause et accessible via des portale web qui scalenet)\r\n\t\tBack c#,java, ….\r\n\t\tFront angulal ,etc\r\n\r\n5 tous doit etre en micro service\r\net doit étre portable pour etre heberger n'import'où\r\n\r\n";
 
-            //var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            //var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             //engine.ModelName = "Online:gemini-2.0-flash";
             ////_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             ////    .ReturnsAsync(new ChatMessage { Content = correctedText });
@@ -354,7 +354,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             // Arrange
             var input = "Gestion de coupur internet traitement des ticker ";
 
-            //var engine = new OrthoEngine(_client, _mockRepo.Object, _mockCurrentUserService.Object, _mockLogger.Object);
+            //var engine = new OrthoEngine(_client, _mockCorrectionSessionRepository.Object, _mockCurrentUserService.Object, _mockLogger.Object);
             //engine.ModelName = "Online:gemini-2.0-flash";
             ////_chatServiceMock.Setup(cs => cs.GetChatMessageContentAsync(It.IsAny<ChatHistory>()))
             ////    .ReturnsAsync(new ChatMessage { Content = correctedText });

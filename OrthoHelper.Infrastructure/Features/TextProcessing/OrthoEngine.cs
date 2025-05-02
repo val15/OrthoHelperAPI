@@ -59,7 +59,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
 
 
-        public void InitializeByModelName()
+        public void InitializeUsingModelName()
         {
             try
             {
@@ -161,7 +161,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             _logger.LogInformation($"Traitement du texte entrant: {inputText}");
             try
             {
-                InitializeByModelName();
+                InitializeUsingModelName();
 
                 var textResult = string.Empty;
                 var resultList = new List<string[]>();

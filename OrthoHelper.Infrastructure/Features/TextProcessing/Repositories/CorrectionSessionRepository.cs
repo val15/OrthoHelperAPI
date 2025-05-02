@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using OrthoHelper.Domain.Features.Auth.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using OrthoHelper.Domain.Features.Auth.Ports;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext;
-using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Mappings;
 

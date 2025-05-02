@@ -17,6 +17,7 @@ using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
 using OrthoHelper.Domain.Features.TextCorrection.Mappings;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
+using OrthoHelper.Application.Features.TextCorrection.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -103,6 +104,7 @@ builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService,
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
+builder.Services.AddScoped<ICorrectionOrchestrator, CorrectionOrchestrator>();
 
 builder.Services.AddScoped<ILLMModelRepository>(provider =>
 {

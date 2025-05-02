@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrthoHelper.Application\OrthoHelper.Application.csproj" />
+    <ProjectReference Include="..\OrthoHelper.Infrastructure\OrthoHelper.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using OllamaSharp.Models;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;

@@ -7,15 +7,17 @@ using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
 
 namespace OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 
 public class CorrectTextUseCaseTests
 {
-    private readonly Mock<ITextProcessingEngine> _mockEngine = new();
-    private readonly Mock<ICurrentUserService> _mockCurrentUserService =new ();
+  
+    private readonly Mock<ICurrentUserService> _mockCurrentUserService = new();
     private readonly Mock<ICorrectionSessionRepository> _mockCorrectionSessionRepository = new();
     private readonly Mock<ILLMModelRepository> _mockLLMModelRepository = new();
+    private readonly Mock<ICorrectionOrchestrator> _mockCorrectionOrchestrator = new();
 
     private readonly CorrectTextUseCase _useCase;
 
@@ -27,7 +29,9 @@ public class CorrectTextUseCaseTests
         _mockCurrentUserService.SetupGet(x => x.UserId).Returns(123);
         _mockLLMModelRepository.Setup(x => x.GetAvailableLLMModelsAsync())
             .ReturnsAsync(new List<LLMModel> { new LLMModel("Ollama:gemma3"), new LLMModel("Online:gemini-2.0-flash") });
-        _useCase = new CorrectTextUseCase(_mockEngine.Object, _mockCurrentUserService.Object, _mockCorrectionSessionRepository.Object, _mockLLMModelRepository.Object);
+        _useCase = new CorrectTextUseCase(_mockCorrectionOrchestrator.Object, 
+            _mockCurrentUserService.Object, 
+            _mockCorrectionSessionRepository.Object);
     }
 
     [Fact]
@@ -36,8 +40,13 @@ public class CorrectTextUseCaseTests
         // Arrange
         var modelName = "Ollama:gemma3";
         var input = new CorrectTextInputDto("Je veut un café", modelName);
-        _mockEngine.Setup(e => e.CorrectTextAsync(input.Text))
-                  .ReturnsAsync("Je veux un café");
+        //_mockEngine.Setup(e => e.CorrectTextAsync(input.Text))
+        //          .ReturnsAsync("Je veux un café");
+        var fakeCorrectionSession = CorrectionSession.Create(input.Text);
+        fakeCorrectionSession.CorrectedText = "Je veux un café";
+        _mockCorrectionOrchestrator
+    .Setup(o => o.ProcessCorrectionAsync(It.IsAny<TextToCorrect>(), It.IsAny<ModelName>(), It.IsAny<string>()))
+    .ReturnsAsync(fakeCorrectionSession);
 
         // Act
         var result = await _useCase.ExecuteAsync(input);
@@ -46,21 +55,27 @@ public class CorrectTextUseCaseTests
         input.ModelName.Should().Be(modelName);
         result.InputText.Should().Be("Je veut un café");
         result.OutputText.Should().Be("Je veux un café");
-        result.InputText.Should().Be("Je veut un café");
-        _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
+     //   _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
     }
+
 
     [Fact]
     public async Task ExecuteAsync_WithNotFoundModel_ThrowsArgumentException()
     {
         // Arrange
-        var modelName = "Ollama:gema3";
+        var modelName = "InvalidModel";
         var input = new CorrectTextInputDto("Je veut un café", modelName);
 
+        _mockCorrectionOrchestrator
+       .Setup(o => o.ProcessCorrectionAsync(It.IsAny<TextToCorrect>(), It.IsAny<ModelName>(), It.IsAny<string>()))
+       .ThrowsAsync(new InvalidModelNameException("Le modèle spécifié n'est pas valide."));
+
         // Act & Assert
-        input.ModelName.Should().Be(modelName);
         await Assert.ThrowsAsync<InvalidModelNameException>(() => _useCase.ExecuteAsync(input));
-        _mockEngine.Verify(e => e.CorrectTextAsync(It.IsAny<string>()), Times.Never);
+        _mockCorrectionOrchestrator.Verify(o => o.ProcessCorrectionAsync(
+            It.IsAny<TextToCorrect>(),
+            It.IsAny<ModelName>(),
+            It.IsAny<string>()), Times.Once);
     }
 
     [Fact]
@@ -70,9 +85,15 @@ public class CorrectTextUseCaseTests
         var modelName = "Ollama:gemma3";
         var input = new CorrectTextInputDto("", modelName);
 
+        _mockCorrectionOrchestrator
+            .Setup(o => o.ProcessCorrectionAsync(It.IsAny<TextToCorrect>(), It.IsAny<ModelName>(), It.IsAny<string>()))
+            .ThrowsAsync(new InvalidTextException("Le texte à corriger ne peut pas être vide."));
+
         // Act & Assert
-        input.ModelName.Should().Be(modelName);
         await Assert.ThrowsAsync<InvalidTextException>(() => _useCase.ExecuteAsync(input));
-        _mockEngine.Verify(e => e.CorrectTextAsync(It.IsAny<string>()), Times.Never);
+        _mockCorrectionOrchestrator.Verify(o => o.ProcessCorrectionAsync(
+            It.IsAny<TextToCorrect>(),
+            It.IsAny<ModelName>(),
+            It.IsAny<string>()), Times.Never);
     }
 }
