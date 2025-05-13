@@ -18,6 +18,7 @@ using OrthoHelper.Domain.Features.TextCorrection.Mappings;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
 using OrthoHelper.Application.Features.TextCorrection.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +45,7 @@ builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 // 3. Configuration HttpClient pour Ollama
 var ollamaConfig = builder.Configuration.GetSection("ModelSettings");
 builder.Services
-    .AddScoped<ICorrectionSessionRepository, CorrectionSessionRepository>()
+    .AddScoped<ISessionRepository, CorrectionSessionRepository>()
     .AddHttpClient("Ollama", client =>
     {
         client.BaseAddress = new Uri(ollamaConfig["Address"]!);
@@ -57,10 +58,10 @@ builder.Services
 builder.Services.AddScoped<IOrthoEngine>(provider =>
 {
     var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-    var repository = provider.GetRequiredService<ICorrectionSessionRepository>();
+    var repository = provider.GetRequiredService<ISessionRepository>();
     var currentUserService = provider.GetRequiredService<ICurrentUserService>();
-    var logger = provider.GetRequiredService<ILogger<OrthoEngine>>();
-    var orthoEngine =  new OrthoEngine(
+    var logger = provider.GetRequiredService<ILogger<OrthoEngineCorrector>>();
+    var orthoEngine =  new OrthoEngineCorrector(
         httpClient: httpClientFactory.CreateClient("Ollama"),
         repository: repository, 
     currentUserService: currentUserService,
@@ -68,6 +69,24 @@ builder.Services.AddScoped<IOrthoEngine>(provider =>
         );
     return orthoEngine;
 });
+
+builder.Services.AddScoped<IOrthoEngine>(provider =>
+{
+    var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+    var repository = provider.GetRequiredService<ISessionRepository>();
+    var currentUserService = provider.GetRequiredService<ICurrentUserService>();
+    var logger = provider.GetRequiredService<ILogger<OrthoEngineTranslator>>();
+    var orthoEngine = new OrthoEngineTranslator(
+        httpClient: httpClientFactory.CreateClient("Ollama"),
+        repository: repository,
+    currentUserService: currentUserService,
+    logger: logger
+        );
+    return orthoEngine;
+});
+
+
+
 
 
 builder.Services
@@ -80,7 +99,7 @@ builder.Services.AddScoped<ITextProcessingEngine, OrthoEngineAdapter>();
 //builder.Services.AddScoped<ITextProcessingEngine, OrthoEngineAdapter>();
 
 // 4. Configuration de l'Application
-builder.Services.AddScoped<ICorrectTextUseCase, CorrectTextUseCase>();
+builder.Services.AddScoped<IProcessTextUseCase, CorrectTextUseCase>();
 
 // 5. Configuration de l'API
 builder.Services.AddControllers();
@@ -104,7 +123,9 @@ builder.Services.AddScoped<OrthoHelper.Domain.Features.Auth.Ports.ITokenService,
 builder.Services.AddScoped<ITextProcessingService, OrthoService>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<ILLMModelRepository, LLMModelRepository>();
-builder.Services.AddScoped<ICorrectionOrchestrator, CorrectionOrchestrator>();
+builder.Services.AddScoped<ICorrectorOrchestrator, CorrectorOrchestrator>();
+builder.Services.AddScoped<IProcessTextUseCase, TranslateTextUseCase>();
+builder.Services.AddScoped<ITranslatorOrchestrator, TranslatorOrchestrator>();
 
 builder.Services.AddScoped<ILLMModelRepository>(provider =>
 {
@@ -177,7 +198,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(OrthoHelper.Application.AssemblyMarker).Assembly));
 
 
-builder.Services.AddAutoMapper(typeof(CorrectionSessionProfile)); // Enregistrer le profil AutoMapper
+builder.Services.AddAutoMapper(typeof(SessionProfile)); // Enregistrer le profil AutoMapper
 
 
 //builder.Services.AddMediatR(cfg =>

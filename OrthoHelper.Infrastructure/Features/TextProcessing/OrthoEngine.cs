@@ -1,68 +1,75 @@
-﻿using System.Diagnostics;
-using Microsoft.Extensions.Logging; // Ajoutez cet using
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.Google;
 using OllamaSharp;
 using OrthoHelper.Domain.Features.Common.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using System.Diagnostics;
 using Tools;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {
-    public class OrthoEngine : IOrthoEngine
+    public abstract class OrthoEngine : IOrthoEngine
     {
-        private IChatCompletionService _chatService;
-        private ChatHistory _history;
-        private readonly ICorrectionSessionRepository _repository;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly ILogger<OrthoEngine> _logger; // Ajoutez le logger
+        protected IChatCompletionService _chatService;
+        protected ChatHistory _history;
 
-        private readonly HttpClient _httpClient;
+        protected readonly ISessionRepository _correctionSessionRepository;
+        protected readonly ICurrentUserService _currentUserService;
+        protected readonly ILogger<OrthoEngine> _logger;
 
-        private readonly int _maxCharsPerPartGemmini = 1000;
-        private bool _subdiviseText = false;
+        protected readonly HttpClient _httpClient;
 
-        private string _modelName = "Ollama:Gemma3";
+        protected readonly int _maxCharsPerPartGemmini = 1000;
+        protected bool _subdiviseText = false;
 
+        protected string _modelName = "Ollama:Gemma3";
+        protected int _minDelayTime = 7000;
+        protected int _retyCount = 1;
+
+        public abstract string InitText { get; }
+        public abstract string BottomOfThequestion { get; }
+        private bool _isInited=false;
         public string ModelName
         {
             get => _modelName;
-            set => _modelName = value;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Le nom du modèle ne peut pas être vide.", nameof(value));
+
+                _modelName = value;
+                InitializeUsingModelName();
+            }
         }
 
         public void SetModelName(string modelName)
         {
-            _modelName = modelName;
+           ModelName = modelName;
         }
 
 
-
-        // Constructeur mis à jour pour accepter ILogger
-        public OrthoEngine(HttpClient httpClient, ICorrectionSessionRepository repository, ICurrentUserService currentUserService, ILogger<OrthoEngine> logger)
+        public string GetModelName()
         {
+            return _modelName;
+        }
+        public OrthoEngine(HttpClient client, ISessionRepository correctionSessionRepository, ICurrentUserService currentUserService, ILogger<OrthoEngine> logger)
+        {
+            _httpClient = client;
+            _correctionSessionRepository = correctionSessionRepository;
             _currentUserService = currentUserService;
-            _repository = repository;
-            _httpClient = httpClient;
-            _logger = logger; // Assignez l'instance du logger
-
-            try
-            {
-                // InitializeByModelName(); // Peut être appelé plus tard si nécessaire
-                _logger.LogInformation("OrthoEngine initialisé.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erreur lors de l'initialisation du service OrthoEngine.");
-                throw;
-            }
+            _logger = logger;
         }
 
-
-
-        public void InitializeUsingModelName()
+        public  void InitializeUsingModelName()
         {
             try
             {
+                if(_isInited)
+                    return;
+
+                _history = new();
                 var realModelName = string.Empty;
                 _logger.LogInformation($"Tentative d'initialisation du modèle: {_modelName}");
                 if (_modelName.Contains("Ollama"))
@@ -103,8 +110,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                     _logger.LogWarning($"Type de modèle non géré: {_modelName}");
                 }
 
-                _history = new();
-                var initText = "Tu es un assistant pour mon éditeur de texte Obsidian. Tu me parles exclusivement en français même si je te parle dans une autre langue, tu me réponds en français. \r\nTu dois pouvoir me corriger mes fautes d'orthographe ou reformuler mes phrases si elles sont grammaticalement incorrectes. Si le text est du markdown, tu ne dois pas le modifier.";
+               
 
                 var historyText = "";
                 if (_currentUserService.IsAuthenticated)
@@ -112,56 +118,44 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                     historyText = GetTextUserSessionHistory().Result;
                     _logger.LogDebug($"Historique de la session utilisateur récupéré: {historyText}");
                 }
-                _history.AddSystemMessage(initText + "\nVoici l'historique de nos échanges : \n " + historyText);
-                _logger.LogDebug($"Message système ajouté à l'historique: {initText}");
+                _history.AddSystemMessage(InitText + "\nVoici l'historique de nos échanges : \n " + historyText);
+                _logger.LogDebug($"Message système ajouté à l'historique: {InitText}");
+                _isInited = true;
             }
             catch (Exception ex)
             {
 
                 _logger.LogError($"Exeption : {ex}");
+                _isInited = false;
             }
 
         }
-
-        public async Task InitializeUserSession(string username)
-        {
-            _logger.LogInformation($"Initialisation de la session utilisateur pour: {username}");
-            var sessions = await _repository.GetCorrectionSessionsAsync();
-            _logger.LogDebug($"Nombre de sessions de correction récupérées: {sessions.Count()}");
-
-            foreach (var session in sessions)
-            {
-                _history.AddUserMessage(session.OriginalText);
-                _history.AddAssistantMessage(session.CorrectedText);
-                _logger.LogTrace($"Message utilisateur ajouté à l'historique: {session.OriginalText}");
-                _logger.LogTrace($"Réponse de l'assistant ajoutée à l'historique: {session.CorrectedText}");
-            }
-        }
-
         public async Task<string> GetTextUserSessionHistory()
         {
             _logger.LogInformation("Récupération de l'historique de la session utilisateur sous forme de texte.");
             var output = "";
-            var sessions = await _repository.GetCorrectionSessionsAsync();
+            var sessions = await _correctionSessionRepository.GetCorrectionSessionsAsync();
             _logger.LogDebug($"Nombre de sessions de correction récupérées pour l'historique: {sessions.Count()}");
 
             foreach (var session in sessions)
             {
-                output += $"user message : {session.OriginalText} .\n";
-                output += $"your response : {session.CorrectedText} .\n"; // Correction ici
+                output += $"user message : {session.InputText} .\n";
+                output += $"your response : {session.OutputText} .\n"; // Correction ici
                 output += $"diff: {session.Diff} .\n";
-                _logger.LogTrace($"Ligne d'historique ajoutée: Utilisateur - {session.OriginalText}, Assistant - {session.CorrectedText}, Diff - {session.Diff}");
+                _logger.LogTrace($"Ligne d'historique ajoutée: Utilisateur - {session.InputText}, Assistant - {session.OutputText}, Diff - {session.Diff}");
             }
             _logger.LogDebug($"Historique de la session utilisateur récupéré: {output}");
             return output;
         }
 
-        public async Task<string> ProcessTextAsync(string inputText)
+
+        public  async Task<string> ProcessTextAsync(string inputText)
         {
             _logger.LogInformation($"Traitement du texte entrant: {inputText}");
             try
             {
-                InitializeUsingModelName();
+
+                //InitializeUsingModelName();
 
                 var textResult = string.Empty;
                 var resultList = new List<string[]>();
@@ -169,7 +163,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                 if (!_subdiviseText && inputText.Contains("QFIA"))
                     return await AskQuestionForIaAsync(inputText);
                 else if (!_subdiviseText)
-                    return await ProcessTextCorrectionAsync(inputText);
+                    return await ProcessTextPartAsync(inputText);
 
 
                 _logger.LogInformation($"Division du text: {inputText}");
@@ -198,7 +192,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                 {
                     foreach (var input in textParts)
                     {
-                        var output = await ProcessTextCorrectionAsync(input);
+                        var output = await ProcessTextPartAsync(input);
                         resultList.Add(new string[] { input, output }); //(new st inpoutText, outputText);
                     }
                 }
@@ -212,6 +206,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                 if (textResult != null)
                 {
                     textResult = textResult.Trim();
+                    
                     return textResult;
                 }
                 else
@@ -233,13 +228,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             _logger.LogInformation($"Question pour l'IA: {questionText}");
             try
             {
-
-
                 questionText = questionText.Replace("QFIA", "");
-
-
-
-
                 _history.AddUserMessage(questionText);
 
                 var result = await _chatService.GetChatMessageContentAsync(_history);
@@ -271,19 +260,14 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         }
 
 
-        public async Task<string> ProcessTextCorrectionAsync(string inputText)
+        public async Task<string> ProcessTextPartAsync(string inputText)
         {
             _logger.LogInformation($"Traitement du texte entrant: {inputText}");
             try
             {
 
 
-
-
-
-
-
-                var userMessage = $"Peux-tu corriger ? (retourne seulement le texte corrigé) : {inputText}";
+                var userMessage = $"{BottomOfThequestion} (retourne seulement le texte) : {inputText}";
                 _history.AddUserMessage(userMessage);
                 _logger.LogDebug($"Message utilisateur (correction) ajouté à l'historique: {userMessage}");
 
@@ -292,8 +276,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                 var result = await _chatService.GetChatMessageContentAsync(_history);
                 var textResult = result.Content;
                 _logger.LogInformation($"Réponse du service de complétion: {textResult}");
-                Debug.WriteLine(textResult);
-                Console.WriteLine(textResult); // Utile pour le débogage initial dans Docker
+               // Debug.WriteLine(textResult);
+               // Console.WriteLine(textResult); // Utile pour le débogage initial dans Docker
                 if (result != null)
                 {
                     _history.Add(result);
@@ -301,10 +285,11 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
                 if (textResult != null)
                 {
-                    textResult.Replace("Voici le texte corrigé :\n\n", string.Empty);
+                    textResult= textResult.Replace("Voici le texte corrigé :\n\n", string.Empty).Trim();
                     var diff = TextHelper.GenerateCharacterDiff(inputText, textResult);
                     _history.AddUserMessage($"differences : {diff}");
                     _logger.LogDebug($"Différences générées: {diff}");
+                    _retyCount = 1;
                     return textResult;
                 }
                 else
@@ -313,13 +298,38 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                     return "Erreur lors du traitement : Réponse du service nulle.";
                 }
             }
+            //catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
+            //{
+            //    _logger.LogError(ex, "Erreur 429 : Trop de requêtes envoyées à l'API.");
+            //    await Task.Delay(500);
+            //    return await ProcessTextPartAsync(inputText);
+
+            //}
+            //catch (HttpRequestException ex)
+            //{
+            //    _logger.LogError(ex, $"HttpRequestException sans code 429. StatusCode: {ex.StatusCode}");
+            //    return $"Erreur HTTP lors du traitement : {inputText}";
+            //}
             catch (Exception ex)
             {
+
+                Debug.WriteLine($"$\"Erreur lors du traitement du texte: {inputText} : {ex}");
                 _logger.LogError(ex, $"Erreur lors du traitement du texte: {inputText}");
-                return $"Erreur lors du traitement : {inputText}";
+                var delayTime = 1000 * _retyCount*_minDelayTime;
+                Debug.WriteLine($"delayTime : {delayTime} ");
+                await Task.Delay(delayTime);
+                _retyCount++;
+                return await ProcessTextPartAsync(inputText);
+               // return $"Erreur lors du traitement : {inputText}";
             }
         }
 
 
+
+
+
+
     }
+
+
 }

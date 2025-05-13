@@ -16,7 +16,7 @@ namespace OrthoHelperAPI.Tests
         private readonly ApiDbContext _context;
         private readonly Mock<ITextProcessingService> _textProcessingServiceMock;
         private readonly Mock<IMessageRepository> _messageRepositoryMock;
-        private readonly TextController _controller;
+        private readonly TextOLDController _controller;
 
         public TextControllerTests()
         {
@@ -31,7 +31,7 @@ namespace OrthoHelperAPI.Tests
             _messageRepositoryMock = new Mock<IMessageRepository>();
 
             // Create controller with mocked dependencies
-            _controller = new TextController(_messageRepositoryMock.Object, _textProcessingServiceMock.Object);
+            _controller = new TextOLDController(_messageRepositoryMock.Object, _textProcessingServiceMock.Object);
 
             // Configure fake user claims
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]

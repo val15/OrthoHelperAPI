@@ -7,9 +7,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Mappings
     public static class CorrectionSessionAdapter
     {
         // Conversion Message (Infra) -> CorrectionSession (Domaine)
-        public static CorrectionSession ToDomain(Message message)
+        public static Session ToDomain(Message message)
         {
-            return new CorrectionSession(
+            return new Session(
                 id: message.Id.ToGuid(), // Adaptez selon le type réel
                 originalText: message.InputText,
                 correctedText: message.OutputText,
@@ -28,12 +28,12 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Mappings
         }
 
         // Conversion CorrectionSession (Domaine) -> Message (Infra)
-        public static Message FromDomain(CorrectionSession session, int userId)
+        public static Message FromDomain(Session session, int userId)
         {
             return new Message
             {
-                InputText = session.OriginalText,
-                OutputText = session.CorrectedText,
+                InputText = session.InputText,
+                OutputText = session.OutputText,
                 Diff = session.Diff,
                 CreatedAt = session.CreatedAt,
                 UserId = userId,

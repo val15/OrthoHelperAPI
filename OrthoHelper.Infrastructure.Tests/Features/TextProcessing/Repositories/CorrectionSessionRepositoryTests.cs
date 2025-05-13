@@ -44,8 +44,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
         public async Task AddAsync_Should_Persist_Data_InMemory()
         {
             // Act
-            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
-            correctionSessionTemp.CorrectedText = "textCorrected1";
+            var correctionSessionTemp = Session.Create("textIncorrect1");
+            correctionSessionTemp.OutputText = "textCorrected1";
             await _repository.AddAsync(correctionSessionTemp);
 
 
@@ -77,8 +77,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
             var testUser = new User { Id = 1, Username = "testuser" };
 
             // Seed la base de test
-            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
-            correctionSessionTemp.CorrectedText = "textCorrected1";
+            var correctionSessionTemp = Session.Create("textIncorrect1");
+            correctionSessionTemp.OutputText = "textCorrected1";
             await _repository.AddAsync(correctionSessionTemp);
             await _repository.AddAsync(correctionSessionTemp);
             await _repository.AddAsync(correctionSessionTemp);
@@ -89,7 +89,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
             // Assert
             result.Should().HaveCount(3);
             result.Should().OnlyContain(x =>
-                x.OriginalText == "textIncorrect1" || x.OriginalText == "textIncorrect1");
+                x.InputText == "textIncorrect1" || x.InputText == "textIncorrect1");
         }
 
         [Fact]
@@ -99,8 +99,8 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
             var testUser = new User { Id = 1, Username = "testuser" };
 
             // Seed la base de test
-            var correctionSessionTemp = CorrectionSession.Create("textIncorrect1");
-            correctionSessionTemp.CorrectedText = "textCorrected1";
+            var correctionSessionTemp = Session.Create("textIncorrect1");
+            correctionSessionTemp.OutputText = "textCorrected1";
             await _repository.AddAsync(correctionSessionTemp);
             await _repository.AddAsync(correctionSessionTemp);
             await _repository.AddAsync(correctionSessionTemp);

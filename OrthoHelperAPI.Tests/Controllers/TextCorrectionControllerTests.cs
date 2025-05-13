@@ -12,22 +12,24 @@ namespace OrthoHelperAPI.Tests.Controllers
 {
     public class TextCorrectionControllerTests
     {
-        private readonly Mock<ICorrectTextUseCase> _mockUseCase = new();
+        private readonly Mock<IProcessTextUseCase> _mockCorrectUseCase = new();
+        private readonly Mock<IProcessTextUseCase> _mockTranslatUseCase = new();
+
         private readonly Mock<IMediator> _mockMediator = new();
-        private readonly TextCorrectionController _controller;
+        private readonly TextController _controller;
 
 
         public TextCorrectionControllerTests()
         {
-            _controller = new TextCorrectionController(_mockUseCase.Object, _mockMediator.Object);
+            _controller = new TextController(_mockCorrectUseCase.Object, _mockTranslatUseCase.Object, _mockMediator.Object);
         }
 
         [Fact]
         public async Task CorrectText_WithEmptyInput_ReturnsBadRequest()
         {
             // Arrange
-            var input = new CorrectTextInputDto("", "Ollama:Gemma");
-            _mockUseCase.Setup(uc => uc.ExecuteAsync(input))
+            var input = new InputTextDto("", "Ollama:Gemma");
+            _mockCorrectUseCase.Setup(uc => uc.ExecuteAsync(input))
                        .ThrowsAsync(new ArgumentException("Le texte ne peut pas être vide."));
 
             // Act
@@ -41,8 +43,8 @@ namespace OrthoHelperAPI.Tests.Controllers
         public async Task CorrectText_WithValidInput_ReturnsOkResult()
         {
             // Arrange
-            var input = new CorrectTextInputDto("Je veut un café", "Ollama:Gemma");
-            var expectedOutput = new CorrectTextOutputDto
+            var input = new InputTextDto("Je veut un café", "Ollama:Gemma");
+            var expectedOutput = new OutputTextDto
             {
                 InputText = "Je veut un café",
                 OutputText = "Je veux un café",
@@ -51,11 +53,37 @@ namespace OrthoHelperAPI.Tests.Controllers
 
             //(, , DateTime.UtcNow);
 
-            _mockUseCase.Setup(uc => uc.ExecuteAsync(input))
+            _mockCorrectUseCase.Setup(uc => uc.ExecuteAsync(input))
                        .ReturnsAsync(expectedOutput);
 
             // Act
             var result = await _controller.CorrectText(input);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var okResult = result as OkObjectResult;
+            okResult.Value.Should().BeEquivalentTo(expectedOutput);
+        }
+
+        [Fact]
+        public async Task TranslatText_WithValidInput_ReturnsOkResult()
+        {
+            // Arrange
+            var input = new InputTextDto("Je veut un café", "Ollama:Gemma");
+            var expectedOutput = new OutputTextDto
+            {
+                InputText = "Hello",
+                OutputText = "Bonjour",
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            //(, , DateTime.UtcNow);
+
+            _mockTranslatUseCase.Setup(uc => uc.ExecuteAsync(input))
+                       .ReturnsAsync(expectedOutput);
+
+            // Act
+            var result = await _controller.TranslateText(input);
 
             // Assert
             result.Should().BeOfType<OkObjectResult>();
@@ -95,7 +123,7 @@ namespace OrthoHelperAPI.Tests.Controllers
         public async Task BrowseCorrectionSession_WhenCalled_ReturnsOkWithData()
         {
             // Arrange
-            var fakeCorrectionList = new List<CorrectTextOutputDto>
+            var fakeCorrectionList = new List<OutputTextDto>
         {
             new() { InputText = "Test1",OutputText="Text 1" },
             new() { InputText = "Test2",OutputText="Text 2" }
@@ -106,7 +134,7 @@ namespace OrthoHelperAPI.Tests.Controllers
 
 
             _mockMediator
-                .Setup(m => m.Send(It.IsAny<BrowseCorrectionSessionQuery>(), It.IsAny<CancellationToken>()))
+                .Setup(m => m.Send(It.IsAny<BrowseSessionQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(fakeCorrectionList);
 
             // Act
@@ -123,7 +151,7 @@ namespace OrthoHelperAPI.Tests.Controllers
         public async Task DeleteAllUserCorrectionSession_WhenCalled_ReturnTrue()
         {
             // Arrange
-            var fakeCorrectionList = new List<CorrectTextOutputDto>
+            var fakeCorrectionList = new List<OutputTextDto>
         {
             new() { InputText = "Test1",OutputText="Text 1" },
             new() { InputText = "Test2",OutputText="Text 2" }
@@ -134,7 +162,7 @@ namespace OrthoHelperAPI.Tests.Controllers
 
 
             _mockMediator
-                .Setup(m => m.Send(It.IsAny<DeleteAllUserCorrectionSessionQuery>(), It.IsAny<CancellationToken>()))
+                .Setup(m => m.Send(It.IsAny<DeleteAllUserSessionQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(fakeCorrectionList.Count);
 
             // Act

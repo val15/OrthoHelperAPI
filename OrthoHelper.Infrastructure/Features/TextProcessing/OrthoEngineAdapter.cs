@@ -16,9 +16,14 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             _orthoEngine.SetModelName(modelName);
         }
 
-        public async Task<string> CorrectTextAsync(string inputText)
+        public async Task<string> ProcessTextAsync(string inputText)
         {
             return await _orthoEngine.ProcessTextAsync(inputText);
+        }
+
+        public string GetModelName()
+        {
+           return _orthoEngine.GetModelName();
         }
 
         //public async Task InitializeUserSession(string username)

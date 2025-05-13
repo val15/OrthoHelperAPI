@@ -1,4 +1,5 @@
 ﻿using Moq;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Infrastructure.Features.TextProcessing;
 
 namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
@@ -8,7 +9,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
     public class OrthoEngineAdapterTests
     {
         [Fact]
-        public async Task CorrectTextAsync_ValidInput_ReturnsCorrectedText()
+        public async Task CorrectTextAsync_ValidInput_ReturnsOutputText()
         {
             // Arrange
             var mockEngine = new Mock<IOrthoEngine>();
@@ -17,7 +18,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
             var adapter = new OrthoEngineAdapter(mockEngine.Object);
 
             // Act
-            var result = await adapter.CorrectTextAsync("test");
+            var result = await adapter.ProcessTextAsync("test");
 
             // Assert
             Assert.Equal("TEST", result);

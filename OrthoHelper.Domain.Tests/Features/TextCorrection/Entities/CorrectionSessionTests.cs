@@ -15,10 +15,10 @@ namespace OrthoHelper.Domain.Tests.Features.TextCorrection.Entities
             var text = "Bonjour, je veut un café";
 
             // Act
-            var session = CorrectionSession.Create(text);
+            var session = Session.Create(text);
 
             // Assert
-            Assert.Equal(text, session.OriginalText);
+            Assert.Equal(text, session.InputText);
             Assert.Equal(CorrectionStatus.Pending, session.Status);
             Assert.NotEqual(Guid.Empty, session.Id);
         }
@@ -30,21 +30,21 @@ namespace OrthoHelper.Domain.Tests.Features.TextCorrection.Entities
             var emptyText = "";
 
             // Act & Assert
-            Assert.Throws<InvalidTextException>(() => CorrectionSession.Create(emptyText));
+            Assert.Throws<InvalidTextException>(() => Session.Create(emptyText));
         }
 
         [Fact]
-        public void ApplyCorrection_WhenPending_UpdatesCorrectedText()
+        public void ApplyCorrection_WhenPending_UpdatesOutputText()
         {
             // Arrange
-            var session = CorrectionSession.Create("Test");
+            var session = Session.Create("Test");
             var correctedText = "Tested";
 
             // Act
             session.ApplyCorrection(correctedText);
 
             // Assert
-            Assert.Equal(correctedText, session.CorrectedText);
+            Assert.Equal(correctedText, session.OutputText);
             Assert.Equal(CorrectionStatus.Completed, session.Status);
         }
 
@@ -52,7 +52,7 @@ namespace OrthoHelper.Domain.Tests.Features.TextCorrection.Entities
         public void ApplyCorrection_WhenAlreadyCompleted_ThrowsException()
         {
             // Arrange
-            var session = CorrectionSession.Create("Test");
+            var session = Session.Create("Test");
             session.ApplyCorrection("Tested");
 
             // Act & Assert

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrthoHelper.Domain\OrthoHelper.Domain.csproj" />
+    <ProjectReference Include="..\OrthoHelper.Shared.Utilities\OrthoHelper.Shared.Utilities.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 

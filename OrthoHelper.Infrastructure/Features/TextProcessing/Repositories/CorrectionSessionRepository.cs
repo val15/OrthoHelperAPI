@@ -9,7 +9,7 @@ using OrthoHelper.Infrastructure.Features.TextProcessing.Mappings;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
 {
-    public class CorrectionSessionRepository : ICorrectionSessionRepository
+    public class CorrectionSessionRepository : ISessionRepository
     {
         private readonly ApiDbContext _context;
         private readonly IUserRepository _userRepository;
@@ -22,7 +22,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             _userRepository = userRepository;
             _currentUserService = currentUserService;
         }
-        public async Task AddAsync(CorrectionSession correctionSession)
+        public async Task AddAsync(Session correctionSession)
         {
             var userName = "";
             // Récupérer l'utilisateur
@@ -42,8 +42,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             // Mapper vers l'entité Message
             var message = new Message
             {
-                InputText = correctionSession.OriginalText,
-                OutputText = correctionSession.CorrectedText,
+                InputText = correctionSession.InputText,
+                OutputText = correctionSession.OutputText,
                 ProcessingTime = correctionSession.ProcessingTime,
                 Diff = correctionSession.Diff,
                 UserId = user.Id, // Utilisation directe de l'ID
@@ -91,12 +91,12 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             
         }
 
-        public Task<CorrectionSession?> GetByIdAsync(Guid id)
+        public Task<Session?> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<CorrectionSession>> GetCorrectionSessionsAsync()
+        public async Task<IEnumerable<Session>> GetCorrectionSessionsAsync()
         {
 
             var userName = "";
@@ -123,7 +123,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
 
         }
 
-        public Task UpdateAsync(CorrectionSession correctionSession)
+        public Task UpdateAsync(Session correctionSession)
         {
             throw new NotImplementedException();
         }
