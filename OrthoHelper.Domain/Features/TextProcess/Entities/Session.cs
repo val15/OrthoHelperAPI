@@ -14,8 +14,8 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
         public CorrectionStatus Status { get; private set; }
         public string Diff { get; set; } = string.Empty;
         public TimeSpan ProcessingTime { get; private set; }
-        private string _modelName;
-
+        public MessageType Type { get; set; }  // Correction ou Traduction
+        public string ModelName { get; set; }
 
         // Constructor privé pour contrôler la création
         private Session(string originalText)
@@ -26,8 +26,14 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
             CreatedAt = DateTime.UtcNow;
             Status = CorrectionStatus.Pending;
         }
+        public enum MessageType
+        {
+            Corrector,
+            Translator
+        }
 
-        public Session(Guid id, string originalText, string correctedText,string diff, DateTime createdAt, TimeSpan processingTime, CorrectionStatus status)
+        public Session(Guid id, string originalText, string correctedText,string diff, DateTime createdAt, TimeSpan processingTime, CorrectionStatus status,
+            MessageType type,string modelName)
         {
             Id = id;
             InputText = originalText;
@@ -36,6 +42,9 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
             CreatedAt = createdAt;
             ProcessingTime = processingTime;
             Status = status;
+            ModelName = modelName;
+            Type = type;
+
         }
 
         // Factory method pour appliquer des règles métier
@@ -55,7 +64,7 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
                 throw new InvalidModelNameException("Le modèle spécifié n'est pas disponible.");
             textProcessingEngine.SetModelName(modelName);
             // Stocker le modèle dans l'entité si nécessaire
-            _modelName = modelName;
+            ModelName = modelName;
         }
 
         // Méthode pour appliquer la correction

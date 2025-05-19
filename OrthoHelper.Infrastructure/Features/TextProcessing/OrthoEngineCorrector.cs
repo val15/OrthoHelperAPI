@@ -31,7 +31,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         public async Task InitializeUserSession(string username)
         {
             _logger.LogInformation($"Initialisation de la session utilisateur pour: {username}");
-            var sessions = await _correctionSessionRepository.GetCorrectionSessionsAsync();
+            var sessions = await _sessionRepository.GetSessionsAsync();
             _logger.LogDebug($"Nombre de sessions de correction récupérées: {sessions.Count()}");
 
             foreach (var session in sessions)

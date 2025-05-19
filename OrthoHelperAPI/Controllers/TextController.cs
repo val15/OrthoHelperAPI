@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using OrthoHelper.Application.Features.TextCorrection.DTOs;
 using OrthoHelper.Application.Features.TextCorrection.Queries;
 using OrthoHelper.Application.Features.TextCorrection.UseCases;
+using OrthoHelper.Application.Features.TextProcess.UseCases;
+using OrthoHelper.Application.Features.TextTranslation;
+using OrthoHelper.Application.Features.TextTranslation.DTOs;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
-using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 
 namespace OrthoHelper.Api.Controllers;
 
@@ -14,16 +16,18 @@ namespace OrthoHelper.Api.Controllers;
 [Route("api/[controller]")]
 public class TextController : ControllerBase
 {
-    private readonly IProcessTextUseCase _correctTextUseCase;
-    private readonly IProcessTextUseCase _translateTextUseCase;
+    private readonly ICorrectTextUseCase _correctTextUseCase;
+    private readonly ITranslateTextUseCase _translateTextUseCase;
+    private readonly ITranslateHtmlFileUseCase _translateHtmlFileUseCase;
     private readonly IMediator _mediator;
-    public TextController(IProcessTextUseCase correctTextUseCase,
-        IProcessTextUseCase translatTextUseCase,
+    public TextController(ICorrectTextUseCase correctTextUseCase,
+        ITranslateTextUseCase translatTextUseCase,
+        ITranslateHtmlFileUseCase translateHtmlFileUseCase,
         IMediator mediator)
     {
         _correctTextUseCase = correctTextUseCase;
         _translateTextUseCase = translatTextUseCase;
-
+        _translateHtmlFileUseCase = translateHtmlFileUseCase;
         _mediator = mediator;
     }
 
@@ -60,6 +64,27 @@ public class TextController : ControllerBase
         catch (TextCorrectionFailedException ex)
         {
             return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpPost("translate-html-file")]
+    public async Task<IActionResult> TranslateHtmlFile([FromBody] HtmlTranslationInputDto input)
+    {
+        if (input == null || string.IsNullOrWhiteSpace(input.HtmlFilePath))
+            return BadRequest("Le chemin du fichier HTML est requis.");
+
+        try
+        {
+            var result = await _translateHtmlFileUseCase.ExecuteAsync(input);
+            return Ok(result);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erreur lors de la traduction du fichier HTML : {ex.Message}");
         }
     }
 

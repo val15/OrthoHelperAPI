@@ -1,5 +1,6 @@
 ﻿using OrthoHelper.Application.Features.TextTranslation.DTOs;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
 using OrthoHelper.Domain.Features.TextTranslation.Entities;
 using OrthoHelper.Domain.Features.TextTranslation.Ports;
 using OrthoHelper.Shared.Utilities;
@@ -26,12 +27,12 @@ namespace OrthoHelper.Application.Features.TextTranslation
         {
             // Créer une session de traduction
             var session = HtmlTranslationSession.Create(input.HtmlFilePath);
-
+            _textProcessingEngine.SetModelName(input.ModelName);
             // Extraire le texte traductible
             var translatableText = await _htmlParser.ExtractTranslatableTextAsync(input.HtmlFilePath);
 
             // Traduire le texte
-           var translations = await TranslationHelper.TranslateTextsInParallelAsync(translatableText, _textProcessingEngine);
+           var translations = await TranslationHelper.TranslateTextsAsync(translatableText, _textProcessingEngine);
 
           
             // Remplacer le texte traduit dans le fichier HTML
@@ -43,7 +44,8 @@ namespace OrthoHelper.Application.Features.TextTranslation
             {
                 OriginalHtmlPath = session.OriginalHtmlPath,
                 TranslatedHtmlPath = session.TranslatedHtmlPath,
-                CreatedAt = session.CreatedAt
+                CreatedAt = session.CreatedAt,
+                ModelName = input.ModelName
             };
         }
     }

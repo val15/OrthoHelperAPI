@@ -16,6 +16,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Mappings
                 processingTime: message.ProcessingTime,
                 diff: message.Diff,
                 createdAt: message.CreatedAt,
+                type: message.Type.Value, // Adaptez selon le type réel
+                modelName: message.ModelName,                            // 
                 status: ParseStatus(message) // Méthode helper
             );
         }

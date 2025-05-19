@@ -7,7 +7,19 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
 
     public class OrthoEngineTranslator : OrthoEngine
     {
-        public override string InitText => "Veuillez traduire le texte suivant en français en respectant impérativement les règles suivantes :\r\n\r\nTraduction avec préservation : Traduisez le contenu général du texte en français.\r\nNe pas traduire les termes spécifiés : Les mots-clés, les noms techniques (par exemple, noms de logiciels, composants matériels, termes de programmation, jargon scientifique ou technique spécifique, noms de marques, etc.) doivent impérativement être conservés en anglais tels quels dans le texte français final. Ne les traduisez sous aucun prétexte.\r\nFallback à l'original si intraduisible ou ambigu : Si un mot ou une expression (qui n'est PAS un mot-clé ou un nom technique à conserver) s'avère particulièrement difficile à traduire, si sa traduction est ambiguë, ou si vous estimez que la traduction pourrait dénaturer un concept important dans le respect des règles ci-dessus, alors conservez ce mot ou cette expression spécifique en anglais dans la phrase française.\r\nCohérence du résultat : Vous devez systématiquement retourner un texte complet. Il n'y aura pas de message d'erreur pour un mot non traduit ; le mot original sera utilisé à la place comme indiqué ci-dessus.\r\nQualité du français pour le reste : Pour toutes les parties du texte qui sont effectivement traduites en français, assurez-vous que le français est clair, grammaticalement correct et sonne naturel, tout en essayant de refléter l'intention de l'auteur pour ces segments.\r\nL'objectif est d'obtenir un texte français fonctionnel et compréhensible pour un public qui reconnaîtrait et s'attendrait à voir la terminologie technique et les mots-clés critiques en anglais, afin d'éviter toute confusion ou perte de précision.";
+        public override string InitText => "Veuillez traduire le texte suivant en français en respectant impérativement les règles suivantes :\r\n\r\nTraduction avec préservation : Traduisez le contenu général du texte en français." +
+            "\r\nNe pas traduire les termes spécifiés : Les mots-clés, les noms techniques (par exemple, noms de logiciels, composants matériels, termes de programmation, jargon scientifique ou technique spécifique, noms de marques, etc.) " +
+            "doivent impérativement être conservés en anglais tels quels dans le texte français final. Ne les traduisez sous aucun prétexte." +
+            "\r\nFallback à l'original si intraduisible ou ambigu : Si un mot ou une expression (qui n'est PAS un mot-clé ou un nom technique à conserver) s'avère particulièrement difficile à traduire, si sa traduction est ambiguë, " +
+            "ou si vous estimez que la traduction pourrait dénaturer un concept important dans le respect des règles ci-dessus, alors conservez ce mot ou cette expression spécifique en anglais dans la phrase française.\r\nCohérence du résultat : " +
+            "Vous devez systématiquement retourner un texte complet." +
+            "Il n'y aura pas de message d'erreur pour un mot non traduit ; " +
+            "le mot original sera utilisé à la place comme indiqué ci-dessus." +
+            "\r\nQualité du français pour le reste : Pour toutes les parties du texte qui sont effectivement traduites en français, assurez-vous que le français est clair, grammaticalement correct et sonne naturel, " +
+            "tout en essayant de refléter l'intention de l'auteur pour ces segments.\r\nL'objectif est d'obtenir un texte français fonctionnel et compréhensible pour un public qui reconnaîtrait et s'attendrait à voir la " +
+            "terminologie technique et les mots-clés critiques en anglais, afin d'éviter toute confusion ou perte de précision." +
+            "Si vous n'arriver pas à traduire, ne revoyer pas une message d'érreur mais renvoiez juste le text original." +
+            "SI tu n'arrive pas à traduire le text en etrer retourner  => TEXT INTRADUCTIBLE";
 
 
         //TODO IN ENV OU PARAM

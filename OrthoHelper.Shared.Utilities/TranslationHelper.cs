@@ -44,7 +44,6 @@ namespace OrthoHelper.Shared.Utilities
               string translatableText,
               ITextProcessingEngine textProcessingEngine)
         {
-
             var texts = translatableText.Split('\n');
 
             var translations = new ConcurrentDictionary<string, string>();
@@ -60,8 +59,9 @@ namespace OrthoHelper.Shared.Utilities
                 translations[text] = translatedText;
 
                 // Log ou debug pour suivre la progression
+             //   Debug.C
                 Interlocked.Increment(ref currentCount);
-                Debug.WriteLine($"Translated '{text}' \n=> '{translatedText}'");
+                Debug.WriteLine($"=> '{text}' \n=> '{translatedText}'");
                 Debug.WriteLine($"{currentCount}/{totalCount}");
             }
 

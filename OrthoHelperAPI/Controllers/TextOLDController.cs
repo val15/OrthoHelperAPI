@@ -31,10 +31,10 @@ namespace OrthoHelperAPI.Controllers
                 var userId = GetUserIdFromToken();
                 var messages = await _messageRepository.GetUserMessagesAsync(userId);
 
-                var startDate = DateTime.Now;
+                var startDate = DateTime.UtcNow;
                 //var result = await _textProcessingService.ProcessTextAsync(request.Text, messages);
                 var result = await _textProcessingService.ProcessTextAsync(request.Text);
-                var processingTime = DateTime.Now - startDate;
+                var processingTime = DateTime.UtcNow - startDate;
 
                 Console.WriteLine($"REFLECTION TIME :{processingTime}");
 

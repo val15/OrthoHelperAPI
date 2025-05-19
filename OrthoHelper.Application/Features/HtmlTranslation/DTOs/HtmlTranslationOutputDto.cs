@@ -22,6 +22,7 @@ namespace OrthoHelper.Application.Features.TextTranslation.DTOs
         /// Date et heure de création de la session de traduction.
         /// </summary>
         public DateTime CreatedAt { get; set; }
+        public string ModelName { get; set; }   
     }
 }
 

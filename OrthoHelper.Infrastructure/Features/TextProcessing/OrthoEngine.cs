@@ -3,10 +3,12 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.Google;
 using OllamaSharp;
 using OrthoHelper.Domain.Features.Common.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using System.Diagnostics;
 using Tools;
+using static OrthoHelper.Domain.Features.TextCorrection.Entities.Session;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {
@@ -15,7 +17,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         protected IChatCompletionService _chatService;
         protected ChatHistory _history;
 
-        protected readonly ISessionRepository _correctionSessionRepository;
+        protected readonly ISessionRepository _sessionRepository;
         protected readonly ICurrentUserService _currentUserService;
         protected readonly ILogger<OrthoEngine> _logger;
 
@@ -54,10 +56,13 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         {
             return _modelName;
         }
-        public OrthoEngine(HttpClient client, ISessionRepository correctionSessionRepository, ICurrentUserService currentUserService, ILogger<OrthoEngine> logger)
+        public OrthoEngine(HttpClient client, 
+            ISessionRepository correctionSessionRepository,
+            ICurrentUserService currentUserService, 
+            ILogger<OrthoEngine> logger)
         {
             _httpClient = client;
-            _correctionSessionRepository = correctionSessionRepository;
+            _sessionRepository = correctionSessionRepository;
             _currentUserService = currentUserService;
             _logger = logger;
         }
@@ -132,20 +137,29 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         }
         public async Task<string> GetTextUserSessionHistory()
         {
-            _logger.LogInformation("Récupération de l'historique de la session utilisateur sous forme de texte.");
-            var output = "";
-            var sessions = await _correctionSessionRepository.GetCorrectionSessionsAsync();
-            _logger.LogDebug($"Nombre de sessions de correction récupérées pour l'historique: {sessions.Count()}");
-
-            foreach (var session in sessions)
+            try
             {
-                output += $"user message : {session.InputText} .\n";
-                output += $"your response : {session.OutputText} .\n"; // Correction ici
-                output += $"diff: {session.Diff} .\n";
-                _logger.LogTrace($"Ligne d'historique ajoutée: Utilisateur - {session.InputText}, Assistant - {session.OutputText}, Diff - {session.Diff}");
+                _logger.LogInformation("Récupération de l'historique de la session utilisateur sous forme de texte.");
+                var output = "";
+                var sessions = await _sessionRepository.GetSessionsAsync();
+                _logger.LogDebug($"Nombre de sessions de correction récupérées pour l'historique: {sessions.Count()}");
+
+                foreach (var session in sessions)
+                {
+                    output += $"user message : {session.InputText} .\n";
+                    output += $"your response : {session.OutputText} .\n"; // Correction ici
+                    output += $"diff: {session.Diff} .\n";
+                    _logger.LogTrace($"Ligne d'historique ajoutée: Utilisateur - {session.InputText}, Assistant - {session.OutputText}, Diff - {session.Diff}");
+                }
+                _logger.LogDebug($"Historique de la session utilisateur récupéré: {output}");
+                return output;
             }
-            _logger.LogDebug($"Historique de la session utilisateur récupéré: {output}");
-            return output;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erreur lors de la récupération de l'historique de la session utilisateur.");
+                return string.Empty;
+            }   
+
         }
 
 
@@ -265,8 +279,16 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             _logger.LogInformation($"Traitement du texte entrant: {inputText}");
             try
             {
+                var className = this.GetType().Name;
+                var messageType = MessageType.Corrector;
+                if (className.Contains("Translator"))
+                    messageType = MessageType.Translator;
+                //TODO lectur dans la base
+                var inBase = await _sessionRepository.GetSessionAsync(inputText, messageType,ModelName);
+                if(inBase!=null)
+                    return inBase.OutputText;
 
-
+                var startDate = DateTime.UtcNow;
                 var userMessage = $"{BottomOfThequestion} (retourne seulement le texte) : {inputText}";
                 _history.AddUserMessage(userMessage);
                 _logger.LogDebug($"Message utilisateur (correction) ajouté à l'historique: {userMessage}");
@@ -290,6 +312,20 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
                     _history.AddUserMessage($"differences : {diff}");
                     _logger.LogDebug($"Différences générées: {diff}");
                     _retyCount = 1;
+
+
+                    if(textResult.ToUpper().Contains("INTRADUCTIBLE"))
+                    {
+                        textResult = inputText;
+                        textResult = inputText;
+                    }
+                    //save in database
+
+                    // Sauvegarde de la session
+                  
+                    var processingTime = DateTime.UtcNow - startDate;
+                    await _sessionRepository.AddAsync(new Session(new Guid(),inputText, textResult, diff,DateTime.UtcNow, processingTime,CorrectionStatus.Completed, messageType, ModelName));
+
                     return textResult;
                 }
                 else

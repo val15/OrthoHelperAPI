@@ -61,7 +61,7 @@ namespace OrthoHelper.Infrastructure.Tests.Features.TextTranslation
 </html>";
 
             // Act
-            var translatedHtmlPath = await _htmlParser.ReplaceTranslatedTextAsync(htmlFilePath, translations);
+            var translatedHtmlPath = await _htmlParser.ReplaceTranslatedTextAsync(htmlFilePath, translations,"TestModel");
 
             // Assert
             Assert.True(File.Exists(translatedHtmlPath));

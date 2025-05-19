@@ -44,6 +44,8 @@ public class CorrectTextUseCaseTests
         //          .ReturnsAsync("Je veux un café");
         var fakeCorrectionSession = Session.Create(input.Text);
         fakeCorrectionSession.OutputText = "Je veux un café";
+        fakeCorrectionSession.ModelName = modelName;
+        fakeCorrectionSession.Type = Session.MessageType.Corrector;
         _mockCorrectionOrchestrator
     .Setup(o => o.ProcessAsync(It.IsAny<TextToCorrect>(), It.IsAny<ModelName>(), It.IsAny<string>()))
     .ReturnsAsync(fakeCorrectionSession);
@@ -55,7 +57,8 @@ public class CorrectTextUseCaseTests
         input.ModelName.Should().Be(modelName);
         result.InputText.Should().Be("Je veut un café");
         result.OutputText.Should().Be("Je veux un café");
-     //   _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
+        result.ModelName.Should().Be(modelName);
+        //   _mockEngine.Verify(e => e.CorrectTextAsync(input.Text), Times.Once);
     }
 
 

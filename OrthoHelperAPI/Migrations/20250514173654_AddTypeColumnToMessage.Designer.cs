@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrthoHelperAPI.Data;
 
@@ -10,9 +11,11 @@ using OrthoHelperAPI.Data;
 namespace OrthoHelperAPI.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514173654_AddTypeColumnToMessage")]
+    partial class AddTypeColumnToMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -31,10 +34,6 @@ namespace OrthoHelperAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("InputText")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ModelName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

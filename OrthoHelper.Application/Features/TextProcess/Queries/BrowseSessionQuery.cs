@@ -26,7 +26,7 @@ namespace OrthoHelper.Application.Features.TextCorrection.Queries
 
         public async Task<IEnumerable<OutputTextDto>> Handle(BrowseSessionQuery request, CancellationToken cancellationToken)
         {
-            var correctionSessions = await _correctionSessionRepository.GetCorrectionSessionsAsync();
+            var correctionSessions = await _correctionSessionRepository.GetSessionsAsync();
             return _mapper.Map<IEnumerable<OutputTextDto>>(correctionSessions);
         }
     }

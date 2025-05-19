@@ -6,6 +6,7 @@ using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Infrastructure.Features.Common.Persistence.DbContext;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Mappings;
+using static OrthoHelper.Domain.Features.TextCorrection.Entities.Session;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
 {
@@ -47,6 +48,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
                 ProcessingTime = correctionSession.ProcessingTime,
                 Diff = correctionSession.Diff,
                 UserId = user.Id, // Utilisation directe de l'ID
+               ModelName = correctionSession.ModelName,
+               Type = correctionSession.Type,
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -91,12 +94,22 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             
         }
 
-        public Task<Session?> GetByIdAsync(Guid id)
+        public async Task<Session?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            MessageType messageType = MessageType.Corrector;
+            var session = await _context.Messages.FirstOrDefaultAsync(x => x.Id == id && x.Type == messageType);
+            return session is null ? null : CorrectionSessionAdapter.ToDomain(session);
         }
 
-        public async Task<IEnumerable<Session>> GetCorrectionSessionsAsync()
+        public async Task<Session?> GetSessionAsync(string inputText, MessageType messageType, string modelName)
+        {
+            var session  = await _context.Messages.FirstOrDefaultAsync(x => x.InputText == inputText && x.Type == messageType && x.ModelName == modelName);
+            return session is null ? null : CorrectionSessionAdapter.ToDomain(session);
+
+        }
+
+
+        public async Task<IEnumerable<Session>> GetSessionsAsync()
         {
 
             var userName = "";

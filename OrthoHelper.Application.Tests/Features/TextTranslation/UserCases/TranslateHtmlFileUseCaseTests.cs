@@ -32,30 +32,36 @@ namespace OrthoHelper.Application.Tests.Features.TextTranslation.UserCases
 
             var translatableText = "Hello, world!\nThis is a test.";
             var translations = new Dictionary<string, string>
-         {
-             { "Hello, world!", "Bonjour, le monde!" },
-             { "This is a test.", "Ceci est un test." }
-         };
-
+        {
+            { "Hello, world!", "Bonjour, le monde!" },
+            { "This is a test.", "Ceci est un test." }
+        };
             var translatedHtmlPath = "TestFiles/translated.html";
 
-            // Mock IHtmlParser
             _mockHtmlParser
                 .Setup(p => p.ExtractTranslatableTextAsync(input.HtmlFilePath))
                 .ReturnsAsync(translatableText);
 
-            _mockHtmlParser
-                .Setup(p => p.ReplaceTranslatedTextAsync(input.HtmlFilePath, It.IsAny<Dictionary<string, string>>(),null))
-                .ReturnsAsync(translatedHtmlPath);
-
-            // Mock ITextProcessingEngine
+            // Simule la traduction de chaque texte
             _mockTextProcessingEngine
                 .Setup(e => e.ProcessTextAsync("Hello, world!"))
                 .ReturnsAsync("Bonjour, le monde!");
-
             _mockTextProcessingEngine
                 .Setup(e => e.ProcessTextAsync("This is a test."))
                 .ReturnsAsync("Ceci est un test.");
+
+            _mockTextProcessingEngine
+                .Setup(e => e.GetModelName())
+                .Returns(input.ModelName);
+
+            _mockHtmlParser
+                .Setup(p => p.ReplaceTranslatedTextAsync(
+                    input.HtmlFilePath,
+                    It.Is<Dictionary<string, string>>(d =>
+                        d.ContainsKey("Hello, world!") && d.ContainsKey("This is a test.")),
+                    input.ModelName,
+                    null))
+                .ReturnsAsync(translatedHtmlPath);
 
             // Act
             var result = await _useCase.ExecuteAsync(input);
@@ -66,9 +72,12 @@ namespace OrthoHelper.Application.Tests.Features.TextTranslation.UserCases
             Assert.Equal(translatedHtmlPath, result.TranslatedHtmlPath);
             Assert.True(result.CreatedAt <= DateTime.UtcNow);
 
-            // Verify interactions
             _mockHtmlParser.Verify(p => p.ExtractTranslatableTextAsync(input.HtmlFilePath), Times.Once);
-            _mockHtmlParser.Verify(p => p.ReplaceTranslatedTextAsync(input.HtmlFilePath, It.IsAny<Dictionary<string, string>>(),null), Times.Once);
+            _mockHtmlParser.Verify(p => p.ReplaceTranslatedTextAsync(
+                input.HtmlFilePath,
+                It.IsAny<Dictionary<string, string>>(),
+                input.ModelName,
+                null), Times.Once);
             _mockTextProcessingEngine.Verify(e => e.ProcessTextAsync("Hello, world!"), Times.Once);
             _mockTextProcessingEngine.Verify(e => e.ProcessTextAsync("This is a test."), Times.Once);
         }
@@ -82,6 +91,11 @@ namespace OrthoHelper.Application.Tests.Features.TextTranslation.UserCases
                 HtmlFilePath = "",
                 ModelName = "Ollama:Gemma"
             };
+
+            // Simule une exception pour un chemin invalide
+            _mockHtmlParser
+                .Setup(p => p.ExtractTranslatableTextAsync(input.HtmlFilePath))
+                .ThrowsAsync(new InvalidHtmlFileException("Invalid path"));
 
             // Act & Assert
             await Assert.ThrowsAsync<InvalidHtmlFileException>(() => _useCase.ExecuteAsync(input));
@@ -99,19 +113,18 @@ namespace OrthoHelper.Application.Tests.Features.TextTranslation.UserCases
 
             var translatableText = "Hello, world!\nThis is a test.";
 
-            // Mock IHtmlParser
             _mockHtmlParser
                 .Setup(p => p.ExtractTranslatableTextAsync(input.HtmlFilePath))
                 .ReturnsAsync(translatableText);
 
-            // Mock ITextProcessingEngine to throw an exception
+            // Simule une erreur lors de la traduction
             _mockTextProcessingEngine
                 .Setup(e => e.ProcessTextAsync(It.IsAny<string>()))
                 .ThrowsAsync(new Exception("Text processing failed."));
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() => _useCase.ExecuteAsync(input));
-            Assert.Equal("Text processing failed.", exception.Message);
+            var ex = await Assert.ThrowsAsync<Exception>(() => _useCase.ExecuteAsync(input));
+            Assert.Equal("Text processing failed.", ex.Message);
         }
     }
 }

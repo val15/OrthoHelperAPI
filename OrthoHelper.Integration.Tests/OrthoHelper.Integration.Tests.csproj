@@ -44,6 +44,7 @@
     <ProjectReference Include="..\OrthoHelper.Application\OrthoHelper.Application.csproj" />
     <ProjectReference Include="..\OrthoHelper.Infrastructure\OrthoHelper.Infrastructure.csproj" />
     <ProjectReference Include="..\OrthoHelper.Shared.Utilities\OrthoHelper.Shared.Utilities.csproj" />
+    <ProjectReference Include="..\OrthoHelperAPI\OrthoHelperAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

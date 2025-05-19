@@ -5,15 +5,18 @@ using OrthoHelper.Application.Features.TextCorrection.DTOs;
 using FluentAssertions;
 using OrthoHelper.Application.Tests.Features.TextCorrection.UseCases;
 using MediatR;
-using OrthoHelper.Domain.Features.TextCorrection.Entities;
 using OrthoHelper.Application.Features.TextCorrection.Queries;
+using OrthoHelper.Application.Features.TextTranslation;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Application.Features.TextProcess.UseCases;
 
 namespace OrthoHelperAPI.Tests.Controllers
 {
     public class TextCorrectionControllerTests
     {
-        private readonly Mock<IProcessTextUseCase> _mockCorrectUseCase = new();
-        private readonly Mock<IProcessTextUseCase> _mockTranslatUseCase = new();
+        private readonly Mock<ICorrectTextUseCase> _mockCorrectUseCase = new();
+        private readonly Mock<ITranslateTextUseCase> _mockTranslatUseCase = new();
+        private readonly Mock<ITranslateHtmlFileUseCase> _mockTranslatHtmlFileUseCase = new();
 
         private readonly Mock<IMediator> _mockMediator = new();
         private readonly TextController _controller;
@@ -21,7 +24,7 @@ namespace OrthoHelperAPI.Tests.Controllers
 
         public TextCorrectionControllerTests()
         {
-            _controller = new TextController(_mockCorrectUseCase.Object, _mockTranslatUseCase.Object, _mockMediator.Object);
+            _controller = new TextController(_mockCorrectUseCase.Object, _mockTranslatUseCase.Object, _mockTranslatHtmlFileUseCase.Object, _mockMediator.Object);
         }
 
         [Fact]

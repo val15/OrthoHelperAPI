@@ -2,6 +2,8 @@
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
+using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;
+using static OrthoHelper.Domain.Features.TextCorrection.Entities.Session;
 
 namespace OrthoHelper.Application.Features.TextCorrection.Services
 {
@@ -35,7 +37,7 @@ namespace OrthoHelper.Application.Features.TextCorrection.Services
 
             // Mise à jour de l'entité Domain
             correctionSession.ApplyCorrection(correctedText);
-
+            correctionSession.Type = MessageType.Translator;
             return correctionSession;
         }
     }

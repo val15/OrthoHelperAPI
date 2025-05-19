@@ -5,10 +5,11 @@ using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
+using OrthoHelper.Application.Features.TextProcess.UseCases;
 
 namespace OrthoHelper.Application.Features.TextCorrection.UseCases;
 
-public class CorrectTextUseCase : IProcessTextUseCase
+public class CorrectTextUseCase : ICorrectTextUseCase
 {
     private readonly ICorrectorOrchestrator _orchestrator;
     private readonly ICurrentUserService _currentUserService;
@@ -46,6 +47,8 @@ public class CorrectTextUseCase : IProcessTextUseCase
             OutputText = correctionSession.OutputText,
             Diff = correctionSession.Diff,
             ProcessingTime = correctionSession.ProcessingTime,
+            ModelName = correctionSession.ModelName,
+            Type = correctionSession.Type,
             CreatedAt = correctionSession.CreatedAt
         };
     }
