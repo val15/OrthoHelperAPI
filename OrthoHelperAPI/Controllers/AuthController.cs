@@ -1,15 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using OrthoHelper.Application.Features.Auth.Commands.RegisterUser;
 using OrthoHelper.Application.Features.Auth.DTOs;
 using OrthoHelper.Application.Features.Auth.Queries.LoginUser;
-using OrthoHelperAPI.Data;
-using OrthoHelperAPI.Model;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace OrthoHelperAPI.Controllers
 {

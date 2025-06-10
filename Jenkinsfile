@@ -85,6 +85,7 @@ pipeline {
                     bat """
                         docker run -d \
                         --name orthohelper-api \
+                        --restart unless-stopped \
                         -p ${APP_PORT}:8080 \
                         -v ${DB_VOLUME}:/app/data \
                         -e ASPNETCORE_ENVIRONMENT=Production \
