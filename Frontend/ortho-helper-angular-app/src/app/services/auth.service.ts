@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private isLoggedIn = false; // État de connexion
 
   constructor(private router: Router) {}
-
   // Méthode pour stocker le token et marquer l'utilisateur comme connecté
   login(token: string): void {
     localStorage.setItem('token', token); // Stockez le token dans le localStorage
