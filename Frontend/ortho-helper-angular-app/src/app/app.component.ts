@@ -5,7 +5,6 @@ import { Router, RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 
-
 import { TextService } from './services/text.service';
 import { ApiResponse } from './models/api-response.model';
 import { AuthService } from './services/auth.service';
@@ -21,7 +20,13 @@ const baseUrl = environment.apiBaseUrl;
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, TextEditorComponent, CorrectTextComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TextEditorComponent,
+    CorrectTextComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [ModelsService],
@@ -30,7 +35,6 @@ export class AppComponent implements OnInit {
   title = 'ortho-helper-angular-app';
   apiResponse: ApiResponse | null = null;
   errorMessage: string | null = null;
-
 
   models: string[] = [];
   selectedModel: string = '';
@@ -54,27 +58,22 @@ export class AppComponent implements OnInit {
       console.error('Token manquant — utilisateur non authentifié');
       return;
     }
-
-
   }
 
-    loadModels(): void {
-       this.modelsService.loadModels(); // Appel de la méthode du service
+  loadModels(): void {
+    this.modelsService.loadModels(); // Appel de la méthode du service
 
-       // Souscription aux changements de modèles
-       this.modelsService.models$.subscribe({
-         next: (loadedModels) => {
-           this.models = loadedModels;
-           this.selectedModel = this.models[0] || '';
-         },
-         error: (error) => {
-           console.error('Erreur lors du chargement des modèles:', error);
-         },
-       });
-    }
-
-
-
+    // Souscription aux changements de modèles
+    this.modelsService.models$.subscribe({
+      next: (loadedModels) => {
+        this.models = loadedModels;
+        this.selectedModel = this.models[0] || '';
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des modèles:', error);
+      },
+    });
+  }
 
   sendToApi() {
     const token = this.authService.getToken();
@@ -86,12 +85,17 @@ export class AppComponent implements OnInit {
     this.textService.setCorrectedText('Traitement en cours...');
     const textToSend = this.textService.getText();
     console.log('Texte envoyé :', textToSend);
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    this.http.post<ApiResponse>(`${baseUrl}/api/TextCorrection/correct`, {
-      text: textToSend,
-      modelName: this.selectedModel
-    }, { headers })
+    this.http
+      .post<ApiResponse>(
+        `${baseUrl}/api/Text/correct`,
+        {
+          text: textToSend,
+          modelName: this.selectedModel,
+        },
+        { headers }
+      )
       .subscribe({
         next: (response: ApiResponse) => {
           this.apiResponse = response;
@@ -107,7 +111,7 @@ export class AppComponent implements OnInit {
           this.errorMessage = error.message || 'Erreur inconnue';
           console.error('Erreur API:', error);
           this.textService.setCorrectedText(`Erreur API: ${error.status}`);
-        }
+        },
       });
   }
 
