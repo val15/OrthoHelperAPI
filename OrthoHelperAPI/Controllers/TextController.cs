@@ -94,6 +94,7 @@ public class TextController : ControllerBase
         var query = new BrowseSessionQuery();
         var result = await _mediator.Send(query);
         return Ok(result);
+
     }
 
     [HttpDelete("DeleteUserMessages")]
