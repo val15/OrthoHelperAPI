@@ -23,8 +23,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             {
 
                 var llmModelList = new List<LLMModel>();
-                //Add other, ex : Online:gemini-2.0-flash
+                //Add other, ex : Online:gemini-2.5-flash
                 llmModelList.Add(new LLMModel($"Online:gemini-2.0-flash"));
+                llmModelList.Add(new LLMModel($"Online:gemini-2.5-flash"));
 
                 var OllamaModels = await GetInstalledOllamaModelsAsync();
 
@@ -54,7 +55,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             //{
             //    new LLMModel("Ollama:Gemma")
             //    ,
-            //    new LLMModel("Online:gemini-2.0-flash")
+            //    new LLMModel("Online:gemini-2.5-flash")
 
             //};
             //return Task.FromResult(llmModelList);

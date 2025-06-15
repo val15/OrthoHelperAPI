@@ -49,10 +49,14 @@ namespace OrthoHelper.Infrastructure.Features.TextTranslation
             }
 
             var finalTranslatedHtmlPath = translatedHtmlPath;
+
             if(string.IsNullOrEmpty(finalTranslatedHtmlPath))
-                finalTranslatedHtmlPath = Path.Combine(Path.GetDirectoryName(htmlFilePath.Replace(".html",""))!, $"{modelName.Replace(":","")}.Translated.html");
-            
-            
+            {
+                finalTranslatedHtmlPath = Path.Combine(Path.GetDirectoryName(htmlFilePath)!, $"{Path.GetFileName(htmlFilePath).Replace(".html","")}.{modelName.Replace(":", "")}.Translated.html");
+
+
+            }
+
             htmlDoc.Save(finalTranslatedHtmlPath);
 
             return finalTranslatedHtmlPath;

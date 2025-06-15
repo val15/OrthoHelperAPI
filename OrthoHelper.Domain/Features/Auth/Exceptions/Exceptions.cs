@@ -1,7 +1,7 @@
 ﻿namespace OrthoHelper.Domain.Features.TextCorrection.Exceptions
 {
-    public class InvalideUserNameException : Exception
+    public class InvalidUserNameException : Exception
     {
-        public InvalideUserNameException(string message) : base(message) { }
+        public InvalidUserNameException(string message) : base(message) { }
     }
 }

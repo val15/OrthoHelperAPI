@@ -4,7 +4,7 @@ using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 using OrthoHelper.Infrastructure.Features.TextProcessing;
 
-namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing
+namespace OrthoHelper.Integration.Tests.Features.TextProcessing
 {
     public class OrthoEngineCorrectorTests
     {

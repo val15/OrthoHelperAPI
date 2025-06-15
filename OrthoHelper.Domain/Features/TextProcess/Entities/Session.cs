@@ -15,7 +15,7 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
         public string Diff { get; set; } = string.Empty;
         public TimeSpan ProcessingTime { get; private set; }
         public MessageType Type { get; set; }  // Correction ou Traduction
-        public string ModelName { get; set; }
+        public string ModelName { get; set; } = "Ollama:Gemma3"; // Nom du modèle utilisé pour la correction ou la traduction
 
         // Constructor privé pour contrôler la création
         private Session(string originalText)

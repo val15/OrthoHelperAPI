@@ -13,10 +13,10 @@ namespace OrthoHelper.Domain.Features.Auth.Entities
         public static User Create(string userName,string passwordHash)
         {
             if (string.IsNullOrWhiteSpace(userName))
-                throw new InvalideUserNameException("userName ne peut pas être vide.");
+                throw new InvalidUserNameException("Username cannot be empty.");
 
             if (userName.Length<3)
-                throw new InvalideUserNameException("userName doit au moin contenir 3 carracaires.");
+                throw new InvalidUserNameException("Username must contain at least 3 characters.");
 
 
             return new User

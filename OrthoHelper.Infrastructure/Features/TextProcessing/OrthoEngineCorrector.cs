@@ -1,12 +1,6 @@
-﻿using System.Diagnostics;
-using Microsoft.Extensions.Logging; // Ajoutez cet using
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.Google;
-using OllamaSharp;
+﻿using Microsoft.Extensions.Logging; // Ajoutez cet using
 using OrthoHelper.Domain.Features.Common.Ports;
-using OrthoHelper.Domain.Features.TextCorrection.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
-using Tools;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {

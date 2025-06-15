@@ -40,6 +40,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing.Repositories
             var user = await _userRepository.GetUserByUsername(userName);
             if (user is null) throw new Exception("Utilisateur non trouvé");
 
+            if(correctionSession.OutputText == null)
+                correctionSession.OutputText = string.Empty; // Assurez-vous que OutputText n'est jamais null
+
             // Mapper vers l'entité Message
             var message = new Message
             {

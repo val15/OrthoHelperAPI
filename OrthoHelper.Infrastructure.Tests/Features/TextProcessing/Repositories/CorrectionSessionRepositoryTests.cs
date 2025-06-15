@@ -11,121 +11,144 @@ using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
 
 namespace OrthoHelper.Infrastructure.Tests.Features.TextProcessing.Repositories
 {
+    /// <summary>
+    /// Contains tests for the CorrectionSessionRepository, verifying its data interaction logic
+    /// using an in-memory database and mocked dependencies.
+    /// </summary>
     public class CorrectionSessionRepositoryTests : IDisposable
     {
+        // The in-memory database context and the repository instance under test.
         private readonly ApiDbContext _context;
-        private readonly IUserRepository _userRepository;
         private readonly CorrectionSessionRepository _repository;
+
+        // Mocks for dependencies that are not under test.
         private readonly Mock<IUserRepository> _userRepoMock;
         private readonly Mock<ICurrentUserService> _currentUserServiceMock;
 
         public CorrectionSessionRepositoryTests()
         {
-            // 1. Configuration de la base en mémoire
+            // ARRANGE (Shared setup for all tests)
+            // 1. Configure the in-memory database. A unique name ensures a clean database for each test.
             var options = new DbContextOptionsBuilder<ApiDbContext>()
                 .UseInMemoryDatabase(databaseName: "TestDB_" + Guid.NewGuid())
                 .Options;
-
             _context = new ApiDbContext(options);
 
-            // 2. Mock de UserRepository
-            _userRepoMock = new Mock<IUserRepository>();
-            _userRepoMock.Setup(r => r.GetUserByUsername(It.IsAny<string>()))
-                       .ReturnsAsync(new User { Id = 1 });
-            _userRepository = _userRepoMock.Object;
+            // 2. Mock the ICurrentUserService to simulate a logged-in user with ID 1.
             _currentUserServiceMock = new Mock<ICurrentUserService>();
+            _currentUserServiceMock.Setup(s => s.UserId).Returns(1);
+            _currentUserServiceMock.Setup(s => s.UserName).Returns("testUser");
+            _currentUserServiceMock.Setup(s => s.IsAuthenticated).Returns(true);
 
-            // 3. Initialisation du repository à tester
-            _repository = new CorrectionSessionRepository(_context, _userRepository, _currentUserServiceMock.Object);
+            // 3. Mock the IUserRepository (though it's not directly used in these specific tests, it's a dependency).
+            _userRepoMock = new Mock<IUserRepository>();
+            _userRepoMock.Setup(r=>r.GetUserByUsername(It.IsAny<string>()))
+                         .ReturnsAsync(new User { Id = 1, Username = "testUser" });
+
+            // 4. Initialize the repository to be tested, injecting the context and mocked services.
+            _repository = new CorrectionSessionRepository(_context, _userRepoMock.Object, _currentUserServiceMock.Object);
+            // 5. Ensure the database is created for the tests.
+            _context.Database.EnsureCreated();
         }
 
-
+        /// <summary>
+        /// Function: AddAsync
+        /// Scenario: When a valid session entity is provided.
+        /// Expected Result: The session should be correctly persisted to the database.
+        /// </summary>
         [Fact]
-        public async Task AddAsync_Should_Persist_Data_InMemory()
+        public async Task AddAsync_WhenSessionIsValid_ShouldPersistSessionToDatabase()
         {
-            // Act
-            var correctionSessionTemp = Session.Create("textIncorrect1");
-            correctionSessionTemp.OutputText = "textCorrected1";
-            await _repository.AddAsync(correctionSessionTemp);
+            // ARRANGE
+            // Create a session entity to be added.
+            var session = Session.Create("textIncorrect1");
+            session.OutputText = "textCorrected1";
+            session.ModelName = "Ollama:Gemma3";
 
+            // ACT
+            // Call the repository method to add the session.
+            await _repository.AddAsync(session);
 
-
-            // Assert
+            // ASSERT
+            // Verify directly against the context that one item was successfully saved.
             _context.Messages.Should().HaveCount(1);
+            var savedMessage = await _context.Messages.FirstAsync();
+            savedMessage.InputText.Should().Be("textIncorrect1");
         }
 
-       
+        /// <summary>
+        /// Function: GetSessionsAsync
+        /// Scenario: When no sessions exist for the current user in the database.
+        /// Expected Result: Should return an empty list.
+        /// </summary>
         [Fact]
-        public async Task GetCorrectionSessionsAsync_Should_Return_Empty_For_NoSessions_InMemory()
+        public async Task GetSessionsAsync_WhenDatabaseIsEmpty_ShouldReturnEmptyList()
         {
-            // Arrange
-            var testUser = new User { Id = 1, Username = "testuser" };
-            _userRepoMock.Setup(r => r.GetUserByUsername("testuser"))
-                       .ReturnsAsync(testUser);
+            // ACT
+            // Call the repository method to get sessions.
+            var result = await _repository.GetSessionsAsync();
 
-            // Act
-            var result = await _repository.GetCorrectionSessionsAsync();
-
-            // Assert
+            // ASSERT
+            // Verify that the result is an empty collection.
             result.Should().BeEmpty();
         }
 
+        /// <summary>
+        /// Function: GetSessionsAsync
+        /// Scenario: When sessions exist for the current user in the database.
+        /// Expected Result: Should return a list containing all sessions for that user.
+        /// </summary>
         [Fact]
-        public async Task GetCorrectionSessionsAsync_Should_Return_CorrectionSessions_InMemory()
+        public async Task GetSessionsAsync_WhenSessionsExistForUser_ShouldReturnAllUserSessions()
         {
-            // Arrange
-            var testUser = new User { Id = 1, Username = "testuser" };
+            // ARRANGE
+            // Seed the database with sessions for the current user (ID 1).
+            await _repository.AddAsync(Session.Create("text1"));
+            await _repository.AddAsync(Session.Create("text2"));
+            await _repository.AddAsync(Session.Create("text3"));
 
-            // Seed la base de test
-            var correctionSessionTemp = Session.Create("textIncorrect1");
-            correctionSessionTemp.OutputText = "textCorrected1";
-            await _repository.AddAsync(correctionSessionTemp);
-            await _repository.AddAsync(correctionSessionTemp);
-            await _repository.AddAsync(correctionSessionTemp);
+            // ACT
+            var result = await _repository.GetSessionsAsync();
 
-            // Act
-            var result = await _repository.GetCorrectionSessionsAsync();
-
-            // Assert
+            // ASSERT
+            // Verify that the repository returns all three sessions.
             result.Should().HaveCount(3);
-            result.Should().OnlyContain(x =>
-                x.InputText == "textIncorrect1" || x.InputText == "textIncorrect1");
         }
 
+        /// <summary>
+        /// Function: DeleteAllUserCorrectionSessionsAsync
+        /// Scenario: When sessions exist for the current user.
+        /// Expected Result: Should delete all sessions for that user from the database.
+        /// </summary>
         [Fact]
-        public async Task DeleteAllUserCorrectionSessionsAsyn_Should_Return_CorrectionSessions_InMemory()
+        public async Task DeleteAllUserCorrectionSessionsAsync_WhenSessionsExist_ShouldRemoveAllFromDatabase()
         {
-            // Arrange
-            var testUser = new User { Id = 1, Username = "testuser" };
+            // ARRANGE
+            // 1. Seed the database with sessions.
+            await _repository.AddAsync(Session.Create("text1"));
+            await _repository.AddAsync(Session.Create("text2"));
 
-            // Seed la base de test
-            var correctionSessionTemp = Session.Create("textIncorrect1");
-            correctionSessionTemp.OutputText = "textCorrected1";
-            await _repository.AddAsync(correctionSessionTemp);
-            await _repository.AddAsync(correctionSessionTemp);
-            await _repository.AddAsync(correctionSessionTemp);
+            // 2. Confirm the initial state.
+            _context.Messages.Should().HaveCount(2);
 
-            // Act
-            var result = await _repository.GetCorrectionSessionsAsync();
+            // ACT
+            // Call the delete method.
+            await _repository.DeleteAllUserCorrectionSessionsAsync();
 
-            // Assert
-            result.Should().HaveCount(3);
-            
-
-            // Act
-              await _repository.DeleteAllUserCorrectionSessionsAsync();
-
-             result = await _repository.GetCorrectionSessionsAsync();
-            result.Should().HaveCount(0);
+            // ASSERT
+            // Verify that the database is now empty for that user.
+            var sessionsAfterDelete = await _repository.GetSessionsAsync();
+            sessionsAfterDelete.Should().BeEmpty();
         }
 
-
-
-
+        /// <summary>
+        /// Disposes the database context after tests are run, ensuring a clean state for the next run.
+        /// </summary>
         public void Dispose()
         {
             _context.Database.EnsureDeleted();
             _context.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

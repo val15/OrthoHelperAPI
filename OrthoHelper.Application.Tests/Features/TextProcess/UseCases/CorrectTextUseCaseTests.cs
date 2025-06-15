@@ -28,7 +28,7 @@ public class CorrectTextUseCaseTests
         _mockCurrentUserService.SetupGet(x => x.IsAuthenticated).Returns(true);
         _mockCurrentUserService.SetupGet(x => x.UserId).Returns(123);
         _mockLLMModelRepository.Setup(x => x.GetAvailableLLMModelsAsync())
-            .ReturnsAsync(new List<LLMModel> { new LLMModel("Ollama:gemma3"), new LLMModel("Online:gemini-2.0-flash") });
+            .ReturnsAsync(new List<LLMModel> { new LLMModel("Ollama:gemma3"), new LLMModel("Online:gemini-2.5-flash") });
         _useCase = new CorrectTextUseCase(_mockCorrectionOrchestrator.Object, 
             _mockCurrentUserService.Object, 
             _mockCorrectionSessionRepository.Object);

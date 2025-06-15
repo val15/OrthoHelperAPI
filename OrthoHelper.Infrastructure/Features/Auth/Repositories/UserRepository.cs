@@ -23,7 +23,7 @@ namespace OrthoHelper.Infrastructure.Features.Auth.Repositories
 
         public async Task<User?> GetUserByUsername(string username)
         {
-            var t_users = await _context.Users.ToListAsync();
+           
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == username);
         }

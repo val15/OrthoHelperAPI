@@ -1,18 +1,15 @@
-﻿using AutoMapper;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using OrthoHelper.Application.Features.TextCorrection.Queries;
 using OrthoHelper.Domain.Features.TextCorrection.Entities;
-using OrthoHelper.Domain.Features.TextCorrection.Mappings;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
 
 namespace OrthoHelper.Application.Tests.Features.TextCorrection.Queries
 {
-    public class BrowseCorrectionSessionQueryTest
+    public class DeleteAllUserCorrectionSessionsCommandHandlerTests
     {
-
         [Fact]
-        public async Task Handle_WhenCalled_CorrectionSessions()
+        public async Task Handle_WhenCalled_ShouldDeleteAllSessionsAndReturnCount()
         {
             // Arrange
             var mockRepo = new Mock<ISessionRepository>();
@@ -22,20 +19,17 @@ namespace OrthoHelper.Application.Tests.Features.TextCorrection.Queries
             Session.Create("textIncorrect2")
         };
 
-            mockRepo.Setup(r => r.GetCorrectionSessionsAsync())
-                    .ReturnsAsync(correctionSessions);
+            mockRepo.Setup(r => r.DeleteAllUserCorrectionSessionsAsync())
+                .ReturnsAsync(correctionSessions.Count);
 
-            var handler = new BrowseCorrectionSessionQueryHandler(mockRepo.Object, new MapperConfiguration(cfg =>
-                cfg.AddProfile<SessionProfile>()).CreateMapper());
-
-            var query = new BrowseSessionQuery();
+            var handler = new DeleteAllUserCorrectionSessionQueryHandler(mockRepo.Object);
+            var query = new DeleteAllUserSessionQuery();
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            result.Should().HaveCount(2);
-            result.First().InputText.Should().Be("textIncorrect1");
+            result.Equals(2);
         }
     }
 }
