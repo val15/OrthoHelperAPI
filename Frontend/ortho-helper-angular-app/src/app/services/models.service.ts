@@ -22,7 +22,7 @@ export class ModelsService {
     });
 
     this.http
-      .get<any[]>(`${environment.apiBaseUrl}/api/TextCorrection/models`, {
+      .get<any[]>(`${environment.apiBaseUrl}/api/Text/models`, {
         headers,
       })
       .subscribe({
