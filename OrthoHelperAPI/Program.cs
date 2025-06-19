@@ -66,21 +66,8 @@ public class Program
 
         // 3. Configuration de l'Infrastructure
         // 4. Configuration de l'Infrastructure
-        builder.Services.AddScoped<IOrthoEngine>(provider =>
-        {
-            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
-            var repository = provider.GetRequiredService<ISessionRepository>();
-            var currentUserService = provider.GetRequiredService<ICurrentUserService>();
-            var logger = provider.GetRequiredService<ILogger<OrthoEngineCorrector>>();
-            var orthoEngine = new OrthoEngineCorrector(
-                httpClient: httpClientFactory.CreateClient("Ollama"),
-                repository: repository,
-            currentUserService: currentUserService,
-            logger: logger
-                );
-            return orthoEngine;
-        });
-
+       
+        //TODO A CORRIGER
         builder.Services.AddScoped<IOrthoEngine>(provider =>
         {
             var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
@@ -95,7 +82,20 @@ public class Program
                 );
             return orthoEngine;
         });
-
+        builder.Services.AddScoped<IOrthoEngine>(provider =>
+        {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var repository = provider.GetRequiredService<ISessionRepository>();
+            var currentUserService = provider.GetRequiredService<ICurrentUserService>();
+            var logger = provider.GetRequiredService<ILogger<OrthoEngineCorrector>>();
+            var orthoEngine = new OrthoEngineCorrector(
+                httpClient: httpClientFactory.CreateClient("Ollama"),
+                repository: repository,
+            currentUserService: currentUserService,
+            logger: logger
+                );
+            return orthoEngine;
+        });
 
 
 

@@ -36,6 +36,7 @@ public class TextController : ControllerBase
     {
         try
         {
+            ///api/text/correct
             var result = await _correctTextUseCase.ExecuteAsync(input);
             return Ok(result);
         }

@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Logging; // Ajoutez cet using
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Domain.Features.TextProcess.Ports;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {
-    public class OrthoEngineCorrector : OrthoEngine
+    public class OrthoEngineCorrector : OrthoEngine, ICorrectorEngine
     {
         public override string InitText =>  "Tu es un assistant pour mon éditeur de texte Obsidian. Tu me parles exclusivement en français même si je te parle dans une autre langue, tu me réponds en français. \r\nTu dois pouvoir me corriger mes fautes d'orthographe ou reformuler mes phrases si elles sont grammaticalement incorrectes. Si le text est du markdown, tu ne dois pas le modifier.";
         public override string BottomOfThequestion => "Peux-tu corriger ?";
@@ -16,7 +17,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         public OrthoEngineCorrector(HttpClient httpClient, ISessionRepository repository, ICurrentUserService currentUserService, ILogger<OrthoEngineCorrector> logger)
             :base(httpClient, repository, currentUserService, logger)
         {
-           
+            _className = this.GetType().Name;
+
         }
 
 

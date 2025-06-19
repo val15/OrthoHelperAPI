@@ -30,6 +30,8 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         protected int _minDelayTime = 7000;
         protected int _retyCount = 1;
 
+        protected string _className; 
+
         public abstract string InitText { get; }
         public abstract string BottomOfThequestion { get; }
         private bool _isInited=false;
@@ -279,9 +281,9 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
             _logger.LogInformation($"Traitement du texte entrant: {inputText}");
             try
             {
-                var className = this.GetType().Name;
+               
                 var messageType = MessageType.Corrector;
-                if (className.Contains("Translator"))
+                if (_className.Contains("Translator"))
                     messageType = MessageType.Translator;
                 //TODO lectur dans la base
                 var inBase = await _sessionRepository.GetSessionAsync(inputText, messageType,ModelName);

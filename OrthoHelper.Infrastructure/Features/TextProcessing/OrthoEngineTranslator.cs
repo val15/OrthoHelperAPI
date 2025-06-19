@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using OrthoHelper.Domain.Features.Common.Ports;
 using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Domain.Features.TextProcess.Ports;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {
 
-    public class OrthoEngineTranslator : OrthoEngine
+    public class OrthoEngineTranslator : OrthoEngine, ITranslatorEngine
     {
         public override string InitText => "Veuillez traduire le texte suivant en français en respectant impérativement les règles suivantes :\r\n\r\nTraduction avec préservation : Traduisez le contenu général du texte en français." +
             "\r\nNe pas traduire les termes spécifiés : Les mots-clés, les noms techniques (par exemple, noms de logiciels, composants matériels, termes de programmation, jargon scientifique ou technique spécifique, noms de marques, etc.) " +
@@ -28,7 +29,7 @@ namespace OrthoHelper.Infrastructure.Features.TextProcessing
         public OrthoEngineTranslator(HttpClient httpClient, ISessionRepository repository, ICurrentUserService currentUserService, ILogger<OrthoEngineTranslator> logger)
             : base(httpClient, repository, currentUserService, logger)
         {
-
+            _className = this.GetType().Name;
         }
     }
 }
