@@ -1,5 +1,6 @@
 ﻿using OrthoHelper.Domain.Features.TextCorrection.Exceptions;
 using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextProcess;
 using Tools;
 
 namespace OrthoHelper.Domain.Features.TextCorrection.Entities
@@ -16,6 +17,8 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
         public TimeSpan ProcessingTime { get; private set; }
         public MessageType Type { get; set; }  // Correction ou Traduction
         public string ModelName { get; set; } = "Ollama:Gemma3"; // Nom du modèle utilisé pour la correction ou la traduction
+
+
 
         // Constructor privé pour contrôler la création
         private Session(string originalText)
@@ -56,13 +59,16 @@ namespace OrthoHelper.Domain.Features.TextCorrection.Entities
             return new Session(originalText);
         }
         // Méthode pour définir le modèle
-        public void SetModelName(string modelName, ITextProcessingEngine textProcessingEngine,IEnumerable<LLMModel> availableModels)
+        public void SetModelName(string modelName, 
+            ITextProcessingEngine textProcessingEngine,
+            IEnumerable<LLMModel> availableModels,
+             EngineType engineType)
         {
             if (string.IsNullOrWhiteSpace(modelName))
                 throw new InvalidModelNameException("Le nom du modèle ne peut pas être vide.");
             if (availableModels.FirstOrDefault(x=> modelName.Contains(x.ModelName)) == null )
                 throw new InvalidModelNameException("Le modèle spécifié n'est pas disponible.");
-            textProcessingEngine.SetModelName(modelName);
+            textProcessingEngine.SetModelName(modelName, engineType);
             // Stocker le modèle dans l'entité si nécessaire
             ModelName = modelName;
         }

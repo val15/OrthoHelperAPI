@@ -2,25 +2,26 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
-using SQLitePCL;
-using OrthoHelperAPI.Services.Interfaces;
-using OrthoHelperAPI.Services;
-using OrthoHelperAPI.Repositories;
-using OrthoHelper.Application.Features.TextCorrection.UseCases;
-using OrthoHelper.Domain.Features.TextCorrection.Ports;
-using OrthoHelper.Infrastructure.Features.TextProcessing;
-using OrthoHelper.Infrastructure.Features.Auth.Repositories;
-using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
-using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
-using OrthoHelper.Domain.Features.TextCorrection.Mappings;
-using OrthoHelper.Domain.Features.Common.Ports;
-using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
 using OrthoHelper.Application.Features.TextCorrection.Services;
-using OrthoHelper.Application.Features.TextTranslation;
-using OrthoHelper.Domain.Features.TextTranslation.Ports;
-using OrthoHelper.Infrastructure.Features.TextTranslation;
+using OrthoHelper.Application.Features.TextCorrection.UseCases;
 using OrthoHelper.Application.Features.TextProcess.UseCases;
+using OrthoHelper.Application.Features.TextTranslation;
+using OrthoHelper.Domain.Features.Common.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Mappings;
+using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextCorrection.Ports.Repositories;
+using OrthoHelper.Domain.Features.TextProcess.Ports;
+using OrthoHelper.Domain.Features.TextTranslation.Ports;
+using OrthoHelper.Infrastructure.Features.Auth.Repositories;
+using OrthoHelper.Infrastructure.Features.Common.Services.OrthoHelper.Infrastructure.Features.Common.Services;
+using OrthoHelper.Infrastructure.Features.TextProcessing;
+using OrthoHelper.Infrastructure.Features.TextProcessing.Repositories;
+using OrthoHelper.Infrastructure.Features.TextTranslation;
+using OrthoHelperAPI.Repositories;
+using OrthoHelperAPI.Services;
+using OrthoHelperAPI.Services.Interfaces;
+using SQLitePCL;
+using System.Text;
 
 public class Program
 {
@@ -66,37 +67,35 @@ public class Program
 
         // 3. Configuration de l'Infrastructure
         // 4. Configuration de l'Infrastructure
-       
+
         //TODO A CORRIGER
-        builder.Services.AddScoped<IOrthoEngine>(provider =>
+        builder.Services.AddScoped<ITranslatorEngine>(provider =>
         {
             var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
             var repository = provider.GetRequiredService<ISessionRepository>();
             var currentUserService = provider.GetRequiredService<ICurrentUserService>();
             var logger = provider.GetRequiredService<ILogger<OrthoEngineTranslator>>();
-            var orthoEngine = new OrthoEngineTranslator(
-                httpClient: httpClientFactory.CreateClient("Ollama"),
-                repository: repository,
-            currentUserService: currentUserService,
-            logger: logger
-                );
-            return orthoEngine;
+            return new OrthoEngineTranslator(
+                httpClientFactory.CreateClient("Ollama"),
+                repository,
+                currentUserService,
+                logger
+            );
         });
-        builder.Services.AddScoped<IOrthoEngine>(provider =>
+
+        builder.Services.AddScoped<ICorrectorEngine>(provider =>
         {
             var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
             var repository = provider.GetRequiredService<ISessionRepository>();
             var currentUserService = provider.GetRequiredService<ICurrentUserService>();
             var logger = provider.GetRequiredService<ILogger<OrthoEngineCorrector>>();
-            var orthoEngine = new OrthoEngineCorrector(
-                httpClient: httpClientFactory.CreateClient("Ollama"),
-                repository: repository,
-            currentUserService: currentUserService,
-            logger: logger
-                );
-            return orthoEngine;
+            return new OrthoEngineCorrector(
+                httpClientFactory.CreateClient("Ollama"),
+                repository,
+                currentUserService,
+                logger
+            );
         });
-
 
 
 

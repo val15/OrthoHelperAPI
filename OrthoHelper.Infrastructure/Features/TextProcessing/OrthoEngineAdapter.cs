@@ -1,34 +1,41 @@
 ﻿using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextProcess;
+using OrthoHelper.Domain.Features.TextProcess.Ports;
 
 namespace OrthoHelper.Infrastructure.Features.TextProcessing
 {
     public class OrthoEngineAdapter : ITextProcessingEngine
     {
-        private readonly IOrthoEngine _orthoEngine;
+        private readonly ITranslatorEngine _translatorEngine;
+        private readonly ICorrectorEngine _correctorEngine;
 
-        public OrthoEngineAdapter(IOrthoEngine orthoEngine)
+        public OrthoEngineAdapter(ITranslatorEngine translatorEngine, ICorrectorEngine correctorEngine)
         {
-            _orthoEngine = orthoEngine;
+            _translatorEngine = translatorEngine;
+            _correctorEngine = correctorEngine;
         }
 
-        public void SetModelName(string modelName)
+        public void SetModelName(string modelName, EngineType engineType)
         {
-            _orthoEngine.SetModelName(modelName);
+            if (engineType == EngineType.Translator)
+                _translatorEngine.SetModelName(modelName);
+            else
+                _correctorEngine.SetModelName(modelName);
         }
 
-        public async Task<string> ProcessTextAsync(string inputText)
+        public async Task<string> ProcessTextAsync(string inputText, EngineType engineType)
         {
-            return await _orthoEngine.ProcessTextAsync(inputText);
+            if (engineType == EngineType.Translator)
+                return await _translatorEngine.ProcessTextAsync(inputText);
+            else
+                return await _correctorEngine.ProcessTextAsync(inputText);
         }
 
-        public string GetModelName()
+        public string GetModelName(EngineType engineType)
         {
-           return _orthoEngine.GetModelName();
+            return engineType == EngineType.Translator
+                ? _translatorEngine.GetModelName()
+                : _correctorEngine.GetModelName();
         }
-
-        //public async Task InitializeUserSession(string username)
-        //{
-        //    await _orthoEngine.InitializeUserSession(username);
-        //}
     }
 }

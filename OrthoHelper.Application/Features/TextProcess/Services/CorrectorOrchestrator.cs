@@ -5,6 +5,7 @@ using OrthoHelper.Domain.Features.TextCorrection.ValueObjects;
 using OllamaSharp.Models.Chat;
 using OrthoHelper.Infrastructure.Features.TextProcessing.Entities;
 using static OrthoHelper.Domain.Features.TextCorrection.Entities.Session;
+using OrthoHelper.Domain.Features.TextProcess;
 
 namespace OrthoHelper.Application.Features.TextCorrection.Services
 {
@@ -31,10 +32,12 @@ namespace OrthoHelper.Application.Features.TextCorrection.Services
             var correctionSession = Session.Create(text.Value);
 
             // Configuration du modèle
-            correctionSession.SetModelName(modelName.Value, _textProcessingEngine, availableModels);
+            correctionSession.SetModelName(modelName.Value,
+                _textProcessingEngine,
+                availableModels,EngineType.Corrector);
 
             // Appel au moteur de traitement
-            var correctedText = await _textProcessingEngine.ProcessTextAsync(text.Value);
+            var correctedText = await _textProcessingEngine.ProcessTextAsync(text.Value,EngineType.Corrector);
 
             // Mise à jour de l'entité Domain
             correctionSession.ApplyCorrection(correctedText);

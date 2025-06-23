@@ -1,4 +1,5 @@
 ﻿using OrthoHelper.Domain.Features.TextCorrection.Ports;
+using OrthoHelper.Domain.Features.TextProcess;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
@@ -27,7 +28,7 @@ namespace OrthoHelper.Shared.Utilities
             {
 
            
-                var translatedText = await textProcessingEngine.ProcessTextAsync(text);
+                var translatedText = await textProcessingEngine.ProcessTextAsync(text, EngineType.Translator);
                 translations[text] = translatedText;
 
                 // Log ou debug pour suivre la progression
@@ -55,7 +56,7 @@ namespace OrthoHelper.Shared.Utilities
             {
 
 
-                var translatedText = await textProcessingEngine.ProcessTextAsync(text);
+                var translatedText = await textProcessingEngine.ProcessTextAsync(text, EngineType.Translator);
                 translations[text] = translatedText;
 
                 // Log ou debug pour suivre la progression
