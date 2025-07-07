@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
   models: string[] = [];
   selectedModel: string = '';
 
+  activeTab: 'correct' | 'translate' = 'correct';
+
   constructor(
     private http: HttpClient,
     private textService: TextService,
@@ -75,6 +77,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  setTab(tab: 'correct' | 'translate') {
+    this.activeTab = tab;
+  }
+
   sendToApi() {
     const token = this.authService.getToken();
     if (!token) {
@@ -84,12 +90,17 @@ export class AppComponent implements OnInit {
 
     this.textService.setCorrectedText('Traitement en cours...');
     const textToSend = this.textService.getText();
-    console.log('Texte envoyé :', textToSend);
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+    // Choix de l'endpoint selon l'onglet actif
+    const endpoint =
+      this.activeTab === 'translate'
+        ? '/api/Text/translate'
+        : '/api/Text/correct';
 
     this.http
       .post<ApiResponse>(
-        `${baseUrl}/api/Text/correct`,
+        `${baseUrl}${endpoint}`,
         {
           text: textToSend,
           modelName: this.selectedModel,
@@ -101,15 +112,10 @@ export class AppComponent implements OnInit {
           this.apiResponse = response;
           this.textService.setCorrectedText(this.apiResponse.outputText);
           this.errorMessage = null;
-          this.errorMessage = null;
-          console.log('apiResponse :');
-          console.log('outputText : ', this.apiResponse.outputText);
-          console.log('processingTime : ', this.apiResponse.processingTime);
         },
         error: (error) => {
           this.apiResponse = null;
           this.errorMessage = error.message || 'Erreur inconnue';
-          console.error('Erreur API:', error);
           this.textService.setCorrectedText(`Erreur API: ${error.status}`);
         },
       });

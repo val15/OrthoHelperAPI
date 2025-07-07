@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TextService } from '../../services/text.service';  // Importer TextService
+import { TextService } from '../../services/text.service'; // Importer TextService
 
 @Component({
   selector: 'app-correct-text',
@@ -8,20 +8,20 @@ import { TextService } from '../../services/text.service';  // Importer TextServ
   // imports: [],
   imports: [FormsModule],
   templateUrl: './correct-text.component.html',
-  styleUrls: ['./correct-text.component.css']
+  styleUrls: ['./correct-text.component.css'],
 })
 //export class ApiResponseComponent {
 //  apiResponse: string = '';
 //}
-
 export class CorrectTextComponent implements OnInit {
+  @Input() activeTab: 'correct' | 'translate' = 'correct';
   correctedText: string = '';
 
-  constructor(private textService: TextService) { }
+  constructor(private textService: TextService) {}
 
   onTextChange() {
     console.log('CorrectText:', this.correctedText);
-   // this.textService.setText(this.userText); // Sauvegarde du texte
+    // this.textService.setText(this.userText); // Sauvegarde du texte
   }
   ngOnInit() {
     // Lors de l'initialisation du composant, récupérer le texte corrigé depuis le service
@@ -31,7 +31,6 @@ export class CorrectTextComponent implements OnInit {
     });
   }
 
-
   userText: string = '';
 
   copyCorrectedText(): void {
@@ -40,14 +39,13 @@ export class CorrectTextComponent implements OnInit {
       return;
     }
 
-    navigator.clipboard.writeText(this.correctedText)
+    navigator.clipboard
+      .writeText(this.correctedText)
       .then(() => {
         console.log('Texte corrigé copié dans le presse-papiers.');
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Erreur lors de la copie :', err);
       });
   }
-
 }
-

@@ -9,18 +9,26 @@
   </select>
 </div>
 
-
+<div *ngIf="authService.isAuthenticated()" class="tab-selector">
+  <button [class.active]="activeTab === 'correct'" (click)="setTab('correct')">
+    Correction
+  </button>
+  <button
+    [class.active]="activeTab === 'translate'"
+    (click)="setTab('translate')"
+  >
+    Traduction
+  </button>
+</div>
 
 <main class="main" *ngIf="authService.isAuthenticated()">
   <div class="container">
     <div class="editor-container">
-      <app-text-editor></app-text-editor>
+      <app-text-editor [activeTab]="activeTab"></app-text-editor>
       <div class="button-container">
-        <button class="send-button" (click)="sendToApi()">
-          ➜
-        </button>
+        <button class="send-button" (click)="sendToApi()">➜</button>
       </div>
-      <app-correct-text></app-correct-text>
+      <app-correct-text [activeTab]="activeTab"></app-correct-text>
     </div>
   </div>
 </main>
